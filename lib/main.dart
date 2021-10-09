@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Signup/signup_page.dart';
 import 'package:lettutor/Pages/Welcome/welcome_page.dart';
 import 'package:lettutor/constants.dart';
 
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: SignUpPage(),
+      home: WelcomePage(),
     );
   }
 }
