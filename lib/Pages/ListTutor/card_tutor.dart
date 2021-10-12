@@ -18,7 +18,7 @@ class CardTutor extends StatelessWidget {
       elevation: 5,
       margin: EdgeInsets.symmetric(
         vertical: 8,
-        horizontal: 5,
+        horizontal: 8,
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
