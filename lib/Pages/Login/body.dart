@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "LOGIN",
+                  "LOG IN",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: size.height * 0.03),

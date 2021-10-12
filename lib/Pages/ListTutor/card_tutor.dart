@@ -33,29 +33,26 @@ class CardTutor extends StatelessWidget {
                     radius: 30,
                     backgroundImage: NetworkImage(
                         "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
-                    // child: Padding(
-                    //   padding: EdgeInsets.all(6),
-                    //   child: FittedBox(
-                    //     child: Image.network('https://picsum.photos/250?image=9'),
-                    //   ),
-                    // ),
                   ),
                 ],
               ),
               SizedBox(
-                width: 20,
+                width: 15,
               ),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Darlyn Grace Sausa"),
+                  Text(
+                    "Darlyn Grace Sausa",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   Text("DRating"),
                   Text("English"),
                 ],
               )),
               SizedBox(
-                width: 20,
+                width: 15,
               ),
               Column(
                 children: <Widget>[

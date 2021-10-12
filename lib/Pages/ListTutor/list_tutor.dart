@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/Pages/ListTutor/card_tutor.dart';
+import 'package:lettutor/Pages/ListTutor/heading.dart';
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/tutor.dart';
 
 class ListTutorPage extends StatelessWidget {
@@ -114,34 +116,17 @@ class ListTutorPage extends StatelessWidget {
           Container(
             height: (MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top) *
-                0.3,
-            child: Card(
-              elevation: 6,
-              margin: EdgeInsets.all(20),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Text("This is the part of noti"),
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Text("This is the part of noti"),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                0.2,
+            padding: const EdgeInsets.all(15.0),
+            color: k2PrimaryColor,
+            child: Heading(),
           ),
           tutors.isEmpty
               ? Container()
               : Container(
                   height: (MediaQuery.of(context).size.height -
                           MediaQuery.of(context).padding.top) *
-                      0.7,
+                      0.8,
                   child: ListView.builder(
                     itemBuilder: (ctx, index) {
                       return CardTutor(tutor: tutors[index]);
