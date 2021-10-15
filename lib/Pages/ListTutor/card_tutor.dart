@@ -45,7 +45,10 @@ class CardTutor extends StatelessWidget {
                 children: [
                   Text(
                     "Darlyn Grace Sausa",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                   Text("DRating"),
                   Text("English"),

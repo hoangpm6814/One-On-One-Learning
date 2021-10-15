@@ -108,33 +108,44 @@ class ListTutorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            height: (MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top) *
-                0.2,
-            padding: const EdgeInsets.all(15.0),
-            color: k2PrimaryColor,
-            child: Heading(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          'List Tutor',
+          style: TextStyle(
+            color: Colors.black,
           ),
-          tutors.isEmpty
-              ? Container()
-              : Container(
-                  height: (MediaQuery.of(context).size.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.8,
-                  child: ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return CardTutor(tutor: tutors[index]);
-                    },
-                    itemCount: tutors.length,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      (MediaQuery.of(context).padding.top + kToolbarHeight)) *
+                  0.2,
+              padding: const EdgeInsets.all(15.0),
+              color: k2PrimaryColor,
+              child: Heading(),
+            ),
+            tutors.isEmpty
+                ? Container()
+                : Container(
+                    height: (MediaQuery.of(context).size.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.8,
+                    child: ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        return CardTutor(tutor: tutors[index]);
+                      },
+                      itemCount: tutors.length,
+                    ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }

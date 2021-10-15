@@ -15,7 +15,7 @@ class Heading extends StatelessWidget {
           "Total lession time is 11 hours and 45 minutes",
           style: TextStyle(
             fontWeight: FontWeight.normal,
-            fontSize: 20,
+            fontSize: 15,
             color: Colors.white,
           ),
         ),
@@ -23,7 +23,7 @@ class Heading extends StatelessWidget {
           "Upcoming lession",
           style: TextStyle(
             fontWeight: FontWeight.normal,
-            fontSize: 20,
+            fontSize: 15,
             color: Colors.white,
           ),
         ),
@@ -31,7 +31,7 @@ class Heading extends StatelessWidget {
           "Wed, 24 Oct 6:30 - 6:55",
           style: TextStyle(
             fontWeight: FontWeight.normal,
-            fontSize: 20,
+            fontSize: 15,
             color: Colors.white,
           ),
         ),

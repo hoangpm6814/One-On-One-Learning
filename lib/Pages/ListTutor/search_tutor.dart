@@ -107,42 +107,49 @@ class SearchTutorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            height: (MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top) *
-                0.1,
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            // color: k2PrimaryColor,
-            child: Scaffold(
-              body: Container(
-                width: double.infinity,
-                child: RoundedInputField(
-                  icon: Icons.search,
-                  hintText: "Type to find tutor",
-                  onChanged: (value) {},
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Search Tutor',
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      (MediaQuery.of(context).padding.top + kToolbarHeight)) *
+                  0.1,
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              // color: k2PrimaryColor,
+              child: Scaffold(
+                body: Container(
+                  width: double.infinity,
+                  child: RoundedInputField(
+                    icon: Icons.search,
+                    hintText: "Type to find tutor",
+                    onChanged: (value) {},
+                  ),
                 ),
               ),
             ),
-          ),
-          tutors.isEmpty
-              ? Container()
-              : Container(
-                  height: (MediaQuery.of(context).size.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.9,
-                  child: ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return CardTutor(tutor: tutors[index]);
-                    },
-                    itemCount: tutors.length,
+            tutors.isEmpty
+                ? Container()
+                : Container(
+                    height: (MediaQuery.of(context).size.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.9,
+                    child: ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        return CardTutor(tutor: tutors[index]);
+                      },
+                      itemCount: tutors.length,
+                    ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
