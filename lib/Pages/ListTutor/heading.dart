@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 
 class Heading extends StatelessWidget {
   const Heading({
@@ -38,23 +39,10 @@ class Heading extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                // borderRadius: BorderRadius.zero,
-              ),
-            ),
-          ),
-          child: Text(
-            "Go to class",
-            style: TextStyle(
-              color: kPrimaryColor,
-            ),
-          ),
+        RoundedButtonSmallPadding(
+          color: Colors.white,
+          textColor: kPrimaryColor,
+          text: "Go to class",
         )
       ],
     );

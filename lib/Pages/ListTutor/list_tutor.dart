@@ -126,9 +126,9 @@ class ListTutorPage extends StatelessWidget {
             Container(
               height: (MediaQuery.of(context).size.height -
                       (MediaQuery.of(context).padding.top + kToolbarHeight)) *
-                  0.2,
+                  0.21,
               padding: const EdgeInsets.all(15.0),
-              color: k2PrimaryColor,
+              color: kPrimaryColor,
               child: Heading(),
             ),
             tutors.isEmpty
@@ -136,7 +136,7 @@ class ListTutorPage extends StatelessWidget {
                 : Container(
                     height: (MediaQuery.of(context).size.height -
                             MediaQuery.of(context).padding.top) *
-                        0.8,
+                        0.79,
                     child: ListView.builder(
                       itemBuilder: (ctx, index) {
                         return CardTutor(tutor: tutors[index]);

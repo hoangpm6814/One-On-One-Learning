@@ -11,7 +11,7 @@ class _LevelRadioState extends State<LevelRadio> {
   // Default Radio Button Selected Item When App Starts.
   String radioButtonItem = 'beginner';
   // Group Value for Radio Button. // default
-  int id = 2;
+  int id = 1;
 
   @override
   Widget build(BuildContext context) {

@@ -31,7 +31,7 @@ class _AvatarPickerState extends State<AvatarPicker> {
                       fixedSize: Size(250, 250),
                       shape: RoundedRectangleBorder(
                           side: BorderSide(
-                              color: Colors.blue,
+                              color: kPrimaryColor,
                               width: 1,
                               style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(0)),
