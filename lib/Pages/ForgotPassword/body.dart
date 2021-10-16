@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lettutor/Pages/Signup/signup_page.dart';
-import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
-import 'package:lettutor/customWidgets/rounded_password_field.dart';
 
 class Body extends StatelessWidget {
   const Body({

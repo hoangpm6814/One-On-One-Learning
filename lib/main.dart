@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/ForgotPassword/forgot_password_page.dart';
-import 'package:lettutor/Pages/ListTutor/list_tutor.dart';
-import 'package:lettutor/Pages/ListTutor/search_tutor.dart';
-import 'package:lettutor/Pages/Signup/signup_page.dart';
+import 'package:lettutor/Pages/BecomeATutor/become_a_tutor_page.dart';
+// import 'package:lettutor/Pages/BecomeATutor/avatar_picker.dart';
+// import 'package:lettutor/Pages/BecomeATutor/input_fields.dart';
+// import 'package:lettutor/Pages/BecomeATutor/stepper.dart';
+// import 'package:lettutor/Pages/ForgotPassword/forgot_password_page.dart';
 // import 'package:lettutor/Pages/ListTutor/list_tutor.dart';
-import 'package:lettutor/Pages/Welcome/welcome_page.dart';
-// import 'package:lettutor/Pages/ListTutor/search_tutor.dart';
-// import 'package:lettutor/Pages/Login/login_page.dart';
-// import 'package:lettutor/Pages/Welcome/welcome_page.dart';
-// import 'package:lettutor/Pages/Welcome/welcome_page.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -24,7 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: ForgotPasswordPage(),
+      home: BecomeATutorPage(),
     );
   }
 }
