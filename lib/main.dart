@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Schedule/view_list_schedule_page.dart';
+// import 'package:lettutor/Pages/Schedule/view_list_schedule_page.dart';
+import 'package:lettutor/Pages/VideoConference/video_conference_page.dart';
 // import 'package:lettutor/Pages/Schedule/view_list_schedule_page_history.dart';
 import 'package:lettutor/constants.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: ViewListSchedulePage(),
+      home: VideoConference(),
     );
   }
 }
