@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Schedule/view_list_schedule_page.dart';
-// import 'package:lettutor/Pages/Schedule/view_list_schedule_page_history.dart';
+import 'package:lettutor/Pages/Course/view_list_course_page.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: ViewListSchedulePage(),
+      home: ViewListCoursePage(),
     );
   }
 }
