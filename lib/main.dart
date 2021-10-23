@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/VideoConference/video_conference_page.dart'
+import 'package:lettutor/Pages/VideoConference/video_conference_page.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
