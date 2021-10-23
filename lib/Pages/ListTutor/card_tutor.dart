@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
 
 class CardTutor extends StatelessWidget {
@@ -50,8 +52,49 @@ class CardTutor extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Text("DRating"),
-                  Text("English"),
+                  Row(
+                    children: [
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star_half,
+                          color: kPrimaryRatingStar, size: 20.0),
+                    ],
+                  ),
+                  // Container(
+                  //   height: 30,
+                  //   child: ListView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     children: <Widget>[
+                  //       SpecialityButtonClickable(
+                  //         text: "English for kids",
+                  //         isChosen: true,
+                  //       ),
+                  //       SizedBox(width: 5),
+                  //       SpecialityButtonClickable(
+                  //         text: "English for Business",
+                  //       ),
+                  //       SizedBox(width: 5),
+                  //       SpecialityButtonClickable(
+                  //         text: "Conversational",
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Wrap(
+                    children: [
+                      SpecialityButtonClickable(
+                        text: "Conversational",
+                        isChosen: true,
+                      ),
+                      SizedBox(width: 5),
+                      SpecialityButtonClickable(
+                        text: "IELTS",
+                        isChosen: true,
+                      ),
+                    ],
+                  ),
                 ],
               )),
               SizedBox(
@@ -74,7 +117,7 @@ class CardTutor extends StatelessWidget {
                 child: Container(
                   width: 150,
                   child: Text(
-                    'I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English.',
+                    "While I've always longed to be an ESL teacher, the delight I had from assisting students' growth and development definitely encouraged my desire. I feel that my enthusiasm, good approach, and hands-on experience working with youngsters will make me a fantastic educator. I'm looking forward to a career that allows me to mold young minds and make a difference in the lives of the children in my community.",
                   ),
                 ),
               ),

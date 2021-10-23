@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/VideoConference/video_conference_page.dart';
+import 'package:lettutor/Pages/ListTutor/search_tutor.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: VideoConference(),
+      home: SearchTutorPage(),
     );
   }
 }
