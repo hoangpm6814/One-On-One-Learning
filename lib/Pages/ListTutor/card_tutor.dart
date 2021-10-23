@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
 
@@ -51,7 +52,16 @@ class CardTutor extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Text("DRating"),
+                  Row(
+                    children: [
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
+                      Icon(Icons.star_half,
+                          color: kPrimaryRatingStar, size: 20.0),
+                    ],
+                  ),
                   // Container(
                   //   height: 30,
                   //   child: ListView(
