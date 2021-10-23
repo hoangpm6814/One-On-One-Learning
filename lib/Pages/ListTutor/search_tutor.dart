@@ -150,6 +150,7 @@ class SearchTutorPage extends StatelessWidget {
                     children: <Widget>[
                       SpecialityButtonClickable(
                         text: "All",
+                        isChosen: true,
                       ),
                       SizedBox(width: 5),
                       SpecialityButtonClickable(

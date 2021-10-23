@@ -107,7 +107,7 @@ class CardTutor extends StatelessWidget {
                 child: Container(
                   width: 150,
                   child: Text(
-                    'I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English. I am a nice english teacher who helps you import English.',
+                    "While I've always longed to be an ESL teacher, the delight I had from assisting students' growth and development definitely encouraged my desire. I feel that my enthusiasm, good approach, and hands-on experience working with youngsters will make me a fantastic educator. I'm looking forward to a career that allows me to mold young minds and make a difference in the lives of the children in my community.",
                   ),
                 ),
               ),
