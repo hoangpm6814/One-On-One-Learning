@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Course/view_list_course_page.dart';
+import 'package:lettutor/Pages/Course/course_detail_page.dart';
+// import 'package:lettutor/Pages/Course/view_list_course_page.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: ViewListCoursePage(),
+      home: CourseDetailPage(),
     );
   }
 }
