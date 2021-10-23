@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
 
 class CardTutor extends StatelessWidget {
@@ -51,7 +52,39 @@ class CardTutor extends StatelessWidget {
                     ),
                   ),
                   Text("DRating"),
-                  Text("English"),
+                  // Container(
+                  //   height: 30,
+                  //   child: ListView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     children: <Widget>[
+                  //       SpecialityButtonClickable(
+                  //         text: "English for kids",
+                  //         isChosen: true,
+                  //       ),
+                  //       SizedBox(width: 5),
+                  //       SpecialityButtonClickable(
+                  //         text: "English for Business",
+                  //       ),
+                  //       SizedBox(width: 5),
+                  //       SpecialityButtonClickable(
+                  //         text: "Conversational",
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Wrap(
+                    children: [
+                      SpecialityButtonClickable(
+                        text: "Conversational",
+                        isChosen: true,
+                      ),
+                      SizedBox(width: 5),
+                      SpecialityButtonClickable(
+                        text: "IELTS",
+                        isChosen: true,
+                      ),
+                    ],
+                  ),
                 ],
               )),
               SizedBox(
