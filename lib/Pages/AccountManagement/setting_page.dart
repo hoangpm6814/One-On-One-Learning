@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/constants.dart';
-import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 
