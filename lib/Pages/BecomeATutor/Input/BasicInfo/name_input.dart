@@ -4,7 +4,10 @@ class NameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Name'),
+      decoration: InputDecoration(
+        labelText: 'Name',
+        hintText: 'What do people call you?',
+      ),
       validator: (String value) {
         if (value.isEmpty) {
           return 'Name is Required';
