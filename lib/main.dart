@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Welcome/welcome_page.dart';
+import 'package:lettutor/Pages/Chat/chat_detail.dart';
+// import 'package:lettutor/Pages/Chat/search_chat.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomePage(),
+      home: ChatDetail(),
     );
   }
 }
