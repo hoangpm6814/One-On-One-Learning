@@ -37,11 +37,11 @@ class RoundedButtonMediumPadding extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(color),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            side: BorderSide(
-              color: textColor,
-              width: 1,
-              style: BorderStyle.solid,
-            ),
+            // side: BorderSide(
+            //   color: textColor,
+            //   width: 1,
+            //   style: BorderStyle.solid,
+            // ),
             borderRadius: BorderRadius.circular(29),
             // borderRadius: BorderRadius.zero,
           ),
