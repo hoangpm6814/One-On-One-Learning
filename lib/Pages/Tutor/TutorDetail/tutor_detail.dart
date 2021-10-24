@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/Pages/Tutor/TutorDetail/alert_dialog_report_tutor.dart';
 import 'package:lettutor/Pages/Tutor/TutorDetail/card_rating.dart';
+import 'package:lettutor/Pages/Tutor/TutorDetail/pick_date_model_bottom.dart';
+import 'package:lettutor/Pages/Tutor/TutorDetail/pick_time_model_bottom.dart';
 import 'package:lettutor/Pages/Tutor/TutorDetail/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
@@ -16,7 +19,6 @@ class TutorDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -28,9 +30,7 @@ class TutorDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  SizedBox(width: 15),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,16 +51,11 @@ class TutorDetailPage extends StatelessWidget {
                         ),
                         Text(
                           "Viet Nam",
-                          style: TextStyle(
-                              // color: Colors.grey,
-                              ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
+                  SizedBox(width: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
@@ -114,7 +109,14 @@ class TutorDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PickDateModelBottom();
+                        },
+                      );
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -134,7 +136,14 @@ class TutorDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialogReport();
+                        },
+                      );
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -154,7 +163,14 @@ class TutorDetailPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PickTimeModelBottom();
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
