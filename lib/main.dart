@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/Pages/Tutor/TutorDetail/tutor_detail.dart';
+import 'package:lettutor/Pages/Welcome/welcome_page.dart';
 import 'package:lettutor/constants.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: TutorDetailPage(),
+      home: WelcomePage(),
     );
   }
 }
