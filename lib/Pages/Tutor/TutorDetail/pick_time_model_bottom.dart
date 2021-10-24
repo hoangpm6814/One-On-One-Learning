@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
-import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_time_pick.dart';
-import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 
 class PickTimeModelBottom extends StatelessWidget {
   @override
