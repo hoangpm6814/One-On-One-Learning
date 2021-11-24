@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
+import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = '/settings';
@@ -13,49 +14,59 @@ class SettingScreen extends StatelessWidget {
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 30,
-                      // maxRadius: 70,
-                      backgroundImage: NetworkImage(
-                          "https://api.app.lettutor.com/avatar/da323fee-20c6-4eb1-b198-3187e176b177avatar1630510677527.jpg"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Minh Pham",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProfileScreen(),
+                  ),
+                );
+              },
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 30,
+                        // maxRadius: 70,
+                        backgroundImage: NetworkImage(
+                            "https://api.app.lettutor.com/avatar/da323fee-20c6-4eb1-b198-3187e176b177avatar1630510677527.jpg"),
                       ),
-                      Text(
-                        "useremail@gmail.com",
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      // Text(
-                      //   "Viet Nam",
-                      //   style: TextStyle(
-                      //       // color: Colors.grey,
-                      //       ),
-                      // ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Minh Pham",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          "useremail@gmail.com",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        // Text(
+                        //   "Viet Nam",
+                        //   style: TextStyle(
+                        //       // color: Colors.grey,
+                        //       ),
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 30,

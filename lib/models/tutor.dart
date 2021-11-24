@@ -5,13 +5,15 @@ class Tutor {
   final String name;
   final double rating;
   final String avatar;
-  final String discription;
+  final String description;
+  bool isDone;
 
   Tutor({
     @required this.id,
     @required this.name,
     @required this.rating,
     @required this.avatar,
-    @required this.discription,
+    @required this.description,
+    this.isDone = false,
   });
 }

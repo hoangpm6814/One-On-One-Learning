@@ -13,7 +13,7 @@ class ChatScreen extends StatelessWidget {
         rating: 5,
         avatar:
             "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-        discription:
+        description:
             "I am a nice english teacher who helps you import Endlish"),
     Tutor(
         id: "2",
@@ -21,7 +21,7 @@ class ChatScreen extends StatelessWidget {
         rating: 5,
         avatar:
             "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-        discription:
+        description:
             "I am a nice english teacher who helps you import Endlish"),
     Tutor(
         id: "1",
@@ -29,7 +29,7 @@ class ChatScreen extends StatelessWidget {
         rating: 5,
         avatar:
             "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-        discription:
+        description:
             "I am a nice english teacher who helps you import Endlish"),
     Tutor(
         id: "2",
@@ -37,7 +37,7 @@ class ChatScreen extends StatelessWidget {
         rating: 5,
         avatar:
             "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-        discription:
+        description:
             "I am a nice english teacher who helps you import Endlish"),
   ];
 

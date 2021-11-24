@@ -3,6 +3,12 @@ import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 
 class TutorDescription extends StatelessWidget {
+  const TutorDescription({
+    Key key,
+    @required this.description,
+  }) : super(key: key);
+
+  final String description;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,7 +20,7 @@ class TutorDescription extends StatelessWidget {
               child: Container(
                 width: 150,
                 child: Text(
-                  "It can be intimidating to speak with a foreigner, no matter how much grammar and vocabulary you've mastered. If you have basic knowledge of English but have not spent much time speaking, this course will help you ease into your first English conversations.",
+                  description,
                 ),
               ),
             ),

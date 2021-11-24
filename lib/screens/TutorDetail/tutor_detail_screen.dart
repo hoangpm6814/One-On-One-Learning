@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/pick_date_model_bottom.dart';
@@ -8,6 +9,14 @@ import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 
 class TutorDetailScreen extends StatelessWidget {
+  static const routeName = '/tutor-detail';
+  const TutorDetailScreen({
+    Key key,
+    @required this.tutor,
+  }) : super(key: key);
+
+  final Tutor tutor;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +34,7 @@ class TutorDetailScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 40,
                         // maxRadius: 70,
-                        backgroundImage: NetworkImage(
-                            "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
+                        backgroundImage: NetworkImage(tutor.avatar),
                       ),
                     ],
                   ),
@@ -37,7 +45,7 @@ class TutorDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hannah Nguyen",
+                          tutor.name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -175,7 +183,7 @@ class TutorDetailScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              TutorDescription(),
+              TutorDescription(description: tutor.description),
               SizedBox(height: 10),
               Text(
                 "Rating and Comment" + "(3)",
