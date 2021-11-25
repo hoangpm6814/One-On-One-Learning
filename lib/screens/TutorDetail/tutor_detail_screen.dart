@@ -183,7 +183,7 @@ class TutorDetailScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              TutorDescription(description: tutor.description),
+              TutorDescription(tutor: tutor),
               SizedBox(height: 10),
               Text(
                 "Rating and Comment" + "(3)",

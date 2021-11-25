@@ -87,7 +87,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.list,
                 color: Colors.black,
               ),
-              text: "Booking history",
+              text: "Booking History",
             ),
             SizedBox(
               height: 10,

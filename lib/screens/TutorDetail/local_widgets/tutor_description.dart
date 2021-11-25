@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
+import 'package:lettutor/models/tutor.dart';
 
 class TutorDescription extends StatelessWidget {
   const TutorDescription({
     Key key,
-    @required this.description,
+    @required this.tutor,
   }) : super(key: key);
 
-  final String description;
+  final Tutor tutor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +21,7 @@ class TutorDescription extends StatelessWidget {
               child: Container(
                 width: 150,
                 child: Text(
-                  description,
+                  tutor.description,
                 ),
               ),
             ),
@@ -34,9 +35,22 @@ class TutorDescription extends StatelessWidget {
             fontSize: 15,
           ),
         ),
-        SpecialityButtonClickable(
-          text: "English",
-          isChosen: true,
+        Container(
+          width: double.infinity,
+          height: 30,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              for (var item in tutor.languages)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                  child: SpecialityButtonClickable(
+                    text: item,
+                    isChosen: true,
+                  ),
+                ),
+            ],
+          ),
         ),
         // SizedBox(height: 10),
         Text(
@@ -49,7 +63,7 @@ class TutorDescription extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
           child: Text(
-            "Bachelor from University of Technology",
+            tutor.education,
           ),
         ),
         SizedBox(height: 10),
@@ -63,7 +77,7 @@ class TutorDescription extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
           child: Text(
-            "5 years of English teaching experience",
+            tutor.experience,
           ),
         ),
         SizedBox(height: 10),
@@ -77,7 +91,7 @@ class TutorDescription extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
           child: Text(
-            "Finance, gardening, travelling",
+            tutor.interest,
           ),
         ),
         SizedBox(height: 10),
@@ -93,7 +107,7 @@ class TutorDescription extends StatelessWidget {
           child: Container(
             // width: 150,
             child: Text(
-              "Teaching Assistant at ILA VietNam, English Teacher at Pathway School",
+              tutor.profession,
             ),
           ),
         ),
@@ -112,20 +126,14 @@ class TutorDescription extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              SpecialityButtonClickable(
-                text: "Conversational",
-                isChosen: true,
-              ),
-              SizedBox(width: 5),
-              SpecialityButtonClickable(
-                text: "English for Business",
-                isChosen: true,
-              ),
-              SizedBox(width: 5),
-              SpecialityButtonClickable(
-                text: "English for kids",
-                isChosen: true,
-              ),
+              for (var item in tutor.specialties)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                  child: SpecialityButtonClickable(
+                    text: item,
+                    isChosen: true,
+                  ),
+                ),
             ],
           ),
         ),

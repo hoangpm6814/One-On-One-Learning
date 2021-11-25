@@ -95,15 +95,14 @@ class CardTutor extends StatelessWidget {
                     // ),
                     Wrap(
                       children: [
-                        SpecialityButtonClickable(
-                          text: "Conversational",
-                          isChosen: true,
-                        ),
-                        SizedBox(width: 5),
-                        SpecialityButtonClickable(
-                          text: "IELTS",
-                          isChosen: true,
-                        ),
+                        for (var item in tutor.specialties)
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                            child: SpecialityButtonClickable(
+                              text: item,
+                              isChosen: true,
+                            ),
+                          ),
                       ],
                     ),
                   ],

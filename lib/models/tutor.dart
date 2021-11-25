@@ -6,7 +6,13 @@ class Tutor {
   final double rating;
   final String avatar;
   final String description;
-  bool isDone;
+  bool isFavourite;
+  List<String> languages;
+  final String education;
+  final String experience;
+  final String interest;
+  final String profession;
+  List<String> specialties;
 
   Tutor({
     @required this.id,
@@ -14,6 +20,12 @@ class Tutor {
     @required this.rating,
     @required this.avatar,
     @required this.description,
-    this.isDone = false,
+    @required this.education,
+    @required this.experience,
+    @required this.interest,
+    @required this.profession,
+    this.isFavourite = false,
+    this.languages = null,
+    this.specialties = null,
   });
 }
