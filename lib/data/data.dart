@@ -4,7 +4,7 @@ final DUMMY_TUTORS = [
   Tutor(
     id: "1",
     name: "Ashley Young",
-    rating: 5,
+    rating: 4.5,
     avatar:
         "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
     description:
@@ -38,7 +38,7 @@ final DUMMY_TUTORS = [
   Tutor(
     id: "3",
     name: "Maria Silkyza Galvez",
-    rating: 5,
+    rating: 4,
     avatar:
         "https://api.app.lettutor.com/avatar/cdb22890-fb57-4ec7-b4b7-829716c85a17avatar1637320790420.png",
     description:
@@ -56,7 +56,7 @@ final DUMMY_TUTORS = [
   Tutor(
     id: "4",
     name: "April Corpuz",
-    rating: 4,
+    rating: 4.5,
     avatar:
         "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg",
     description:
@@ -89,7 +89,7 @@ final DUMMY_TUTORS = [
   Tutor(
     id: "6",
     name: "Stephen Curry",
-    rating: 5,
+    rating: 3,
     avatar:
         "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
     description: "I am a nice english teacher who helps you import Endlish",

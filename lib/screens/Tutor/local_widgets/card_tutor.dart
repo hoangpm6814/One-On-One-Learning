@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/screens/TutorDetail/tutor_detail_screen.dart';
@@ -63,15 +64,8 @@ class CardTutor extends StatelessWidget {
                         fontSize: 20,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
-                        Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
-                        Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
-                        Icon(Icons.star, color: kPrimaryRatingStar, size: 20.0),
-                        Icon(Icons.star_half,
-                            color: kPrimaryRatingStar, size: 20.0),
-                      ],
+                    RatingStar(
+                      rating: tutor.rating,
                     ),
                     // Container(
                     //   height: 30,

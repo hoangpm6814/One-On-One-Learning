@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
@@ -67,19 +68,8 @@ class TutorDetailScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Row(
-                        children: [
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star_half,
-                              color: kPrimaryRatingStar, size: 20.0),
-                        ],
+                      RatingStar(
+                        rating: tutor.rating,
                       ),
                       IconButton(
                         icon: Icon(Icons.favorite_border_outlined),
@@ -186,7 +176,7 @@ class TutorDetailScreen extends StatelessWidget {
               TutorDescription(tutor: tutor),
               SizedBox(height: 10),
               Text(
-                "Rating and Comment" + "(3)",
+                "Rating and Comment " + "(3)",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
