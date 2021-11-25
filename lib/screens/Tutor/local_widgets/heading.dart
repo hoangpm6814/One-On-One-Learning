@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
+import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 
 class Heading extends StatelessWidget {
   const Heading({
@@ -43,6 +44,14 @@ class Heading extends StatelessWidget {
           color: Colors.white,
           textColor: kPrimaryColor,
           text: "Go to class",
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => VideoConferenceScreen(),
+              ),
+            );
+          },
         )
       ],
     );

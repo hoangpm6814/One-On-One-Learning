@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class VideoConferenceScreen extends StatefulWidget {
+  static const routeName = '/video-conference';
+
   const VideoConferenceScreen({Key key}) : super(key: key);
 
   @override
@@ -11,7 +13,17 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text("View Schedule")),
+      appBar: AppBar(
+        elevation: 0,
+        // automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+        title: Text(
+          "Meeting room",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       backgroundColor: Colors.black,
       body: Column(
         children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 
 class CardSchedule extends StatelessWidget {
   const CardSchedule({Key key}) : super(key: key);
@@ -186,6 +187,14 @@ class CardSchedule extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 LightRoundedButtonMediumPadding(
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VideoConferenceScreen(),
+                      ),
+                    );
+                  },
                   color: kPrimaryColor,
                   textColor: Colors.white,
                   text: "Enter lesson",

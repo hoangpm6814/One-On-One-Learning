@@ -5,7 +5,6 @@ import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
-import 'package:lettutor/screens/Welcome/welcome_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       title: 'One-on-one App',
       initialRoute: '/', // default is '/'
       routes: {
-        '/': (ctx) => WelcomeScreen(),
+        '/': (ctx) => TabsScreen(),
         TutorListScreen.routeName: (ctx) => TutorListScreen(),
         ChatScreen.routeName: (ctx) => ChatScreen(),
         ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
