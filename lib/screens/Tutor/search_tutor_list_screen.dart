@@ -87,7 +87,7 @@ class SearchTutorListScreen extends StatelessWidget {
               : Container(
                   height: (MediaQuery.of(context).size.height -
                           MediaQuery.of(context).padding.top) *
-                      0.8,
+                      0.62,
                   child: ListView.builder(
                     itemBuilder: (ctx, index) {
                       return CardTutor(tutor: tutors[index]);

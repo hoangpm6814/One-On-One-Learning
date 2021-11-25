@@ -21,8 +21,10 @@ class TutorListScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             height: (MediaQuery.of(context).size.height -
-                    (MediaQuery.of(context).padding.top + kToolbarHeight)) *
-                0.21,
+                    (MediaQuery.of(context).padding.top +
+                        MediaQuery.of(context).padding.bottom +
+                        kToolbarHeight)) *
+                0.2,
             padding: const EdgeInsets.all(15.0),
             color: kPrimaryColor,
             child: Heading(),
@@ -31,8 +33,10 @@ class TutorListScreen extends StatelessWidget {
               ? Container()
               : Container(
                   height: (MediaQuery.of(context).size.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.79,
+                          (MediaQuery.of(context).padding.top +
+                              MediaQuery.of(context).padding.bottom +
+                              kToolbarHeight)) *
+                      0.64,
                   child: ListView.builder(
                     itemBuilder: (ctx, index) {
                       return CardTutor(tutor: tutors[index]);
