@@ -25,54 +25,27 @@ final DUMMY_TUTORS = [
       rating: 5,
       avatar:
           "https://api.app.lettutor.com/avatar/cdb22890-fb57-4ec7-b4b7-829716c85a17avatar1637320790420.png",
-      description: "I am a nice english teacher who helps you import Endlish"),
+      description:
+          "A teacher for almost a decade with lengthy teaching exposure with Vietnamese students, adult professionals, non -professionals, and executives. Teaching is a skill delivered with own style and creativity focused on YOU. YES, our lessons will be based on what really matters to you, what you want to learn in a short possible time."),
   Tutor(
     id: "4",
-    name: "Jill Leano",
+    name: "April Corpuz",
     rating: 4,
     avatar:
-        "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
+        "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg",
     description:
-        "Hi, My name is Jill I am an experienced English Teacher from Philippine. I would like share my enthusiasm with the learners in this platform. I've been working with diverse learners of all levels for many years. I am greatly passionate about about profession. I love teaching because I can help others improve their skills and it gives me joy and excitement meeting different learners around the world.",
+        "Hello there! I am an Industrial Engineer in the profession but chose to do online teaching because I love to meet different learners. I am an outgoing person and I have this passion for dealing with different people and seeing them progress with my help as their teacher. In fact, making friends is one of my best skills. I am very good at adapting to new environments and new situations. I am very friendly and can easily get along well with everyone. I have obtained a 120-Hour TEFL Certificate. I get a variety of teaching techniques. I know that there are fast and not so fast learners.",
   ),
   Tutor(
       id: "5",
-      name: "Ashley Young",
+      name: "Michael Owen",
       rating: 5,
       avatar:
           "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
       description: "I am a nice english teacher who helps you import Endlish"),
   Tutor(
       id: "6",
-      name: "Michael Owen",
-      rating: 5,
-      avatar:
-          "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-      description: "I am a nice english teacher who helps you import Endlish"),
-  Tutor(
-      id: "7",
       name: "Stephen Curry",
-      rating: 5,
-      avatar:
-          "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-      description: "I am a nice english teacher who helps you import Endlish"),
-  Tutor(
-      id: "8",
-      name: "Taylor Swift",
-      rating: 4,
-      avatar:
-          "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-      description: "I am a nice english teacher who helps you import Endlish"),
-  Tutor(
-      id: "9",
-      name: "Ashley Young",
-      rating: 5,
-      avatar:
-          "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-      description: "I am a nice english teacher who helps you import Endlish"),
-  Tutor(
-      id: "10",
-      name: "Michael Owen",
       rating: 5,
       avatar:
           "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/screens/Chat/local_widgets/chat_message_model.dart';
 
-class ChatDetail extends StatelessWidget {
+class ChatDetailScreen extends StatelessWidget {
   final List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello, Minh", messageType: "receiver"),
     ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
@@ -52,7 +52,7 @@ class ChatDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Jennifer Nguyen",
+                        "April Corpuz",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
