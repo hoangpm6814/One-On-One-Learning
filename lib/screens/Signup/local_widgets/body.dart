@@ -7,6 +7,7 @@ import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/customWidgets/rounded_password_field.dart';
+import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -41,13 +42,20 @@ class Body extends StatelessWidget {
                 ),
                 RoundedButton(
                   text: "SIGN UP",
-                  press: () {},
+                  press: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TabsScreen(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: size.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   login: false,
                   press: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
