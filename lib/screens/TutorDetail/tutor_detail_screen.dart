@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/pick_date_model_bottom.dart';
@@ -8,15 +9,28 @@ import 'package:lettutor/screens/TutorDetail/local_widgets/pick_time_model_botto
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
+import 'package:provider/provider.dart';
 
-class TutorDetailScreen extends StatelessWidget {
+class TutorDetailScreen extends StatefulWidget {
   static const routeName = '/tutor-detail';
   const TutorDetailScreen({
     Key key,
-    @required this.tutor,
+    @required this.id,
   }) : super(key: key);
 
-  final Tutor tutor;
+  final String id;
+
+  @override
+  State<TutorDetailScreen> createState() => _TutorDetailScreenState();
+}
+
+class _TutorDetailScreenState extends State<TutorDetailScreen> {
+  Tutor tutor;
+  @override
+  void didChangeDependencies() {
+    tutor = Provider.of<TutorProvider>(context).getById(widget.id);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +86,14 @@ class TutorDetailScreen extends StatelessWidget {
                         rating: tutor.rating,
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite_border_outlined),
+                        icon: Icon(tutor.isFavourite
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined),
                         color: Theme.of(context).errorColor,
-                        onPressed: () => {},
+                        onPressed: () => {
+                          Provider.of<TutorProvider>(context, listen: false)
+                              .toggleIsFavourite(tutor.id),
+                        },
                       ),
                     ],
                   )

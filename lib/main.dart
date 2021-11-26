@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/constants.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,23 +21,35 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'One-on-one App',
-      initialRoute: '/', // default is '/'
-      routes: {
-        '/': (ctx) => TabsScreen(),
-        TutorListScreen.routeName: (ctx) => TutorListScreen(),
-        ChatScreen.routeName: (ctx) => ChatScreen(),
-        ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
-        SearchTutorListScreen.routeName: (ctx) => SearchTutorListScreen(),
-        SettingScreen.routeName: (ctx) => SettingScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: TutorProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'One-on-one App',
+        theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        initialRoute: '/', // default is '/'
+        routes: {
+          '/': (ctx) => TabsScreen(),
+          TutorListScreen.routeName: (ctx) => TutorListScreen(),
+          // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
+          ChatScreen.routeName: (ctx) => ChatScreen(),
+          ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
+          SearchTutorListScreen.routeName: (ctx) => SearchTutorListScreen(),
+          SettingScreen.routeName: (ctx) => SettingScreen(),
+        },
 
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-          builder: (ctx) => TutorListScreen(),
-        );
-      },
+        onUnknownRoute: (settings) {
+          return MaterialPageRoute(
+            builder: (ctx) => TutorListScreen(),
+          );
+        },
+      ),
     );
   }
 }

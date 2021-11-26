@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/tutor_detail_screen.dart';
+import 'package:provider/provider.dart';
 
 class CardTutor extends StatelessWidget {
   const CardTutor({
@@ -21,7 +22,7 @@ class CardTutor extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) => TutorDetailScreen(
-              tutor: tutor,
+              id: tutor.id,
             ),
           ),
         );
@@ -107,9 +108,14 @@ class CardTutor extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.favorite_border_outlined),
+                      icon: Icon(tutor.isFavourite
+                          ? Icons.favorite
+                          : Icons.favorite_border_outlined),
                       color: Theme.of(context).errorColor,
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Provider.of<TutorProvider>(context, listen: false)
+                            .toggleIsFavourite(tutor.id),
+                      },
                     ),
                   ],
                 )

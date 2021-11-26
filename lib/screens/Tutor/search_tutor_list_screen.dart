@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/data/data.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
-import 'package:lettutor/models/tutor.dart';
+import 'package:provider/provider.dart';
 
 class SearchTutorListScreen extends StatelessWidget {
   static const routeName = '/search-tutor-list';
 
-  final List<Tutor> tutors = DUMMY_TUTORS;
-
-  // ListTutor(this.tutors);
-
   @override
   Widget build(BuildContext context) {
+    final tutors = Provider.of<TutorProvider>(context).listTutor;
     return SingleChildScrollView(
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,

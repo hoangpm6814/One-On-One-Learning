@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/data/data.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/heading.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/models/tutor.dart';
+import 'package:provider/provider.dart';
 
 class TutorListScreen extends StatelessWidget {
   static const routeName = '/tutor-list';
 
-  final List<Tutor> tutors = DUMMY_TUTORS;
-
-  // ListTutor(this.tutors);
-
   @override
   Widget build(BuildContext context) {
+    final tutors = Provider.of<TutorProvider>(context).listTutor;
     return SingleChildScrollView(
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
