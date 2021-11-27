@@ -32,10 +32,10 @@ class CardTutor extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
         ),
         elevation: 5,
-        margin: EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 8,
-        ),
+        // margin: EdgeInsets.symmetric(
+        //   vertical: 8,
+        //   horizontal: 3,
+        // ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: <Widget>[

@@ -33,7 +33,11 @@ class TutorListScreen extends StatelessWidget {
                           (MediaQuery.of(context).padding.top +
                               MediaQuery.of(context).padding.bottom +
                               kToolbarHeight)) *
-                      0.64,
+                      0.63,
+                  margin: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 8,
+                  ),
                   child: ListView.builder(
                     itemBuilder: (ctx, index) {
                       return CardTutor(tutor: tutors[index]);
