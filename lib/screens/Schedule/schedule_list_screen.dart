@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/screens/Schedule/local_widgets/card_schedule.dart';
 import 'package:provider/provider.dart';
@@ -39,19 +41,40 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
                 ],
               ),
             ),
-            Container(
-              height: (MediaQuery.of(context).size.height -
-                      (MediaQuery.of(context).padding.top +
-                          MediaQuery.of(context).padding.bottom +
-                          kToolbarHeight)) *
-                  0.78,
-              child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return CardSchedule(schedule: schedules[index]);
-                },
-                itemCount: schedules.length,
-              ),
-            ),
+            schedules.length > 0
+                ? Container(
+                    height: (MediaQuery.of(context).size.height -
+                            (MediaQuery.of(context).padding.top +
+                                MediaQuery.of(context).padding.bottom +
+                                kToolbarHeight)) *
+                        0.78,
+                    child: ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        return CardSchedule(
+                          key: Key(schedules[index].id),
+                          schedule: schedules[index],
+                        );
+                      },
+                      itemCount: schedules.length,
+                    ),
+                  )
+                : Container(
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Currently you do not have any upcoming class. Try booking your own schedule...",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             // CardSchedule(
             //   schedule: schedules[0],
             // ),

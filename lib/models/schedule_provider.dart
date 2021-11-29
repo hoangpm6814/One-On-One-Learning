@@ -11,5 +11,28 @@ class ScheduleProvider with ChangeNotifier {
     return _scheduleList.firstWhere((schedule) => schedule.id == id);
   }
 
+  void createNewSchedule(Schedule schedule) {
+    final newSchedule = Schedule(
+      id: schedule.id,
+      studentId: schedule.studentId,
+      tutorId: schedule.tutorId,
+      date: schedule.date,
+      shift: schedule.shift,
+      requirement: schedule.requirement,
+    );
+    _scheduleList.add(newSchedule);
+    notifyListeners();
+  }
+
+  void editSchedule(Schedule schedule) {
+    removeSchedule(schedule.id);
+    createNewSchedule(schedule);
+  }
+
+  void removeSchedule(String id) {
+    _scheduleList.removeWhere((schedule) => schedule.id == id);
+    notifyListeners();
+  }
+
   final List<Schedule> _scheduleList = DUMMY_SCHEDULES;
 }

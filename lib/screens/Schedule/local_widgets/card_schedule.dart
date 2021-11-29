@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
 import 'package:lettutor/models/schedule.dart';
+import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
@@ -63,7 +64,10 @@ class CardSchedule extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<ScheduleProvider>(context, listen: false)
+                          .removeSchedule(schedule.id);
+                    },
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
