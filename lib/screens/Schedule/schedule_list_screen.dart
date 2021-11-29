@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/screens/Schedule/local_widgets/card_schedule.dart';
+import 'package:provider/provider.dart';
 
 class ScheduleListScreen extends StatefulWidget {
   static const routeName = '/schedule-list';
@@ -16,6 +18,7 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final schedules = Provider.of<ScheduleProvider>(context).listSchedule;
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(12),
@@ -36,19 +39,28 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
                 ],
               ),
             ),
-            // Container(
-            //   child: ListView.builder(
-            //     itemBuilder: (ctx, index) {
-            //       return CardTutor(tutor: tutors[index]);
-            //     },
-            //     itemCount: tutors.length,
-            //   ),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      (MediaQuery.of(context).padding.top +
+                          MediaQuery.of(context).padding.bottom +
+                          kToolbarHeight)) *
+                  0.78,
+              child: ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return CardSchedule(schedule: schedules[index]);
+                },
+                itemCount: schedules.length,
+              ),
+            ),
+            // CardSchedule(
+            //   schedule: schedules[0],
             // ),
-            CardSchedule(),
-            CardSchedule(),
-            CardSchedule(),
-            CardSchedule(),
-            CardSchedule(),
+            // CardSchedule(
+            //   schedule: schedules[1],
+            // ),
+            // CardSchedule(
+            //   schedule: schedules[2],
+            // ),
           ],
         ),
       ),

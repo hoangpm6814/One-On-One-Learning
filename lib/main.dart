@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
@@ -25,6 +26,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider.value(
           value: TutorProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ScheduleProvider(),
         ),
       ],
       child: MaterialApp(

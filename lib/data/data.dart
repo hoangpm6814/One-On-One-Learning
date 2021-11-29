@@ -1,3 +1,4 @@
+import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor.dart';
 
 final DUMMY_TUTORS = [
@@ -100,5 +101,35 @@ final DUMMY_TUTORS = [
     profession:
         "Teaching Assistant at ILA VietNam, English Teacher at Pathway School",
     specialties: ["Conversational", "IELTS"],
+  ),
+];
+
+final DUMMY_SCHEDULES = [
+  Schedule(
+    id: "1",
+    studentId: "1",
+    tutorId: "2",
+    date: DateTime.now(),
+    shift: 1,
+    requirement:
+        "I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.",
+  ),
+  Schedule(
+    id: "2",
+    studentId: "1",
+    tutorId: "1",
+    date: DateTime.now(),
+    shift: 2,
+    requirement:
+        "I want to speak English best. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.",
+  ),
+  Schedule(
+    id: "3",
+    studentId: "1",
+    tutorId: "3",
+    date: DateTime.now(),
+    shift: 3,
+    requirement:
+        "I want to speak Spanish better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.",
   ),
 ];

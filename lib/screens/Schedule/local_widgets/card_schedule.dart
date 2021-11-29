@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:lettutor/models/schedule.dart';
+import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
+import 'package:provider/provider.dart';
 
 class CardSchedule extends StatelessWidget {
-  const CardSchedule({Key key}) : super(key: key);
+  const CardSchedule({
+    Key key,
+    @required this.schedule,
+  }) : super(key: key);
+
+  final Schedule schedule;
+
   @override
   Widget build(BuildContext context) {
+    final Tutor tutor =
+        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -29,7 +42,7 @@ class CardSchedule extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sun, October 24, 21",
+                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -83,8 +96,7 @@ class CardSchedule extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(
-                          "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
+                      backgroundImage: NetworkImage(tutor.avatar),
                     ),
                   ],
                 ),
@@ -94,7 +106,7 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Darlyn Grace Sausa",
+                        tutor.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -132,7 +144,7 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lesson time: " + "00:00 - 00:25",
+                        "Lesson time: " + getTimeShift(schedule.shift),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -177,7 +189,7 @@ class CardSchedule extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      'I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.',
+                      schedule.requirement,
                     ),
                   ),
                 ),
@@ -205,5 +217,18 @@ class CardSchedule extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getTimeShift(int shift) {
+    switch (shift) {
+      case 1:
+        return "00:00 - 00:25";
+        break;
+      case 2:
+        return "00:30 - 00:55";
+        break;
+      default:
+        return "22:30 - 22:55";
+    }
   }
 }
