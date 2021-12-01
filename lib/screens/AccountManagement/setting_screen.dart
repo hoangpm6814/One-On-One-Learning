@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
+import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 
@@ -80,6 +81,25 @@ class SettingScreen extends StatelessWidget {
               ),
               text: "View Feedbacks",
               press: () {},
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RoundedSettingButton(
+              icon: Icon(
+                Icons.person_add_alt,
+                color: Colors.black,
+              ),
+              text: "Become A Tutor",
+              press: () {
+                // print("push");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BecomeATutorScreen(),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 10,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/country_input.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/date_of_birth_input.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/name_input.dart';
@@ -118,12 +119,26 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                   text: "Choose video",
                 ),
                 SizedBox(height: 30),
-                ElevatedButton(
-                  child: Text(
-                    'Press to become a tutor!',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  onPressed: () {
+                // ElevatedButton(
+                //   child: Text(
+                //     'Press to become a tutor!',
+                //     style: TextStyle(color: Colors.white, fontSize: 16),
+                //   ),
+                //   onPressed: () {
+                //     if (!_formKey.currentState.validate()) {
+                //       return;
+                //     }
+                //     _formKey.currentState.save();
+                //     // print(_name);
+                //     // print(_dateOfBirth);
+
+                //     //Send to API
+                //   },
+                // ),
+                RoundedButtonMediumPadding(
+                  color: kPrimaryColor,
+                  text: 'Press to become a tutor!',
+                  press: () {
                     if (!_formKey.currentState.validate()) {
                       return;
                     }
