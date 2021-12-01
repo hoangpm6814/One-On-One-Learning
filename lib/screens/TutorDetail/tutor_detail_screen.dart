@@ -4,7 +4,7 @@ import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
-import 'package:lettutor/screens/TutorDetail/local_widgets/pick_date_model_bottom.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/pick_time_model_bottom.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
@@ -115,7 +115,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
-                        return PickDateModelBottom(tutorId: tutor.id);
+                        return PickScheduleBottom(tutorId: tutor.id);
                       },
                     );
                   },

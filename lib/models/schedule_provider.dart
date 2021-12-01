@@ -7,6 +7,13 @@ class ScheduleProvider with ChangeNotifier {
     return _scheduleList;
   }
 
+  List<Schedule> get listScheduleHistory {
+    final now = DateTime.now();
+    return _scheduleList
+        .where((element) => now.difference(element.date).inDays >= 1)
+        .toList(); // now > date
+  }
+
   Schedule getById(String id) {
     return _scheduleList.firstWhere((schedule) => schedule.id == id);
   }

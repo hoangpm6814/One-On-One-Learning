@@ -3,6 +3,7 @@ import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
+import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = '/settings';
@@ -78,6 +79,7 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "View Feedbacks",
+              press: () {},
             ),
             SizedBox(
               height: 10,
@@ -88,6 +90,15 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "Booking History",
+              press: () {
+                // print("push");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ScheduleHistoryListScreen(),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 10,
@@ -98,6 +109,7 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "Session History",
+              press: () {},
             ),
             SizedBox(
               height: 10,
@@ -108,6 +120,7 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "Advanced Settings",
+              press: () {},
             ),
             SizedBox(
               height: 30,
@@ -121,6 +134,7 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "Our Website",
+              press: () {},
             ),
             SizedBox(
               height: 10,
@@ -131,6 +145,7 @@ class SettingScreen extends StatelessWidget {
                 color: Colors.black,
               ),
               text: "Facebook",
+              press: () {},
             ),
             SizedBox(
               height: 50,

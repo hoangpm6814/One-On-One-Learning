@@ -60,7 +60,7 @@ class RoundedSettingButton extends StatelessWidget {
           ),
         ],
       ),
-      onPressed: () {},
+      onPressed: press,
     );
   }
 }

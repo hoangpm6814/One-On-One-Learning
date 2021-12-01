@@ -126,8 +126,8 @@ final DUMMY_SCHEDULES = [
   Schedule(
     id: "3",
     studentId: "1",
-    tutorId: "3",
-    date: DateTime.now(),
+    tutorId: "4",
+    date: DateTime.now().subtract(Duration(days: 1)),
     shift: 3,
     requirement:
         "I want to speak Spanish better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.",
