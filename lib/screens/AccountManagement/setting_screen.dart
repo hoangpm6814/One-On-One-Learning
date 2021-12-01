@@ -34,7 +34,7 @@ class SettingScreen extends StatelessWidget {
                         radius: 30,
                         // maxRadius: 70,
                         backgroundImage: NetworkImage(
-                            "https://api.app.lettutor.com/avatar/da323fee-20c6-4eb1-b198-3187e176b177avatar1630510677527.jpg"),
+                            "https://api.app.lettutor.com/avatar/86248137-6f7d-4cf5-ad2e-34da42722b28avatar1628058042246.jpg"),
                       ),
                     ],
                   ),
@@ -46,14 +46,14 @@ class SettingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Minh Pham",
+                          "Mai Khanh",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
                         ),
                         Text(
-                          "useremail@gmail.com",
+                          "maikhanh@gmail.com",
                           style: TextStyle(
                             color: Colors.grey,
                           ),

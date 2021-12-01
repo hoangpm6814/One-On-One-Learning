@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/constants.dart';
+import 'package:intl/intl.dart';
+import 'package:lettutor/customWidgets/rating.dart';
+import 'package:lettutor/models/rating.dart';
 
 class CardRating extends StatelessWidget {
+  const CardRating({
+    Key key,
+    @required this.rating,
+  }) : super(key: key);
+
+  final Rating rating;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -44,13 +53,13 @@ class CardRating extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "10:02:36, 16/10/2021",
+                    DateFormat('dd/MM/yyyy HH:mm').format(rating.date),
                     style: TextStyle(color: Colors.grey),
                   ),
                   Container(
                     // width: 150,
                     child: Text(
-                      "She is indeed a very good teacher, gonna be back!",
+                      rating.comment,
                     ),
                   ),
                 ],
@@ -60,14 +69,8 @@ class CardRating extends StatelessWidget {
               ),
               Column(
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: kPrimaryRatingStar, size: 15.0),
-                      Icon(Icons.star, color: kPrimaryRatingStar, size: 15.0),
-                      Icon(Icons.star, color: kPrimaryRatingStar, size: 15.0),
-                      Icon(Icons.star, color: kPrimaryRatingStar, size: 15.0),
-                      Icon(Icons.star, color: kPrimaryRatingStar, size: 15.0),
-                    ],
+                  RatingStar(
+                    rating: rating.star.toDouble(),
                   ),
                 ],
               )

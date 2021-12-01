@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/rating.dart';
+import 'package:lettutor/models/rating.dart';
+import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
@@ -25,18 +28,12 @@ class TutorDetailScreen extends StatefulWidget {
 }
 
 class _TutorDetailScreenState extends State<TutorDetailScreen> {
-  // final List<String> questions = [
-  //   'How are you feeling today?',
-  //   'What is your favourite color?',
-  //   'Do you like Flutter?',
-  // ];
-
-  // int question = 0;
-
   Tutor tutor;
+  List<Rating> ratings;
   @override
   void didChangeDependencies() {
     tutor = Provider.of<TutorProvider>(context).getById(widget.id);
+    ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
     super.didChangeDependencies();
   }
 
@@ -204,16 +201,38 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               TutorDescription(tutor: tutor),
               SizedBox(height: 10),
               Text(
-                "Rating and Comment " + "(3)",
+                "Rating and Comment " + "(${ratings.length})",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 5),
-              CardRating(),
-              CardRating(),
-              CardRating(),
+              ratings.length > 0
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              (MediaQuery.of(context).padding.top +
+                                  MediaQuery.of(context).padding.bottom +
+                                  kToolbarHeight)) *
+                          0.5,
+                      child: ListView.builder(
+                        itemBuilder: (ctx, index) {
+                          return CardRating(
+                            rating: ratings[index],
+                          );
+                        },
+                        itemCount: ratings.length,
+                      ),
+                    )
+                  : Container(
+                      child: Text(
+                        "Currently there is no rating for this tutor.",
+                        style: TextStyle(
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    )
             ],
           ),
         ),

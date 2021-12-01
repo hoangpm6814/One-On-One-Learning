@@ -1,3 +1,4 @@
+import 'package:lettutor/models/rating.dart';
 import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor.dart';
 
@@ -131,5 +132,48 @@ final DUMMY_SCHEDULES = [
     shift: 3,
     requirement:
         "I want to speak Spanish better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.",
+  ),
+];
+
+final DUMMY_RATINGS = [
+  Rating(
+    id: "1",
+    star: 5,
+    comment: "This teacher is very good!",
+    studentId: "1",
+    tutorId: "4",
+    date: DateTime.now(),
+  ),
+  Rating(
+    id: "2",
+    star: 4,
+    comment: "This teacher is nice!",
+    studentId: "1",
+    tutorId: "4",
+    date: DateTime.now(),
+  ),
+  Rating(
+    id: "3",
+    star: 4,
+    comment: "She is indeed a very good teacher, gonna be back!",
+    studentId: "1",
+    tutorId: "4",
+    date: DateTime.now(),
+  ),
+  Rating(
+    id: "4",
+    star: 5,
+    comment: "This teacher is really nice! She taught me a lot.",
+    studentId: "1",
+    tutorId: "2",
+    date: DateTime.now(),
+  ),
+  Rating(
+    id: "5",
+    star: 5,
+    comment: "She is a very good teacher, gonna be back!",
+    studentId: "1",
+    tutorId: "2",
+    date: DateTime.now(),
   ),
 ];

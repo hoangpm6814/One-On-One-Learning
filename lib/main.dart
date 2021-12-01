@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
@@ -29,6 +30,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider.value(
           value: ScheduleProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: RatingProvider(),
         ),
       ],
       child: MaterialApp(
