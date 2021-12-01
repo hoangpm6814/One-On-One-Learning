@@ -40,7 +40,10 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tutor Detail")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Tutor Detail"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),

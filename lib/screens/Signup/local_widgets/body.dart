@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/local_widgets/or_divider.dart';
 import 'package:lettutor/screens/Signup/local_widgets/social_icon.dart';
@@ -24,14 +23,20 @@ class Body extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                const SizedBox(
+                  height: 30,
+                ),
                 Text(
                   "SIGN UP",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.03),
-                SvgPicture.asset(
-                  "assets/icons/signup1.svg",
-                  height: size.height * 0.35,
+                Image.asset(
+                  "assets/images/signup_img.png",
+                  height: size.height * 0.4,
                 ),
                 RoundedInputField(
                   hintText: "Your Email",

@@ -7,7 +7,10 @@ class CourseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Course Detail")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Course Detail"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),

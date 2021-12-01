@@ -3,7 +3,6 @@ import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/signup_screen.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/constants.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,15 +19,15 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "ONE ON ONE APP",
+                  "ONE ON ONE LEARNING APP",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(height: size.height * 0.05),
-                SvgPicture.asset(
-                  "assets/icons/welcome1.svg",
+                Image.asset(
+                  "assets/images/welcome_img.png",
                   height: size.height * 0.45,
                 ),
                 SizedBox(height: size.height * 0.05),

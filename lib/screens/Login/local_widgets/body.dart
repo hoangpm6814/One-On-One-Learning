@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lettutor/screens/Signup/signup_screen.dart';
 import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
@@ -16,6 +15,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      padding: EdgeInsets.all(20),
       width: double.infinity,
       height: size.height,
       child: Stack(
@@ -27,12 +27,15 @@ class Body extends StatelessWidget {
               children: <Widget>[
                 Text(
                   "LOG IN",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.03),
-                SvgPicture.asset(
-                  "assets/icons/signin.svg",
-                  height: size.height * 0.35,
+                Image.asset(
+                  "assets/images/login_img.png",
+                  height: size.height * 0.4,
                 ),
                 SizedBox(height: size.height * 0.03),
                 RoundedInputField(
