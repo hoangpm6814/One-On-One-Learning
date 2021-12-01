@@ -20,7 +20,10 @@ class ScheduleHistoryListScreenState extends State<ScheduleHistoryListScreen> {
     final schedules =
         Provider.of<ScheduleProvider>(context).listScheduleHistory;
     return Scaffold(
-      appBar: AppBar(title: Text("Schedule History")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Schedule History"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(12),

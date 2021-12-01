@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Profile")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Profile"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
@@ -22,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
-                              "https://api.app.lettutor.com/avatar/da323fee-20c6-4eb1-b198-3187e176b177avatar1630510677527.jpg"),
+                              "https://api.app.lettutor.com/avatar/86248137-6f7d-4cf5-ad2e-34da42722b28avatar1628058042246.jpg"),
                         ),
                       ),
                       SizedBox(
@@ -31,14 +35,14 @@ class ProfileScreen extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "Minh Pham",
+                            "Mai Khanh",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                           Text(
-                            "useremail@gmail.com",
+                            "maikhanh@gmail.com",
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -72,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                       // labelText: 'Name',
                       hintText: "Enter your name",
                     ),
-                    controller: TextEditingController(text: "Minh Phạm"),
+                    controller: TextEditingController(text: "Mai Khanh"),
                   ),
                   SizedBox(height: 10),
                   Text(

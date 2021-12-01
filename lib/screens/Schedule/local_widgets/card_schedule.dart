@@ -6,6 +6,7 @@ import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -117,22 +118,32 @@ class CardSchedule extends StatelessWidget {
                         ),
                       ),
                       Text("Viet Nam"),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.chat,
-                            color: kPrimaryColor,
-                            size: 20.0,
-                          ),
-                          SizedBox(width: 3),
-                          Text(
-                            "Chat",
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ChatDetailScreen(),
                             ),
-                          ),
-                        ],
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.chat,
+                              color: kPrimaryColor,
+                              size: 20.0,
+                            ),
+                            SizedBox(width: 3),
+                            Text(
+                              "Chat",
+                              style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

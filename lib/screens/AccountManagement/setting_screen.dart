@@ -3,6 +3,7 @@ import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
+import 'package:lettutor/screens/Course/course_list_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 
@@ -74,17 +75,17 @@ class SettingScreen extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            RoundedSettingButton(
-              icon: Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-              text: "View Feedbacks",
-              press: () {},
-            ),
-            SizedBox(
-              height: 10,
-            ),
+            // RoundedSettingButton(
+            //   icon: Icon(
+            //     Icons.person,
+            //     color: Colors.black,
+            //   ),
+            //   text: "View Feedbacks",
+            //   press: () {},
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             RoundedSettingButton(
               icon: Icon(
                 Icons.person_add_alt,
@@ -92,7 +93,6 @@ class SettingScreen extends StatelessWidget {
               ),
               text: "Become A Tutor",
               press: () {
-                // print("push");
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -106,16 +106,15 @@ class SettingScreen extends StatelessWidget {
             ),
             RoundedSettingButton(
               icon: Icon(
-                Icons.list,
+                Icons.card_giftcard_rounded,
                 color: Colors.black,
               ),
-              text: "Booking History",
+              text: "Course For You",
               press: () {
-                // print("push");
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => ScheduleHistoryListScreen(),
+                    builder: (_) => CourseListScreen(),
                   ),
                 );
               },
@@ -128,9 +127,27 @@ class SettingScreen extends StatelessWidget {
                 Icons.history,
                 color: Colors.black,
               ),
-              text: "Session History",
-              press: () {},
+              text: "Booking History",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ScheduleHistoryListScreen(),
+                  ),
+                );
+              },
             ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // RoundedSettingButton(
+            //   icon: Icon(
+            //     Icons.history,
+            //     color: Colors.black,
+            //   ),
+            //   text: "Session History",
+            //   press: () {},
+            // ),
             SizedBox(
               height: 10,
             ),

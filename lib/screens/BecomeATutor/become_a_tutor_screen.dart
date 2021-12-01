@@ -54,7 +54,10 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Become A Tutor")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Become A Tutor"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
