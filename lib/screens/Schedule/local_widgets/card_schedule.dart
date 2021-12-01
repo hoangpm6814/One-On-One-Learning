@@ -226,13 +226,19 @@ class CardSchedule extends StatelessWidget {
   String getTimeShift(int shift) {
     switch (shift) {
       case 1:
-        return "00:00 - 00:25";
-        break;
+        return "08:00 - 09:30";
       case 2:
-        return "00:30 - 00:55";
-        break;
+        return "09:30 - 11:00";
+      case 3:
+        return "13:30 - 15:00";
+      case 4:
+        return "15:00 - 16:30";
+      case 5:
+        return "20:00 - 21:30";
+      case 6:
+        return "21:30 - 23:00";
       default:
-        return "22:30 - 22:55";
+        return "21:30 - 23:00";
     }
   }
 }

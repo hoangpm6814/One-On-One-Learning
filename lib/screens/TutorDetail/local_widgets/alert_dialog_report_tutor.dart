@@ -51,6 +51,10 @@ class AlertDialogReport extends StatelessWidget {
               SizedBox(height: 30),
               LightRoundedButtonSmallPadding(
                 text: "Report tutor",
+                press: () {
+                  // send data
+                  Navigator.pop(context);
+                },
               ),
               // TextFormField(
               //   decoration: InputDecoration(

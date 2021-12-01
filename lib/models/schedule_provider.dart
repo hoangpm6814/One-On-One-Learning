@@ -12,6 +12,8 @@ class ScheduleProvider with ChangeNotifier {
   }
 
   void createNewSchedule(Schedule schedule) {
+    // print("shift:" + schedule.shift.toString());
+    // print("requirement:" + schedule.requirement);
     final newSchedule = Schedule(
       id: schedule.id,
       studentId: schedule.studentId,

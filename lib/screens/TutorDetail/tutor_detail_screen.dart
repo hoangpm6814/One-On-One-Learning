@@ -25,6 +25,14 @@ class TutorDetailScreen extends StatefulWidget {
 }
 
 class _TutorDetailScreenState extends State<TutorDetailScreen> {
+  // final List<String> questions = [
+  //   'How are you feeling today?',
+  //   'What is your favourite color?',
+  //   'Do you like Flutter?',
+  // ];
+
+  // int question = 0;
+
   Tutor tutor;
   @override
   void didChangeDependencies() {
@@ -103,6 +111,14 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                 width: double.infinity,
                 child: RoundedButtonMediumPadding(
                   text: "Booking",
+                  press: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return PickDateModelBottom(tutorId: tutor.id);
+                      },
+                    );
+                  },
                 ),
               ),
               Row(
@@ -126,14 +142,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                         ),
                       ],
                     ),
-                    onPressed: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return PickDateModelBottom();
-                        },
-                      );
-                    },
+                    onPressed: () {},
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

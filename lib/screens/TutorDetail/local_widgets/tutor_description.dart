@@ -35,6 +35,7 @@ class TutorDescription extends StatelessWidget {
             fontSize: 15,
           ),
         ),
+        SizedBox(height: 5),
         Container(
           width: double.infinity,
           height: 30,
@@ -52,7 +53,7 @@ class TutorDescription extends StatelessWidget {
             ],
           ),
         ),
-        // SizedBox(height: 10),
+        SizedBox(height: 10),
         Text(
           "Education",
           style: TextStyle(
