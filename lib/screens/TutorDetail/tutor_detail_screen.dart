@@ -5,10 +5,10 @@ import 'package:lettutor/models/rating.dart';
 import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_rating_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.dart';
-import 'package:lettutor/screens/TutorDetail/local_widgets/pick_time_model_bottom.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
@@ -187,10 +187,12 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                       ],
                     ),
                     onPressed: () {
-                      showModalBottomSheet<void>(
+                      showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return PickTimeModelBottom();
+                          return AlertDialogRating(
+                            tutorId: tutor.id,
+                          );
                         },
                       );
                     },

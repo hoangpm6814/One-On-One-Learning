@@ -15,5 +15,18 @@ class RatingProvider with ChangeNotifier {
     return _ratingList.where((todo) => todo.tutorId == tutorId).toList();
   }
 
+  void createNewRating(Rating rating) {
+    final newRating = Rating(
+      id: rating.id,
+      studentId: rating.studentId,
+      tutorId: rating.tutorId,
+      date: rating.date,
+      comment: rating.comment,
+      star: rating.star,
+    );
+    _ratingList.add(newRating);
+    notifyListeners();
+  }
+
   final List<Rating> _ratingList = DUMMY_RATINGS;
 }
