@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:lettutor/models/filter_chip.data.dart';
 import 'package:lettutor/models/rating.dart';
 import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor.dart';
@@ -53,7 +55,7 @@ final DUMMY_TUTORS = [
         "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
     profession:
         "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
-    specialties: ["Conversational"],
+    specialties: ["Conversational", "STARTERS"],
   ),
   Tutor(
     id: "4",
@@ -69,15 +71,16 @@ final DUMMY_TUTORS = [
     interest: "Finance, gardening, travelling",
     profession:
         "Teaching Assistant at ILA VietNam, English Teacher at Pathway School",
-    specialties: ["Conversational", "IELTS"],
+    specialties: ["Conversational", "IELTS", "STARTERS", "MOVERS"],
   ),
   Tutor(
     id: "5",
     name: "Michael Owen",
     rating: 5,
     avatar:
-        "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-    description: "I am a nice english teacher who helps you import Endlish",
+        "https://api.app.lettutor.com/avatar/9f896616-72d6-4d28-8859-de0e90f3c4adavatar1634393619087.jpg",
+    description:
+        "I am an online English tutor for more than 2 years now. I love meeting new people, talking with them and sit on a meaningful conversation while learning about their different cultures at the same time. I could say that I am a people-person because I love stirring up interesting topics relatable to my students' lives. I can help you out with your conversation skills because I am creative, patient and has a great passion in teaching meaningfully. I'll slowly build your pronunciation and vocabulary.",
     languages: ["English", "French", "Vietnamese"],
     education: "PhD. from University of Toronto",
     experience:
@@ -94,7 +97,8 @@ final DUMMY_TUTORS = [
     rating: 3,
     avatar:
         "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-    description: "I am a nice english teacher who helps you import Endlish",
+    description:
+        "Hi, how are you? I am teacher Ca! I am a professional teacher and I've been teaching for 5 years and more than a year online. I handled diverse students level from kids to adults. Teaching is fun. You can teach anytime and anywhere. Pandemic is not a hindrance for continuous learning to our dear students. Everything is on the tip of our fingers and done virtually.",
     languages: ["English", "French", "Vietnamese"],
     education: "Bachelor from University of Technology",
     experience: "5 years of English teaching experience",
@@ -175,5 +179,43 @@ final DUMMY_RATINGS = [
     studentId: "1",
     tutorId: "2",
     date: DateTime.now(),
+  ),
+];
+
+final DUMMY_SPECIALTIES = [
+  FilterChipData(
+    label: 'Conversational',
+    isSelected: false,
+    color: Colors.green,
+  ),
+  FilterChipData(
+    label: 'IELTS',
+    isSelected: false,
+    color: Colors.red,
+  ),
+  FilterChipData(
+    label: 'STARTERS',
+    isSelected: false,
+    color: Colors.purple,
+  ),
+  FilterChipData(
+    label: 'MOVERS',
+    isSelected: false,
+    color: Colors.blue,
+  ),
+  FilterChipData(
+    label: 'FLYERS',
+    isSelected: false,
+    color: Colors.orange,
+  ),
+  FilterChipData(
+    label: 'English for kids',
+    isSelected: false,
+    color: Colors.blue,
+  ),
+  FilterChipData(
+    label: 'English for Business',
+    isSelected: false,
+    color: Colors.orange,
   ),
 ];
