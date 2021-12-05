@@ -49,5 +49,19 @@
     "search_tutor": "Tìm kiếm giáo viên",
     "online": "Đang hoạt động",
     "write_message": "Viết tin nhắn...",
-    "no_tutor_match": "Hiện không có giáo viên nào khớp yêu cầu của bạn"
+    "no_tutor_match": "Hiện không có giáo viên nào khớp yêu cầu của bạn",
+    "your_booked_schedules": "Lịch học đã đặt của bạn:",
+    "lesson": "bài học",
+    "chat": "Nhắn tin",
+    "lesson_time": "Thời gian:",
+    "lesson_requirement": "Yêu cầu bài học:",
+    "edit_requirement": "Chỉnh sửa yêu cầu",
+    "cancel": "Hủy",
+    "enter_lesson": "Tham gia bài học",
+    "no_upcoming_class": "Hiện bạn không có lớp học nào sắp tới. Hãy thử đặt lịch học cho riêng mình...",
+    "schedule_history": "Lịch sử đặt lịch",
+    "your_schedule_history": "Lịch sử đặt lịch của bạn:",
+    "days_ago": "ngày trước",
+    "tutor_judgement": "Đánh giá của giáo viên:",
+    "no_history_schedule": "Hiện bạn không có lịch sử đặt lịch nào. Hãy thử đặt lịch học cho riêng mình..."
 }

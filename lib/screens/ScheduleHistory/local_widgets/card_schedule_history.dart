@@ -6,6 +6,7 @@ import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardScheduleHistory extends StatelessWidget {
   const CardScheduleHistory({
@@ -47,7 +48,11 @@ class CardScheduleHistory extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        Text(dateDiff(schedule.date) + " days ago"),
+                        Text(
+                          dateDiff(schedule.date) +
+                              " " +
+                              AppLocalizations.of(context).days_ago,
+                        ),
                       ],
                     ),
                   ),
@@ -96,7 +101,7 @@ class CardScheduleHistory extends StatelessWidget {
                             ),
                             SizedBox(width: 3),
                             Text(
-                              "Chat",
+                              AppLocalizations.of(context).chat,
                               style: TextStyle(
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.bold,
@@ -119,7 +124,9 @@ class CardScheduleHistory extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lesson time: " + getTimeShift(schedule.shift),
+                        AppLocalizations.of(context).lesson_time +
+                            " " +
+                            getTimeShift(schedule.shift),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -136,7 +143,7 @@ class CardScheduleHistory extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Lesson requirement: ",
+                    AppLocalizations.of(context).lesson_requirement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -162,7 +169,7 @@ class CardScheduleHistory extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Tutor's judgement: ",
+                    AppLocalizations.of(context).tutor_judgement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

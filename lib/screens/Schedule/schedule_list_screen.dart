@@ -4,6 +4,7 @@ import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/screens/Schedule/local_widgets/card_schedule.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScheduleListScreen extends StatefulWidget {
   static const routeName = '/schedule-list';
@@ -32,7 +33,7 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
               child: Row(
                 children: [
                   Text(
-                    "Your booked schedules:",
+                    AppLocalizations.of(context).your_booked_schedules,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -64,7 +65,7 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            "Currently you do not have any upcoming class. Try booking your own schedule...",
+                            AppLocalizations.of(context).no_upcoming_class,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

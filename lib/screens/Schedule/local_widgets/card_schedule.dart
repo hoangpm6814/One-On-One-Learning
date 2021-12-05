@@ -9,6 +9,7 @@ import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardSchedule extends StatelessWidget {
   const CardSchedule({
@@ -50,7 +51,7 @@ class CardSchedule extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        Text("1 lesson"),
+                        Text("1 " + AppLocalizations.of(context).lesson),
                       ],
                     ),
                   ),
@@ -60,7 +61,7 @@ class CardSchedule extends StatelessWidget {
                         Icon(Icons.cancel, color: Colors.red, size: 20.0),
                         SizedBox(width: 5),
                         Text(
-                          "Cancel",
+                          AppLocalizations.of(context).cancel,
                           style: TextStyle(color: Colors.red),
                         ),
                       ],
@@ -136,7 +137,7 @@ class CardSchedule extends StatelessWidget {
                             ),
                             SizedBox(width: 3),
                             Text(
-                              "Chat",
+                              AppLocalizations.of(context).chat,
                               style: TextStyle(
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.bold,
@@ -159,7 +160,9 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lesson time: " + getTimeShift(schedule.shift),
+                        AppLocalizations.of(context).lesson_time +
+                            " " +
+                            getTimeShift(schedule.shift),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -176,7 +179,7 @@ class CardSchedule extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Lesson requirement: ",
+                    AppLocalizations.of(context).lesson_requirement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -186,7 +189,7 @@ class CardSchedule extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Edit requirement",
+                      AppLocalizations.of(context).edit_requirement,
                       style: TextStyle(
                         color: kPrimaryColor,
                         fontWeight: FontWeight.bold,
@@ -224,7 +227,7 @@ class CardSchedule extends StatelessWidget {
                   },
                   color: kPrimaryColor,
                   textColor: Colors.white,
-                  text: "Enter lesson",
+                  text: AppLocalizations.of(context).enter_lesson,
                 ),
               ],
             ),

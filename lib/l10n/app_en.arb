@@ -74,5 +74,19 @@
     "search_tutor": "Search for tutor",
     "online": "Online",
     "write_message": "Write message...",
-    "no_tutor_match": "Currently there is no tutor matching your search."
+    "no_tutor_match": "Currently there is no tutor matching your search.",
+    "your_booked_schedules": "Your booked schedules:",
+    "lesson": "lesson",
+    "chat": "Chat",
+    "lesson_time": "Lesson time:",
+    "lesson_requirement": "Lesson requirement",
+    "edit_requirement": "Edit requirement",
+    "cancel": "Cancel",
+    "enter_lesson": "Enter lesson",
+    "no_upcoming_class": "Currently you do not have any upcoming class. Try booking your own schedule...",
+    "schedule_history": "Schedule History",
+    "your_schedule_history": "Your schedule history:",
+    "days_ago": "days ago",
+    "tutor_judgement": "Tutor's judgement",
+    "no_history_schedule": "Currently you do not have any booking history. Try booking your own schedule..."
 }

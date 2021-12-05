@@ -3,6 +3,7 @@ import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/screens/ScheduleHistory/local_widgets/card_schedule_history.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScheduleHistoryListScreen extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class ScheduleHistoryListScreenState extends State<ScheduleHistoryListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text("Schedule History"),
+        title: Text(AppLocalizations.of(context).schedule_history),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -35,7 +36,7 @@ class ScheduleHistoryListScreenState extends State<ScheduleHistoryListScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "Your schedule history:",
+                      AppLocalizations.of(context).your_schedule_history,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -67,7 +68,7 @@ class ScheduleHistoryListScreenState extends State<ScheduleHistoryListScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              "Currently you do not have any booking history. Try booking your own schedule...",
+                              AppLocalizations.of(context).no_history_schedule,
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
