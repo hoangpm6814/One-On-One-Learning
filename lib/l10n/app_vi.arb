@@ -9,5 +9,18 @@
     "settings": "Cài đặt",
     "go_to_class": "Vào lớp học",
     "lesson_time_spent": "Tổng thời gian học là {hours} giờ và {minutes} phút",
-    "upcomming_lession": "Lớp học sắp tới"
+    "upcomming_lession": "Lớp học sắp tới",
+    "become_a_tutor": "Trở Thành Giáo Viên",
+    "course_for_you": "Khóa Học Dành Cho Bạn",
+    "booking_history": "Lịch Sử Đặt Lớp",
+    "advanced_settings": "Cài Đặt Nâng Cao",
+    "our_website": "Website Của Chúng Tôi",
+    "log_out": "Đăng xuất" ,
+    "profile": "Thông tin cá nhân",
+    "name": "Tên",
+    "birthday": "Ngày sinh",
+    "phone": "Điện thoại",
+    "country": "Quốc gia",
+    "level": "Trình độ",
+    "save": "Lưu"
 }

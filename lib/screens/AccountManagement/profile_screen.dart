@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -9,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text("Profile"),
+        title: Text(AppLocalizations.of(context).profile),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -60,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Name:",
+                    AppLocalizations.of(context).name + ":",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       // fontSize: 20,
@@ -80,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Birthday:",
+                    AppLocalizations.of(context).birthday + ":",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       // fontSize: 20,
@@ -97,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Phone:",
+                    AppLocalizations.of(context).phone + ":",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       // fontSize: 20,
@@ -114,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Country:",
+                    AppLocalizations.of(context).country + ":",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       // fontSize: 20,
@@ -131,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Level:",
+                    AppLocalizations.of(context).level + ":",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       // fontSize: 20,
@@ -154,7 +155,7 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 child: RoundedButtonSmallPadding(
-                  text: "Save",
+                  text: AppLocalizations.of(context).save,
                 ),
               ),
             ],

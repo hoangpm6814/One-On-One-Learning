@@ -6,6 +6,7 @@ import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
 import 'package:lettutor/screens/Course/course_list_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = '/settings';
@@ -91,7 +92,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.person_add_alt,
                 color: Colors.black,
               ),
-              text: "Become A Tutor",
+              text: AppLocalizations.of(context).become_a_tutor,
               press: () {
                 Navigator.push(
                   context,
@@ -109,7 +110,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.card_giftcard_rounded,
                 color: Colors.black,
               ),
-              text: "Course For You",
+              text: AppLocalizations.of(context).course_for_you,
               press: () {
                 Navigator.push(
                   context,
@@ -127,7 +128,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.history,
                 color: Colors.black,
               ),
-              text: "Booking History",
+              text: AppLocalizations.of(context).booking_history,
               press: () {
                 Navigator.push(
                   context,
@@ -156,7 +157,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.settings,
                 color: Colors.black,
               ),
-              text: "Advanced Settings",
+              text: AppLocalizations.of(context).advanced_settings,
               press: () {},
             ),
             SizedBox(
@@ -170,7 +171,7 @@ class SettingScreen extends StatelessWidget {
                 Icons.web,
                 color: Colors.black,
               ),
-              text: "Our Website",
+              text: AppLocalizations.of(context).our_website,
               press: () {},
             ),
             SizedBox(
@@ -198,7 +199,7 @@ class SettingScreen extends StatelessWidget {
                     ),
                   );
                 },
-                text: "Log out",
+                text: AppLocalizations.of(context).log_out,
               ),
             ),
           ],
