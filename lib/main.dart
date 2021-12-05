@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/l10n/l10n.dart';
+import 'package:lettutor/models/locale_provider.dart';
 import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:lettutor/models/tutor_provider.dart';
@@ -10,6 +13,7 @@ import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() => runApp(const MyApp());
 
@@ -35,26 +39,40 @@ class _MyAppState extends State<MyApp> {
           value: RatingProvider(),
         ),
       ],
-      child: MaterialApp(
-        title: 'One-on-one App',
-        theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        initialRoute: '/', // default is '/'
-        routes: {
-          '/': (ctx) => TabsScreen(),
-          TutorListScreen.routeName: (ctx) => TutorListScreen(),
-          // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
-          ChatScreen.routeName: (ctx) => ChatScreen(),
-          ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
-          SearchTutorListScreen.routeName: (ctx) => SearchTutorListScreen(),
-          SettingScreen.routeName: (ctx) => SettingScreen(),
-        },
+      child: ChangeNotifierProvider(
+        create: (context) => LocaleProvider(),
+        builder: (context, child) {
+          final localeProvider = Provider.of<LocaleProvider>(context);
+          return MaterialApp(
+            title: 'One-on-one App',
+            theme: ThemeData(
+              primaryColor: kPrimaryColor,
+              scaffoldBackgroundColor: Colors.white,
+            ),
+            locale: localeProvider.locale,
+            supportedLocales: L10n.all,
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            initialRoute: '/', // default is '/'
+            routes: {
+              '/': (ctx) => TabsScreen(),
+              TutorListScreen.routeName: (ctx) => TutorListScreen(),
+              // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
+              ChatScreen.routeName: (ctx) => ChatScreen(),
+              ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
+              SearchTutorListScreen.routeName: (ctx) => SearchTutorListScreen(),
+              SettingScreen.routeName: (ctx) => SettingScreen(),
+            },
 
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(
-            builder: (ctx) => TutorListScreen(),
+            onUnknownRoute: (settings) {
+              return MaterialPageRoute(
+                builder: (ctx) => TutorListScreen(),
+              );
+            },
           );
         },
       ),

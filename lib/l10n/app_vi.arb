@@ -1,0 +1,13 @@
+{
+    "language": "Việt Nam",
+    "helloWorld": "Xin chào thế giới!",
+    "hello": "Xin chào {username}",
+    "home": "Trang chủ",
+    "message": "Tin nhắn",
+    "upcomming": "Sắp tới",
+    "tutors": "Giáo viên",
+    "settings": "Cài đặt",
+    "go_to_class": "Vào lớp học",
+    "lesson_time_spent": "Tổng thời gian học là {hours} giờ và {minutes} phút",
+    "upcomming_lession": "Lớp học sắp tới"
+}

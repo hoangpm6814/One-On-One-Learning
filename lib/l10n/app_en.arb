@@ -1,0 +1,38 @@
+{
+    "language": "English",
+    "@language":{
+      "description": "The current Language"
+    },
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "A programmer greeting"
+    },
+    "hello": "Hello {username}",
+    "@hello": {
+      "description": "A welcome message",
+      "placeholders": {
+         "username": {
+           "type": "String"
+         }
+      }
+    },
+    "home": "Home",
+    "message": "Message",
+    "upcomming": "Upcomming",
+    "tutors": "Tutors",
+    "settings": "Settings",
+    "go_to_class": "Go to class",
+    "lesson_time_spent": "Total lession time is {hours} hours and {minutes} minutes",
+    "@lesson_time_spent": {
+      "description": "Lession time spent",
+      "placeholders": {
+         "hours": {
+           "type": "String"
+         },
+         "minutes": {
+           "type": "String"
+         }
+      }
+    },
+    "upcomming_lession": "Upcomming lession"
+}

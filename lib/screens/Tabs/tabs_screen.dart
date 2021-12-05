@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/language_picker_widget.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key key}) : super(key: key);
@@ -19,6 +21,8 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   void initState() {
+    // String lang = AppLocalizations.of(context).language;
+    // print(lang);
     _pages = [
       {
         'page': TutorListScreen(),
@@ -30,7 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
       },
       {
         'page': ScheduleListScreen(),
-        'title': 'UpComing',
+        'title': 'Upcomming',
       },
       {
         'page': SearchTutorListScreen(),
@@ -52,10 +56,30 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String textAppBar(String pageTitle) {
+      if (pageTitle == "Home")
+        return AppLocalizations.of(context).home;
+      else if (pageTitle == "Message")
+        return AppLocalizations.of(context).message;
+      else if (pageTitle == "Upcomming")
+        return AppLocalizations.of(context).upcomming;
+      else if (pageTitle == "Tutors")
+        return AppLocalizations.of(context).tutors;
+      return AppLocalizations.of(context).settings;
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text(_pages[_selectedPageIndex]['title']),
+        title: Text(
+          textAppBar(_pages[_selectedPageIndex]['title']),
+        ),
+        actions: [
+          LanguagePickerWidget(),
+          const SizedBox(
+            width: 12,
+          ),
+        ],
       ),
       // drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]['page'],
@@ -72,27 +96,27 @@ class _TabsScreenState extends State<TabsScreen> {
             icon: const Icon(
               Icons.home,
             ),
-            label: "Home",
+            label: AppLocalizations.of(context).home,
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.message_rounded),
-            label: "Message",
+            label: AppLocalizations.of(context).message,
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.upcoming),
-            label: "Upcoming",
+            label: AppLocalizations.of(context).upcomming,
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.people_alt),
-            label: "Tutors",
+            label: AppLocalizations.of(context).tutors,
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.settings),
-            label: "Settings",
+            label: AppLocalizations.of(context).settings,
           ),
         ],
       ),
