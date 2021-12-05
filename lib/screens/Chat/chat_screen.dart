@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/screens/Chat/local_widgets/chat_cell.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/models/tutor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatelessWidget {
   static const routeName = '/chat';
@@ -92,7 +93,7 @@ class ChatScreen extends StatelessWidget {
                 width: double.infinity,
                 child: RoundedInputField(
                   icon: Icons.search,
-                  hintText: "Search message",
+                  hintText: AppLocalizations.of(context).search_message,
                   onChanged: (value) {},
                 ),
               ),

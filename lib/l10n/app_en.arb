@@ -69,5 +69,10 @@
     "course_duration": "Course duration",
     "topic_list": "Topic list",
     "why_you_should_join_this_course": "Why you should join this course",
-    "what_you_can_do": "What you can do"
+    "what_you_can_do": "What you can do",
+    "search_message": "Search for message",
+    "search_tutor": "Search for tutor",
+    "online": "Online",
+    "write_message": "Write message...",
+    "no_tutor_match": "Currently there is no tutor matching your search."
 }

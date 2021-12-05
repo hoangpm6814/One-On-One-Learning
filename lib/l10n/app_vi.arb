@@ -44,5 +44,10 @@
     "course_duration": "Thời lượng khóa học",
     "topic_list": "Danh sách chủ đề",
     "why_you_should_join_this_course": "Tại sao bạn nên tham gia khóa học",
-    "what_you_can_do": "Bạn có thể làm được gì"
+    "what_you_can_do": "Bạn có thể làm được gì",
+    "search_message": "Tìm kiếm tin nhắn",
+    "search_tutor": "Tìm kiếm giáo viên",
+    "online": "Đang hoạt động",
+    "write_message": "Viết tin nhắn...",
+    "no_tutor_match": "Hiện không có giáo viên nào khớp yêu cầu của bạn"
 }

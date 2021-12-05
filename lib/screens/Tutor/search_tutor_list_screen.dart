@@ -8,6 +8,7 @@ import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchTutorListScreen extends StatefulWidget {
   static const routeName = '/search-tutor-list';
@@ -76,7 +77,10 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
       );
 
   Widget buildSearch() => SearchWidget(
-      text: query, hintText: 'Search for tutor...', onChanged: searchTodo);
+        text: query,
+        hintText: AppLocalizations.of(context).search_tutor,
+        onChanged: searchTodo,
+      );
 
   void searchTodo(String query) {
     final searchTutors = allTutors.where((todo) {
@@ -119,7 +123,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                         height: 30,
                       ),
                       Text(
-                        "Currently there is no tutor matching your search.",
+                        AppLocalizations.of(context).no_tutor_match,
                         style: TextStyle(
                           color: kPrimaryColor,
                           fontWeight: FontWeight.bold,

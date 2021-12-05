@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/screens/Chat/local_widgets/chat_message_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatDetailScreen extends StatelessWidget {
   final List<ChatMessage> messages = [
@@ -60,7 +61,7 @@ class ChatDetailScreen extends StatelessWidget {
                         height: 6,
                       ),
                       Text(
-                        "Online",
+                        AppLocalizations.of(context).online,
                         style: TextStyle(
                             color: Colors.grey.shade600, fontSize: 13),
                       ),
@@ -156,7 +157,7 @@ class ChatDetailScreen extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Write message...",
+                          hintText: AppLocalizations.of(context).write_message,
                           hintStyle: TextStyle(color: Colors.black54),
                           border: InputBorder.none),
                     ),
