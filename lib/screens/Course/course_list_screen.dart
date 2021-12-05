@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/screens/Course/local_widgets/card_course.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseListScreen extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class CourseListScreenState extends State<CourseListScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text("View Course"),
+        title: Text(AppLocalizations.of(context).course),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -33,7 +34,7 @@ class CourseListScreenState extends State<CourseListScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "English For Beginners:",
+                          AppLocalizations.of(context).english_for_beginners,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -45,18 +46,19 @@ class CourseListScreenState extends State<CourseListScreen> {
                   CardCourse(
                     avatar:
                         "https://camblycurriculumicons.s3.amazonaws.com/5e2b99d0c4288f294426b643?h=d41d8cd98f00b204e9800998ecf8427e",
-                    title: "Basic Conversation Topics (New)",
+                    title: AppLocalizations.of(context).course_title_1,
                     description:
-                        'Gain confidence speaking about familiar topics',
-                    level: "Beginner" + " - " + "10 Lessons",
+                        AppLocalizations.of(context).course_description_1,
+                    level: AppLocalizations.of(context).course_duration_1,
                   ),
                   SizedBox(height: 10),
                   CardCourse(
                     avatar:
                         "https://camblycurriculumicons.s3.amazonaws.com/5e2b895e541a832674533c18?h=d41d8cd98f00b204e9800998ecf8427e",
-                    title: "Intermediate Conversation Topics (New)",
-                    description: "Express your ideas and opinions",
-                    level: "Intermediate" + " - " + "10 Lessons",
+                    title: AppLocalizations.of(context).course_title_2,
+                    description:
+                        AppLocalizations.of(context).course_description_2,
+                    level: AppLocalizations.of(context).course_duration_2,
                   ),
                   // SizedBox(height: 10),
                   // CardCourse(),
@@ -70,7 +72,7 @@ class CourseListScreenState extends State<CourseListScreen> {
                     child: Row(
                       children: [
                         Text(
-                          "Conversational English:",
+                          AppLocalizations.of(context).conversational_english,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -82,19 +84,19 @@ class CourseListScreenState extends State<CourseListScreen> {
                   CardCourse(
                     avatar:
                         "https://camblycurriculumicons.s3.amazonaws.com/5e2b9a4c05342470fdddf8b8?h=d41d8cd98f00b204e9800998ecf8427e",
-                    title: "Healthy Mind, Healthy Body (New)",
+                    title: AppLocalizations.of(context).course_title_3,
                     description:
-                        "Let's discuss the many aspects of living a long, happy life",
-                    level: "Intermediate" + " - " + "6 Lessons",
+                        AppLocalizations.of(context).course_description_3,
+                    level: AppLocalizations.of(context).course_duration_3,
                   ),
                   SizedBox(height: 10),
                   CardCourse(
                     avatar:
                         "https://camblycurriculumicons.s3.amazonaws.com/5eab4979c920a20f93071fdd?h=d41d8cd98f00b204e9800998ecf8427e",
-                    title: "Movies and Television (New)",
+                    title: AppLocalizations.of(context).course_title_4,
                     description:
-                        "Let's discuss our preferences and habits surrounding movies and television shows",
-                    level: "Beginner" + " - " + "10 Lessons",
+                        AppLocalizations.of(context).course_description_4,
+                    level: AppLocalizations.of(context).course_duration_4,
                   ),
                   SizedBox(height: 10),
                 ],
