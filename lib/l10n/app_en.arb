@@ -88,5 +88,6 @@
     "your_schedule_history": "Your schedule history:",
     "days_ago": "days ago",
     "tutor_judgement": "Tutor's judgement",
-    "no_history_schedule": "Currently you do not have any booking history. Try booking your own schedule..."
+    "no_history_schedule": "Currently you do not have any booking history. Try booking your own schedule...",
+    "switch_mode": "Switch Light / Dark Mode"
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:lettutor/constants.dart';
+// import 'package:lettutor/constants.dart';
 import 'package:lettutor/l10n/l10n.dart';
 import 'package:lettutor/models/locale_provider.dart';
 import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/schedule_provider.dart';
+import 'package:lettutor/models/theme_provider.dart';
 import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
@@ -38,17 +39,27 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider.value(
           value: RatingProvider(),
         ),
+        ChangeNotifierProvider.value(
+          value: LocaleProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ThemeProvider(),
+        ),
       ],
       child: ChangeNotifierProvider(
         create: (context) => LocaleProvider(),
         builder: (context, child) {
           final localeProvider = Provider.of<LocaleProvider>(context);
+          final themeProvider = Provider.of<ThemeProvider>(context);
           return MaterialApp(
             title: 'One-on-one App',
-            theme: ThemeData(
-              primaryColor: kPrimaryColor,
-              scaffoldBackgroundColor: Colors.white,
-            ),
+            // theme: ThemeData(
+            //   primaryColor: kPrimaryColor,
+            //   scaffoldBackgroundColor: Colors.white,
+            // ),
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
             locale: localeProvider.locale,
             supportedLocales: L10n.all,
             localizationsDelegates: [

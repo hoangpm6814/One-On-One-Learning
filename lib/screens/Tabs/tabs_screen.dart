@@ -73,6 +73,9 @@ class _TabsScreenState extends State<TabsScreen> {
         backgroundColor: kPrimaryColor,
         title: Text(
           textAppBar(_pages[_selectedPageIndex]['title']),
+          style: TextStyle(
+            color: Theme.of(context).scaffoldBackgroundColor,
+          ),
         ),
         actions: [
           LanguagePickerWidget(),
@@ -85,36 +88,36 @@ class _TabsScreenState extends State<TabsScreen> {
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        backgroundColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Colors.white,
+        backgroundColor: kPrimaryColor,
+        unselectedItemColor: Theme.of(context).scaffoldBackgroundColor,
         selectedItemColor: Colors.amber,
         currentIndex: _selectedPageIndex,
         // type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: kPrimaryColor,
             icon: const Icon(
               Icons.home,
             ),
             label: AppLocalizations.of(context).home,
           ),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: kPrimaryColor,
             icon: const Icon(Icons.message_rounded),
             label: AppLocalizations.of(context).message,
           ),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: kPrimaryColor,
             icon: const Icon(Icons.upcoming),
             label: AppLocalizations.of(context).upcomming,
           ),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: kPrimaryColor,
             icon: const Icon(Icons.people_alt),
             label: AppLocalizations.of(context).tutors,
           ),
           BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: kPrimaryColor,
             icon: const Icon(Icons.settings),
             label: AppLocalizations.of(context).settings,
           ),

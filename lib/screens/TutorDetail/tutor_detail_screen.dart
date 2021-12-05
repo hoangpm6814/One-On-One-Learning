@@ -126,7 +126,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [
@@ -146,7 +146,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [
@@ -173,7 +173,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [

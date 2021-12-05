@@ -19,7 +19,7 @@ class Heading extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 15,
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
         ),
         Text(
@@ -27,7 +27,7 @@ class Heading extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 15,
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
         ),
         Text(
@@ -35,14 +35,14 @@ class Heading extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 15,
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
           ),
         ),
         SizedBox(
           height: 10,
         ),
         RoundedButtonSmallPadding(
-          color: Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
           textColor: kPrimaryColor,
           text: AppLocalizations.of(context).go_to_class,
           press: () {

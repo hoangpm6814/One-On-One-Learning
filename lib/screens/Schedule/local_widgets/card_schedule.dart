@@ -71,8 +71,8 @@ class CardSchedule extends StatelessWidget {
                           .removeSchedule(schedule.id);
                     },
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).scaffoldBackgroundColor),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(
@@ -226,7 +226,7 @@ class CardSchedule extends StatelessWidget {
                     );
                   },
                   color: kPrimaryColor,
-                  textColor: Colors.white,
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
                   text: AppLocalizations.of(context).enter_lesson,
                 ),
               ],

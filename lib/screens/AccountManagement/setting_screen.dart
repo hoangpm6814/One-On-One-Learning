@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
@@ -186,7 +188,23 @@ class SettingScreen extends StatelessWidget {
               press: () {},
             ),
             SizedBox(
-              height: 50,
+              height: 10,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  AppLocalizations.of(context).switch_mode,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                ChangeThemeButtonWidget(),
+              ],
+            ),
+            SizedBox(
+              height: 20,
             ),
             Container(
               width: double.infinity,
