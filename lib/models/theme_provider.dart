@@ -25,6 +25,7 @@ class MyThemes {
     primaryColor: Colors.black,
     colorScheme: ColorScheme.dark(),
     disabledColor: Colors.white,
+    // buttonColor: Colors.black,
     // iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
   );
 
@@ -33,6 +34,7 @@ class MyThemes {
     primaryColor: Colors.white,
     colorScheme: ColorScheme.light(),
     disabledColor: Colors.white,
+    // buttonColor: Colors.white,
     // iconTheme: IconThemeData(color: Colors.red, opacity: 0.8),
   );
 }

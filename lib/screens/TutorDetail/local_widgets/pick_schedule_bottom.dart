@@ -63,7 +63,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: StadiumBorder(),
-              primary: Colors.green,
+              primary: kPrimaryColor,
             ),
             onPressed: () => setState(() {
               if (num >= requestTitle.length - 1) {
@@ -179,8 +179,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
   Widget buildChipDate(int option, BuildContext context) {
     final isSelected = selectedDateDiff == option;
     final foregroundColor = isSelected ? Colors.white : Colors.black;
-    final backgroundColor =
-        isSelected ? Theme.of(context).primaryColor : Colors.white;
+    final backgroundColor = isSelected ? kPrimaryColor : Colors.white;
     return GestureDetector(
       onTap: () => setState(() {
         selectedDateDiff = option;
@@ -188,7 +187,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
       child: Chip(
         shape: StadiumBorder(
           side: BorderSide(
-            color: Theme.of(context).primaryColor,
+            color: kPrimaryColor,
           ),
         ),
         label: Text(
@@ -207,8 +206,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
   Widget buildChipShift(int option, BuildContext context) {
     final isSelected = selectedShift == option;
     final foregroundColor = isSelected ? Colors.white : Colors.black;
-    final backgroundColor =
-        isSelected ? Theme.of(context).primaryColor : Colors.white;
+    final backgroundColor = isSelected ? kPrimaryColor : Colors.white;
     return GestureDetector(
       onTap: () => setState(() {
         selectedShift = option;
@@ -217,7 +215,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         shape: StadiumBorder(
           side: BorderSide(
-            color: Theme.of(context).primaryColor,
+            color: kPrimaryColor,
           ),
         ),
         label: Text(
@@ -235,7 +233,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
 
   String getStringDateFromDateDiff(int datediff) {
     final DateTime now = DateTime.now();
-    return DateFormat("dd-MM-yyyy").format(now.add(Duration(days: datediff)));
+    return DateFormat("dd/MM/yyyy").format(now.add(Duration(days: datediff)));
   }
 
   String getStringShiftFromShift(int shift) {
@@ -262,7 +260,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
     return Container(
       margin: EdgeInsets.fromLTRB(20, 10, 20, 30),
       // height: 400,
-      color: Colors.white,
+      // color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -5,6 +5,7 @@ import 'package:lettutor/models/rating.dart';
 import 'package:lettutor/models/rating_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_rating_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
@@ -142,7 +143,14 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ChatDetailScreen(),
+                        ),
+                      );
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
