@@ -11,6 +11,7 @@ class RoundedPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(color: Colors.black54);
     return TextFieldContainer(
       child: TextField(
         obscureText: true,
@@ -27,7 +28,9 @@ class RoundedPasswordField extends StatelessWidget {
             color: kPrimaryColor,
           ),
           border: InputBorder.none,
+          hintStyle: textStyle,
         ),
+        style: textStyle,
       ),
     );
   }
