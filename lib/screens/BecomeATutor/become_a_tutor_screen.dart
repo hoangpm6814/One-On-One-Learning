@@ -117,8 +117,8 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                       "Some useful tips:\n1) Look straight at the camera and smile naturally.\n2) Find a quite place to make a video.\n3) Dress politely.\n4) Video should be between 1 and 3 minutes.\n5) Brand yourself and have fun.",
                 ),
                 LightRoundedButtonMediumPadding(
-                  color: Colors.white,
-                  textColor: kPrimaryColor,
+                  // color: Colors.white,
+                  // textColor: kPrimaryColor,
                   text: "Choose video",
                 ),
                 SizedBox(height: 30),
