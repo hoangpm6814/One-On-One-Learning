@@ -3,18 +3,27 @@ import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
+import 'package:lettutor/models/theme_provider.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
 import 'package:lettutor/screens/Course/course_list_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = '/settings';
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final buttonTextColor = themeProvider.isDarkMode
+        ? Theme.of(context).disabledColor
+        : Theme.of(context).disabledColor;
+    final buttonColor = themeProvider.isDarkMode
+        ? Theme.of(context).primaryColor
+        : Theme.of(context).primaryColor;
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(24),
@@ -90,9 +99,11 @@ class SettingScreen extends StatelessWidget {
             //   height: 10,
             // ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.person_add_alt,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: AppLocalizations.of(context).become_a_tutor,
               press: () {
@@ -108,9 +119,11 @@ class SettingScreen extends StatelessWidget {
               height: 10,
             ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.card_giftcard_rounded,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: AppLocalizations.of(context).course_for_you,
               press: () {
@@ -126,9 +139,11 @@ class SettingScreen extends StatelessWidget {
               height: 10,
             ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.history,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: AppLocalizations.of(context).booking_history,
               press: () {
@@ -155,9 +170,11 @@ class SettingScreen extends StatelessWidget {
               height: 10,
             ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.settings,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: AppLocalizations.of(context).advanced_settings,
               press: () {},
@@ -169,9 +186,11 @@ class SettingScreen extends StatelessWidget {
               height: 10,
             ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.web,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: AppLocalizations.of(context).our_website,
               press: () {},
@@ -180,9 +199,11 @@ class SettingScreen extends StatelessWidget {
               height: 10,
             ),
             RoundedSettingButton(
+              textColor: buttonTextColor,
+              color: buttonColor,
               icon: Icon(
                 Icons.facebook,
-                color: Colors.black,
+                color: buttonTextColor,
               ),
               text: "Facebook",
               press: () {},

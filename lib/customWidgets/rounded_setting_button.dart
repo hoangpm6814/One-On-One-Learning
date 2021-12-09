@@ -55,7 +55,7 @@ class RoundedSettingButton extends StatelessWidget {
           ),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.black,
+            color: textColor,
             size: 15,
           ),
         ],
