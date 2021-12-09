@@ -22,9 +22,9 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const styleActive = TextStyle(color: Colors.black);
-    const styleHint = TextStyle(color: Colors.black54);
-    final style = widget.text.isEmpty ? styleHint : styleActive;
+    // const styleActive = TextStyle(color: Colors.black);
+    // const styleHint = TextStyle(color: Colors.black54);
+    // final style = widget.text.isEmpty ? styleHint : styleActive;
 
     return Container(
       height: 42,
@@ -32,7 +32,8 @@ class _SearchWidgetState extends State<SearchWidget> {
       margin: const EdgeInsets.fromLTRB(0, 10, 0, 3),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
+        // color: Color(0xFF3d3d3d),
+        color: Colors.black12,
         border: Border.all(color: Colors.black26),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -40,10 +41,16 @@ class _SearchWidgetState extends State<SearchWidget> {
         controller: controller,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
-          icon: Icon(Icons.search, color: style.color),
+          icon: Icon(
+            Icons.search,
+            color: Theme.of(context).disabledColor,
+          ),
           suffixIcon: widget.text.isNotEmpty
               ? GestureDetector(
-                  child: Icon(Icons.close, color: style.color),
+                  child: Icon(
+                    Icons.close,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   onTap: () {
                     controller.clear();
                     widget.onChanged('');
@@ -52,10 +59,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                 )
               : null,
           hintText: widget.hintText,
-          hintStyle: style,
+          // hintStyle: style,
           border: InputBorder.none,
         ),
-        style: style,
+        // style: style,
         onChanged: widget.onChanged,
       ),
     );

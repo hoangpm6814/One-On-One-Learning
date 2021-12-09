@@ -33,7 +33,7 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
     colorScheme: ColorScheme.light(),
-    disabledColor: Colors.white,
+    disabledColor: Colors.black,
     // buttonColor: Colors.white,
     // iconTheme: IconThemeData(color: Colors.red, opacity: 0.8),
   );

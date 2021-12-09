@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/customWidgets/search.dart';
 import 'package:lettutor/screens/Chat/local_widgets/chat_cell.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   static const routeName = '/chat';
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   final List<Tutor> tutors = [
     Tutor(
       id: "1",
@@ -73,7 +79,13 @@ class ChatScreen extends StatelessWidget {
     ),
   ];
 
-  // ListTutor(this.tutors);
+  String query = '';
+
+  Widget buildSearch() => SearchWidget(
+        text: query,
+        hintText: AppLocalizations.of(context).search_message,
+        onChanged: (value) {},
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +94,26 @@ class ChatScreen extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          // Container(
+          //   height: (MediaQuery.of(context).size.height -
+          //           (MediaQuery.of(context).padding.top + kToolbarHeight)) *
+          //       0.1,
+          //   padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+          //   // color: k2PrimaryColor,
+          //   child: Scaffold(
+          //     body: Container(
+          //       width: double.infinity,
+          //       child: RoundedInputField(
+          //         icon: Icons.search,
+          //         hintText: AppLocalizations.of(context).search_message,
+          //         onChanged: (value) {},
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Container(
-            height: (MediaQuery.of(context).size.height -
-                    (MediaQuery.of(context).padding.top + kToolbarHeight)) *
-                0.1,
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            // color: k2PrimaryColor,
-            child: Scaffold(
-              body: Container(
-                width: double.infinity,
-                child: RoundedInputField(
-                  icon: Icons.search,
-                  hintText: AppLocalizations.of(context).search_message,
-                  onChanged: (value) {},
-                ),
-              ),
-            ),
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: buildSearch(),
           ),
           tutors.isEmpty
               ? Container()
