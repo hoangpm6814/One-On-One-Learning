@@ -37,11 +37,11 @@ class LightRoundedButtonSmallPadding extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(color),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            side: BorderSide(
-              color: textColor,
-              width: 1,
-              style: BorderStyle.solid,
-            ),
+            // side: BorderSide(
+            //   color: textColor,
+            //   width: 1,
+            //   style: BorderStyle.solid,
+            // ),
             borderRadius: BorderRadius.circular(10),
             // borderRadius: BorderRadius.zero,
           ),
