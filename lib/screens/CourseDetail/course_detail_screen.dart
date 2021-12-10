@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:lettutor/api/pdf_api.dart';
 import 'package:lettutor/screens/CourseDetail/local_widgets/part_divider.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/CourseDetail/pdf_viewer_screen.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   @override
@@ -150,6 +153,19 @@ class CourseDetailScreen extends StatelessWidget {
                       color: kPrimaryColor,
                       textColor: Colors.white,
                       text: AppLocalizations.of(context).explore,
+                      press: () async {
+                        // pdf from assets
+                        final path =
+                            'assets/files/Basic_Conversation_Topics.pdf';
+                        final file = await PDFApi.loadAsset(path);
+                        openPDF(context, file);
+
+                        // pdf from network
+                        // final url =
+                        //     'https://www.cambridgeenglish.org/images/291264-learning-tips-pdf.pdf';
+                        // final file = await PDFApi.loadNetwork(url);
+                        // openPDF(context, file);
+                      },
                     ),
                   ],
                 ),
@@ -160,4 +176,8 @@ class CourseDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  void openPDF(BuildContext context, File file) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PDFViewerScreen(file: file)),
+      );
 }
