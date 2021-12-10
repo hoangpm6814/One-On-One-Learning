@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/models/schedule.dart';
+import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardScheduleHistory extends StatelessWidget {
-  const CardScheduleHistory({Key key}) : super(key: key);
+  const CardScheduleHistory({
+    Key key,
+    @required this.schedule,
+  }) : super(key: key);
+
+  final Schedule schedule;
+
   @override
   Widget build(BuildContext context) {
+    final Tutor tutor =
+        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -27,13 +42,17 @@ class CardScheduleHistory extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sun, October 24, 21",
+                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
                         ),
-                        Text("16 hours ago"),
+                        Text(
+                          dateDiff(schedule.date) +
+                              " " +
+                              AppLocalizations.of(context).days_ago,
+                        ),
                       ],
                     ),
                   ),
@@ -47,8 +66,7 @@ class CardScheduleHistory extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(
-                          "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
+                      backgroundImage: NetworkImage(tutor.avatar),
                     ),
                   ],
                 ),
@@ -58,29 +76,39 @@ class CardScheduleHistory extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Darlyn Grace Sausa",
+                        tutor.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
                       Text("Viet Nam"),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.chat,
-                            color: kPrimaryColor,
-                            size: 20.0,
-                          ),
-                          SizedBox(width: 3),
-                          Text(
-                            "Chat",
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ChatDetailScreen(),
                             ),
-                          ),
-                        ],
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.chat,
+                              color: kPrimaryColor,
+                              size: 20.0,
+                            ),
+                            SizedBox(width: 3),
+                            Text(
+                              AppLocalizations.of(context).chat,
+                              style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -96,7 +124,9 @@ class CardScheduleHistory extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lesson time: " + "00:00 - 00:25",
+                        AppLocalizations.of(context).lesson_time +
+                            " " +
+                            getTimeShift(schedule.shift),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -113,7 +143,7 @@ class CardScheduleHistory extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Lesson requirement: ",
+                    AppLocalizations.of(context).lesson_requirement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -128,7 +158,7 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      'I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.',
+                      schedule.requirement,
                     ),
                   ),
                 ),
@@ -139,7 +169,7 @@ class CardScheduleHistory extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Tutor's judgement: ",
+                    AppLocalizations.of(context).tutor_judgement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -164,5 +194,29 @@ class CardScheduleHistory extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getTimeShift(int shift) {
+    switch (shift) {
+      case 1:
+        return "08:00 - 09:30";
+      case 2:
+        return "09:30 - 11:00";
+      case 3:
+        return "13:30 - 15:00";
+      case 4:
+        return "15:00 - 16:30";
+      case 5:
+        return "20:00 - 21:30";
+      case 6:
+        return "21:30 - 23:00";
+      default:
+        return "21:30 - 23:00";
+    }
+  }
+
+  String dateDiff(DateTime date) {
+    final DateTime now = DateTime.now();
+    return now.difference(date).inDays.toString();
   }
 }

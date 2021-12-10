@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/models/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomedNotification extends StatelessWidget {
   final String text;
@@ -7,12 +9,15 @@ class CustomedNotification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       // width: 100,
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         border: Border.all(color: kPrimaryColor),
-        color: Colors.lightBlue[50],
+        color: themeProvider.isDarkMode
+            ? Colors.lightBlue[300]
+            : Colors.lightBlue[50],
       ),
 
       child: Text(

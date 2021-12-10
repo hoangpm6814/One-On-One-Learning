@@ -1,17 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lettutor/customWidgets/rating.dart';
+import 'package:lettutor/models/rating.dart';
+import 'package:lettutor/models/rating_provider.dart';
+import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_rating_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
-import 'package:lettutor/screens/TutorDetail/local_widgets/pick_date_model_bottom.dart';
-import 'package:lettutor/screens/TutorDetail/local_widgets/pick_time_model_bottom.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TutorDetailScreen extends StatelessWidget {
+class TutorDetailScreen extends StatefulWidget {
+  static const routeName = '/tutor-detail';
+  const TutorDetailScreen({
+    Key key,
+    @required this.id,
+  }) : super(key: key);
+
+  final String id;
+
+  @override
+  State<TutorDetailScreen> createState() => _TutorDetailScreenState();
+}
+
+class _TutorDetailScreenState extends State<TutorDetailScreen> {
+  Tutor tutor;
+  List<Rating> ratings;
+  @override
+  void didChangeDependencies() {
+    tutor = Provider.of<TutorProvider>(context).getById(widget.id);
+    ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tutor Detail")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text(AppLocalizations.of(context).tutor_detail),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
@@ -25,8 +59,7 @@ class TutorDetailScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 40,
                         // maxRadius: 70,
-                        backgroundImage: NetworkImage(
-                            "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
+                        backgroundImage: NetworkImage(tutor.avatar),
                       ),
                     ],
                   ),
@@ -37,7 +70,7 @@ class TutorDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hannah Nguyen",
+                          tutor.name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -50,7 +83,7 @@ class TutorDetailScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Viet Nam",
+                          tutor.nation,
                         ),
                       ],
                     ),
@@ -59,24 +92,18 @@ class TutorDetailScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Row(
-                        children: [
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star,
-                              color: kPrimaryRatingStar, size: 20.0),
-                          Icon(Icons.star_half,
-                              color: kPrimaryRatingStar, size: 20.0),
-                        ],
+                      RatingStar(
+                        rating: tutor.rating,
                       ),
                       IconButton(
-                        icon: Icon(Icons.favorite_border_outlined),
+                        icon: Icon(tutor.isFavourite
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined),
                         color: Theme.of(context).errorColor,
-                        onPressed: () => {},
+                        onPressed: () => {
+                          Provider.of<TutorProvider>(context, listen: false)
+                              .toggleIsFavourite(tutor.id),
+                        },
                       ),
                     ],
                   )
@@ -85,7 +112,15 @@ class TutorDetailScreen extends StatelessWidget {
               Container(
                 width: double.infinity,
                 child: RoundedButtonMediumPadding(
-                  text: "Booking",
+                  text: AppLocalizations.of(context).booking,
+                  press: () {
+                    showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return PickScheduleBottom(tutorId: tutor.id);
+                      },
+                    );
+                  },
                 ),
               ),
               Row(
@@ -93,7 +128,7 @@ class TutorDetailScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [
@@ -102,7 +137,7 @@ class TutorDetailScreen extends StatelessWidget {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Message",
+                          AppLocalizations.of(context).message,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -110,17 +145,17 @@ class TutorDetailScreen extends StatelessWidget {
                       ],
                     ),
                     onPressed: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return PickDateModelBottom();
-                        },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ChatDetailScreen(),
+                        ),
                       );
                     },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [
@@ -129,7 +164,7 @@ class TutorDetailScreen extends StatelessWidget {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Report",
+                          AppLocalizations.of(context).report,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -147,7 +182,7 @@ class TutorDetailScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: Theme.of(context).scaffoldBackgroundColor,
                     ),
                     child: Column(
                       children: [
@@ -156,7 +191,7 @@ class TutorDetailScreen extends StatelessWidget {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Reviews",
+                          AppLocalizations.of(context).reviews,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -164,10 +199,12 @@ class TutorDetailScreen extends StatelessWidget {
                       ],
                     ),
                     onPressed: () {
-                      showModalBottomSheet<void>(
+                      showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return PickTimeModelBottom();
+                          return AlertDialogRating(
+                            tutorId: tutor.id,
+                          );
                         },
                       );
                     },
@@ -175,19 +212,42 @@ class TutorDetailScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              TutorDescription(),
+              TutorDescription(tutor: tutor),
               SizedBox(height: 10),
               Text(
-                "Rating and Comment" + "(3)",
+                AppLocalizations.of(context).rating_and_comment +
+                    " (${ratings.length})",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 5),
-              CardRating(),
-              CardRating(),
-              CardRating(),
+              ratings.length > 0
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              (MediaQuery.of(context).padding.top +
+                                  MediaQuery.of(context).padding.bottom +
+                                  kToolbarHeight)) *
+                          0.5,
+                      child: ListView.builder(
+                        itemBuilder: (ctx, index) {
+                          return CardRating(
+                            rating: ratings[index],
+                          );
+                        },
+                        itemCount: ratings.length,
+                      ),
+                    )
+                  : Container(
+                      child: Text(
+                        AppLocalizations.of(context).no_rating_tutor,
+                        style: TextStyle(
+                          color: kPrimaryColor,
+                        ),
+                      ),
+                    )
             ],
           ),
         ),

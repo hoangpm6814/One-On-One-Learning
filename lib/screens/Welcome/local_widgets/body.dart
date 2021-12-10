@@ -3,7 +3,7 @@ import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/signup_screen.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/constants.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,22 +20,22 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "ONE ON ONE APP",
+                  AppLocalizations.of(context).one_on_one_app_upper,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(height: size.height * 0.05),
-                SvgPicture.asset(
-                  "assets/icons/welcome1.svg",
+                Image.asset(
+                  "assets/images/welcome_img.png",
                   height: size.height * 0.45,
                 ),
                 SizedBox(height: size.height * 0.05),
                 RoundedButton(
-                  text: "LOG IN",
+                  text: AppLocalizations.of(context).log_in_upper,
                   press: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
@@ -46,11 +46,11 @@ class Body extends StatelessWidget {
                   },
                 ),
                 RoundedButton(
-                  text: "SIGN UP",
+                  text: AppLocalizations.of(context).sign_up_upper,
                   color: kPrimaryLightColor,
                   textColor: Colors.black,
                   press: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) {

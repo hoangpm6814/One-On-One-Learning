@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoConferenceScreen extends StatefulWidget {
+  static const routeName = '/video-conference';
+
   const VideoConferenceScreen({Key key}) : super(key: key);
 
   @override
@@ -11,7 +14,17 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text("View Schedule")),
+      appBar: AppBar(
+        elevation: 0,
+        // automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+        title: Text(
+          AppLocalizations.of(context).meeting_room,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       backgroundColor: Colors.black,
       body: Column(
         children: [
@@ -23,7 +36,7 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tutoring Meeting Room ',
+                  AppLocalizations.of(context).tutoring_meeting_room,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -60,7 +73,7 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Lesson will be started after",
+                        AppLocalizations.of(context).lesson_start_after,
                         style: TextStyle(
                           color: Colors.white,
                         ),

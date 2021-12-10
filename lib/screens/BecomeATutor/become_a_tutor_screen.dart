@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/country_input.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/date_of_birth_input.dart';
 import 'package:lettutor/screens/BecomeATutor/Input/BasicInfo/name_input.dart';
@@ -53,7 +54,10 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Become A Tutor")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text("Become A Tutor"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
@@ -113,17 +117,31 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                       "Some useful tips:\n1) Look straight at the camera and smile naturally.\n2) Find a quite place to make a video.\n3) Dress politely.\n4) Video should be between 1 and 3 minutes.\n5) Brand yourself and have fun.",
                 ),
                 LightRoundedButtonMediumPadding(
-                  color: Colors.white,
-                  textColor: kPrimaryColor,
+                  // color: Colors.white,
+                  // textColor: kPrimaryColor,
                   text: "Choose video",
                 ),
                 SizedBox(height: 30),
-                ElevatedButton(
-                  child: Text(
-                    'Press to become a tutor!',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  onPressed: () {
+                // ElevatedButton(
+                //   child: Text(
+                //     'Press to become a tutor!',
+                //     style: TextStyle(color: Colors.white, fontSize: 16),
+                //   ),
+                //   onPressed: () {
+                //     if (!_formKey.currentState.validate()) {
+                //       return;
+                //     }
+                //     _formKey.currentState.save();
+                //     // print(_name);
+                //     // print(_dateOfBirth);
+
+                //     //Send to API
+                //   },
+                // ),
+                RoundedButtonMediumPadding(
+                  color: kPrimaryColor,
+                  text: 'Press to become a tutor!',
+                  press: () {
                     if (!_formKey.currentState.validate()) {
                       return;
                     }

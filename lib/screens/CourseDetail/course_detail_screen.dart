@@ -1,13 +1,20 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:lettutor/api/pdf_api.dart';
 import 'package:lettutor/screens/CourseDetail/local_widgets/part_divider.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/CourseDetail/pdf_viewer_screen.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Course Detail")),
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        title: Text(AppLocalizations.of(context).course_detail),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(24),
@@ -20,26 +27,31 @@ class CourseDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Row(
                     children: [
-                      Text(
-                        "Basic Conversation Topics",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).course_title_1,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                PartDivider(text: "Overview"),
+                PartDivider(text: AppLocalizations.of(context).overview),
                 Row(
                   children: [
                     Icon(Icons.help_outline, color: Colors.red, size: 20.0),
                     SizedBox(width: 5),
-                    Text(
-                      "Why you should join this course:",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .why_you_should_join_this_course,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],
@@ -63,7 +75,7 @@ class CourseDetailScreen extends StatelessWidget {
                     Icon(Icons.info_outline, color: Colors.red, size: 20.0),
                     SizedBox(width: 5),
                     Text(
-                      "What you can do:",
+                      AppLocalizations.of(context).what_you_can_do,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -85,7 +97,7 @@ class CourseDetailScreen extends StatelessWidget {
                   ],
                 ),
                 // SizedBox(height: 30),
-                PartDivider(text: "Level required"),
+                PartDivider(text: AppLocalizations.of(context).level_required),
                 Row(
                   children: [
                     Icon(
@@ -103,7 +115,7 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                PartDivider(text: "Course duration"),
+                PartDivider(text: AppLocalizations.of(context).course_duration),
                 Row(
                   children: [
                     Icon(
@@ -121,7 +133,7 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                PartDivider(text: "Topic list"),
+                PartDivider(text: AppLocalizations.of(context).topic_list),
                 Row(
                   children: [
                     Expanded(
@@ -140,7 +152,20 @@ class CourseDetailScreen extends StatelessWidget {
                     LightRoundedButtonMediumPadding(
                       color: kPrimaryColor,
                       textColor: Colors.white,
-                      text: "Explore",
+                      text: AppLocalizations.of(context).explore,
+                      press: () async {
+                        // pdf from assets
+                        final path =
+                            'assets/files/Basic_Conversation_Topics.pdf';
+                        final file = await PDFApi.loadAsset(path);
+                        openPDF(context, file);
+
+                        // pdf from network
+                        // final url =
+                        //     'https://www.cambridgeenglish.org/images/291264-learning-tips-pdf.pdf';
+                        // final file = await PDFApi.loadNetwork(url);
+                        // openPDF(context, file);
+                      },
                     ),
                   ],
                 ),
@@ -151,4 +176,8 @@ class CourseDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  void openPDF(BuildContext context, File file) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PDFViewerScreen(file: file)),
+      );
 }

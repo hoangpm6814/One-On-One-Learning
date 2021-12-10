@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:lettutor/models/schedule.dart';
+import 'package:lettutor/models/schedule_provider.dart';
+import 'package:lettutor/models/tutor.dart';
+import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
+import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardSchedule extends StatelessWidget {
-  const CardSchedule({Key key}) : super(key: key);
+  const CardSchedule({
+    Key key,
+    @required this.schedule,
+  }) : super(key: key);
+
+  final Schedule schedule;
+
   @override
   Widget build(BuildContext context) {
+    final Tutor tutor =
+        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -28,13 +45,13 @@ class CardSchedule extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sun, October 24, 21",
+                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
                         ),
-                        Text("1 lesson"),
+                        Text("1 " + AppLocalizations.of(context).lesson),
                       ],
                     ),
                   ),
@@ -44,15 +61,18 @@ class CardSchedule extends StatelessWidget {
                         Icon(Icons.cancel, color: Colors.red, size: 20.0),
                         SizedBox(width: 5),
                         Text(
-                          "Cancel",
+                          AppLocalizations.of(context).cancel,
                           style: TextStyle(color: Colors.red),
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<ScheduleProvider>(context, listen: false)
+                          .removeSchedule(schedule.id);
+                    },
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).scaffoldBackgroundColor),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(
@@ -82,8 +102,7 @@ class CardSchedule extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(
-                          "https://api.app.lettutor.com/avatar/cd0a440b-cd19-4c55-a2a2-612707b1c12cavatar1631029793834.jpg"),
+                      backgroundImage: NetworkImage(tutor.avatar),
                     ),
                   ],
                 ),
@@ -93,29 +112,39 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Darlyn Grace Sausa",
+                        tutor.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
                       Text("Viet Nam"),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.chat,
-                            color: kPrimaryColor,
-                            size: 20.0,
-                          ),
-                          SizedBox(width: 3),
-                          Text(
-                            "Chat",
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ChatDetailScreen(),
                             ),
-                          ),
-                        ],
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.chat,
+                              color: kPrimaryColor,
+                              size: 20.0,
+                            ),
+                            SizedBox(width: 3),
+                            Text(
+                              AppLocalizations.of(context).chat,
+                              style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -131,7 +160,9 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Lesson time: " + "00:00 - 00:25",
+                        AppLocalizations.of(context).lesson_time +
+                            " " +
+                            getTimeShift(schedule.shift),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -148,7 +179,7 @@ class CardSchedule extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Lesson requirement: ",
+                    AppLocalizations.of(context).lesson_requirement,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -158,7 +189,7 @@ class CardSchedule extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Edit requirement",
+                      AppLocalizations.of(context).edit_requirement,
                       style: TextStyle(
                         color: kPrimaryColor,
                         fontWeight: FontWeight.bold,
@@ -176,7 +207,7 @@ class CardSchedule extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      'I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better. I want to speak English better.',
+                      schedule.requirement,
                     ),
                   ),
                 ),
@@ -186,9 +217,17 @@ class CardSchedule extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 LightRoundedButtonMediumPadding(
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VideoConferenceScreen(),
+                      ),
+                    );
+                  },
                   color: kPrimaryColor,
-                  textColor: Colors.white,
-                  text: "Enter lesson",
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
+                  text: AppLocalizations.of(context).enter_lesson,
                 ),
               ],
             ),
@@ -196,5 +235,24 @@ class CardSchedule extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String getTimeShift(int shift) {
+    switch (shift) {
+      case 1:
+        return "08:00 - 09:30";
+      case 2:
+        return "09:30 - 11:00";
+      case 3:
+        return "13:30 - 15:00";
+      case 4:
+        return "15:00 - 16:30";
+      case 5:
+        return "20:00 - 21:30";
+      case 6:
+        return "21:30 - 23:00";
+      default:
+        return "21:30 - 23:00";
+    }
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/local_widgets/or_divider.dart';
 import 'package:lettutor/screens/Signup/local_widgets/social_icon.dart';
@@ -7,6 +6,8 @@ import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/customWidgets/rounded_password_field.dart';
+import 'package:lettutor/screens/Tabs/tabs_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -23,31 +24,44 @@ class Body extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                const SizedBox(
+                  height: 30,
+                ),
                 Text(
-                  "SIGN UP",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context).sign_up_upper,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.03),
-                SvgPicture.asset(
-                  "assets/icons/signup1.svg",
-                  height: size.height * 0.35,
+                Image.asset(
+                  "assets/images/signup_img.png",
+                  height: size.height * 0.4,
                 ),
                 RoundedInputField(
-                  hintText: "Your Email",
+                  hintText: AppLocalizations.of(context).your_email,
                   onChanged: (value) {},
                 ),
                 RoundedPasswordField(
                   onChanged: (value) {},
                 ),
                 RoundedButton(
-                  text: "SIGN UP",
-                  press: () {},
+                  text: AppLocalizations.of(context).sign_up_upper,
+                  press: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => TabsScreen(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: size.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   login: false,
                   press: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
@@ -62,11 +76,11 @@ class Body extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SocalIcon(
-                      iconSrc: "assets/icons/facebook.svg",
+                      iconSrc: "assets/icons/facebook_icon.svg",
                       press: () {},
                     ),
                     SocalIcon(
-                      iconSrc: "assets/icons/google-plus.svg",
+                      iconSrc: "assets/icons/google_icon.svg",
                       press: () {},
                     ),
                   ],
