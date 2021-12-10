@@ -83,7 +83,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           ),
                         ),
                         Text(
-                          "Viet Nam",
+                          tutor.nation,
                         ),
                       ],
                     ),

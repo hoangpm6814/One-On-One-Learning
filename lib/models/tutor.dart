@@ -6,6 +6,7 @@ class Tutor {
   final double rating;
   final String avatar;
   final String description;
+  final String nation;
   bool isFavourite;
   List<String> languages;
   final String education;
@@ -20,6 +21,7 @@ class Tutor {
     @required this.rating,
     @required this.avatar,
     @required this.description,
+    @required this.nation,
     @required this.education,
     @required this.experience,
     @required this.interest,
