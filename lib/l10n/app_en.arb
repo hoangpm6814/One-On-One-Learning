@@ -107,5 +107,16 @@
     "review_this_tutor": "Review this tutor:",
     "how_do_you_think_tutor": "How do you think about the tutor?",
     "write_down_review": "Write down your experience...",
-    "review_tutor": "Review tutor"
+    "review_tutor": "Review tutor",
+    "log_in": "Log In",
+    "log_in_upper": "LOG IN",
+    "your_email": "Your Email",
+    "password": "Password",
+    "do_not_have_account": "Don't have an account? ",
+    "sign_up": "Sign Up",
+    "sign_up_upper": "SIGN UP",
+    "already_have_an_account": "already have an account? ",
+    "or_upper": "OR",
+    "one_on_one_app_upper": "ONE ON ONE LEARNING APP"
+
 }

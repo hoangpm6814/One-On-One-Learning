@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrDivider extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class OrDivider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              "OR",
+              AppLocalizations.of(context).or_upper,
               style: TextStyle(
                 color: kPrimaryColor,
                 fontWeight: FontWeight.w600,

@@ -3,6 +3,7 @@ import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/signup_screen.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "ONE ON ONE LEARNING APP",
+                  AppLocalizations.of(context).one_on_one_app_upper,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -32,7 +33,7 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.05),
                 RoundedButton(
-                  text: "LOG IN",
+                  text: AppLocalizations.of(context).log_in_upper,
                   press: () {
                     Navigator.pushReplacement(
                       context,
@@ -45,7 +46,7 @@ class Body extends StatelessWidget {
                   },
                 ),
                 RoundedButton(
-                  text: "SIGN UP",
+                  text: AppLocalizations.of(context).sign_up_upper,
                   color: kPrimaryLightColor,
                   textColor: Colors.black,
                   press: () {

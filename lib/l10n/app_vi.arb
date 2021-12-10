@@ -1,7 +1,4 @@
 {
-    "language": "Việt Nam",
-    "helloWorld": "Xin chào thế giới!",
-    "hello": "Xin chào {username}",
     "home": "Trang Chủ",
     "message": "Tin Nhắn",
     "upcomming": "Sắp Tới",
@@ -99,5 +96,15 @@
     "review_this_tutor": "Đánh giá giáo viên này:",
     "how_do_you_think_tutor": "Bạn cảm thấy giáo viên này ntn?",
     "write_down_review": "Viết ra trải nghiệm của bạn...",
-    "review_tutor": "Đánh giá giáo viên"
+    "review_tutor": "Đánh giá giáo viên",
+    "log_in": "Đăng Nhập",
+    "log_in_upper": "ĐĂNG NHẬP",
+    "your_email": "Email Của Bạn",
+    "password": "Mật khẩu",
+    "do_not_have_account": "Chưa có tài khoản? ",
+    "sign_up": "Đăng Ký",
+    "sign_up_upper": "ĐĂNG KÝ",
+    "already_have_an_account": "Đã có tài khoản? ",
+    "or_upper": "HOẶC",
+    "one_on_one_app_upper": "ỨNG DỤNG HỌC MỘT KÈM MỘT"
 }

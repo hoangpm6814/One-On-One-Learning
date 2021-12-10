@@ -5,6 +5,7 @@ import 'package:lettutor/customWidgets/rounded_button.dart';
 import 'package:lettutor/customWidgets/rounded_input_field.dart';
 import 'package:lettutor/customWidgets/rounded_password_field.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -26,7 +27,7 @@ class Body extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "LOG IN",
+                  AppLocalizations.of(context).log_in_upper,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -39,14 +40,14 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: size.height * 0.03),
                 RoundedInputField(
-                  hintText: "Your Email",
+                  hintText: AppLocalizations.of(context).your_email,
                   onChanged: (value) {},
                 ),
                 RoundedPasswordField(
                   onChanged: (value) {},
                 ),
                 RoundedButton(
-                  text: "LOG IN",
+                  text: AppLocalizations.of(context).log_in_upper,
                   press: () {
                     Navigator.pushReplacement(
                       context,

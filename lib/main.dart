@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-// import 'package:lettutor/constants.dart';
 import 'package:lettutor/l10n/l10n.dart';
 import 'package:lettutor/models/locale_provider.dart';
 import 'package:lettutor/models/rating_provider.dart';
@@ -10,9 +9,9 @@ import 'package:lettutor/models/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
-import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
+import 'package:lettutor/screens/Welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -70,7 +69,7 @@ class _MyAppState extends State<MyApp> {
             ],
             initialRoute: '/', // default is '/'
             routes: {
-              '/': (ctx) => TabsScreen(),
+              '/': (ctx) => WelcomeScreen(),
               TutorListScreen.routeName: (ctx) => TutorListScreen(),
               // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
               ChatScreen.routeName: (ctx) => ChatScreen(),
