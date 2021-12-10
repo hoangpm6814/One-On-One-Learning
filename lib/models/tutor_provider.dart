@@ -4,6 +4,8 @@ import 'package:lettutor/models/tutor.dart';
 
 class TutorProvider with ChangeNotifier {
   List<Tutor> get listTutor {
+    // sort by rating
+    _tutorList.sort((a, b) => b.rating.compareTo(a.rating));
     return _tutorList;
   }
 
