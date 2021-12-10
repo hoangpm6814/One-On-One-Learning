@@ -149,7 +149,7 @@ class CourseDetailScreen extends StatelessWidget {
                     LightRoundedButtonMediumPadding(
                       color: kPrimaryColor,
                       textColor: Colors.white,
-                      text: "Explore",
+                      text: AppLocalizations.of(context).explore,
                     ),
                   ],
                 ),

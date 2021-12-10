@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoConferenceScreen extends StatefulWidget {
   static const routeName = '/video-conference';
@@ -18,7 +19,7 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
         // automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: Text(
-          "Meeting room",
+          AppLocalizations.of(context).meeting_room,
           style: TextStyle(
             color: Colors.white,
           ),
@@ -35,7 +36,7 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Tutoring Meeting Room ',
+                  AppLocalizations.of(context).tutoring_meeting_room,
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -72,7 +73,7 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Lesson will be started after",
+                        AppLocalizations.of(context).lesson_start_after,
                         style: TextStyle(
                           color: Colors.white,
                         ),

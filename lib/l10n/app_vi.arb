@@ -43,6 +43,7 @@
     "level_required": "Trình độ yêu cầu",
     "course_duration": "Thời lượng khóa học",
     "topic_list": "Danh sách chủ đề",
+    "explore": "Khám phá",
     "why_you_should_join_this_course": "Tại sao bạn nên tham gia khóa học",
     "what_you_can_do": "Bạn có thể làm được gì",
     "search_message": "Tìm kiếm tin nhắn",
@@ -64,5 +65,8 @@
     "days_ago": "ngày trước",
     "tutor_judgement": "Đánh giá của giáo viên:",
     "no_history_schedule": "Hiện bạn không có lịch sử đặt lịch nào. Hãy thử đặt lịch học cho riêng mình...",
-    "switch_mode": "Chuyển chế độ sáng / tối"
+    "switch_mode": "Chuyển chế độ sáng / tối",
+    "meeting_room": "Phòng học",
+    "tutoring_meeting_room": "Thời gian phòng học",
+    "lesson_start_after": "Lớp học sẽ bắt đầu sau"
 }

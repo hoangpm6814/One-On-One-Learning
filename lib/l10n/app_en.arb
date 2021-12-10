@@ -68,6 +68,7 @@
     "level_required": "Level required",
     "course_duration": "Course duration",
     "topic_list": "Topic list",
+    "explore": "Explore",
     "why_you_should_join_this_course": "Why you should join this course",
     "what_you_can_do": "What you can do",
     "search_message": "Search for message",
@@ -89,5 +90,8 @@
     "days_ago": "days ago",
     "tutor_judgement": "Tutor's judgement",
     "no_history_schedule": "Currently you do not have any booking history. Try booking your own schedule...",
-    "switch_mode": "Switch Light / Dark Mode"
+    "switch_mode": "Switch Light / Dark Mode",
+    "meeting_room": "Meeting room",
+    "tutoring_meeting_room": "Tutoring Meeting Room",
+    "lesson_start_after": "Lesson will be started after"
 }
