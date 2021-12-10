@@ -1,21 +1,4 @@
 {
-    "language": "English",
-    "@language":{
-      "description": "The current Language"
-    },
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "A programmer greeting"
-    },
-    "hello": "Hello {username}",
-    "@hello": {
-      "description": "A welcome message",
-      "placeholders": {
-         "username": {
-           "type": "String"
-         }
-      }
-    },
     "home": "Home",
     "message": "Message",
     "upcomming": "Upcomming",
@@ -93,5 +76,36 @@
     "switch_mode": "Switch Light / Dark Mode",
     "meeting_room": "Meeting room",
     "tutoring_meeting_room": "Tutoring Meeting Room",
-    "lesson_start_after": "Lesson will be started after"
+    "lesson_start_after": "Lesson will be started after",
+    "tutor_detail": "Tutor Detail",
+    "booking": "Booking",
+    "report": "Report",
+    "reviews": "Reviews",
+    "language": "Language",
+    "education": "Education",
+    "experience": "Experience",
+    "interests": "Interests",
+    "profession": "Profession",
+    "specialties": "Specialties",
+    "rating_and_comment": "Rating and Comment",
+    "close": "Close",
+    "submit": "Submit",
+    "pick_your_date": "Pick your date",
+    "pick_your_time": "Pick your time",
+    "schedule_this_tutor": "Schedule this tutor:",
+    "requirement": "Requirement",
+    "schedule_now": "Schedule now",
+    "write_down_requirement_booking": "Write down what you want to achieve from this schedule...",
+    "report_this_tutor": "Report this tutor",
+    "share_us_what_wrong": "Share us what's wrong with you...",
+    "content": "Content",
+    "chip_this_tutor_is_annoying": "This tutor is annoying me.",
+    "chip_this_profile_is_fake": "This profile is fake or someone else's",
+    "chip_inappropriate_profile": "Inappropriate profile photo.",
+    "report_tutor": "Report tutor",
+    "no_rating_tutor": "Currently there is no rating for this tutor.",
+    "review_this_tutor": "Review this tutor:",
+    "how_do_you_think_tutor": "How do you think about the tutor?",
+    "write_down_review": "Write down your experience...",
+    "review_tutor": "Review tutor"
 }

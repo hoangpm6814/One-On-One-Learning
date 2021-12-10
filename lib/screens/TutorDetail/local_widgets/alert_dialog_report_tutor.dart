@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AlertDialogReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: Text('Report this tutor'),
+      title: Text(AppLocalizations.of(context).report_this_tutor),
       content: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Form(
           child: Column(
             children: <Widget>[
               Text(
-                "Share us what's wrong with you...",
+                AppLocalizations.of(context).share_us_what_wrong,
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
@@ -26,7 +27,7 @@ class AlertDialogReport extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: "Content",
+                  hintText: AppLocalizations.of(context).content,
                 ),
                 onSaved: (String value) {
                   // _introduction = value;
@@ -37,20 +38,20 @@ class AlertDialogReport extends StatelessWidget {
               ),
               SizedBox(height: 10),
               SpecialityButtonClickable(
-                text: "This tutor is annoying me.",
+                text: AppLocalizations.of(context).chip_this_tutor_is_annoying,
                 isChosen: true,
               ),
               SpecialityButtonClickable(
-                text: "This profile is fake or someone else's",
+                text: AppLocalizations.of(context).chip_this_profile_is_fake,
                 isChosen: true,
               ),
               SpecialityButtonClickable(
-                text: "Inappropriate profile photo.",
+                text: AppLocalizations.of(context).chip_inappropriate_profile,
                 isChosen: true,
               ),
               SizedBox(height: 30),
               LightRoundedButtonSmallPadding(
-                text: "Report tutor",
+                text: AppLocalizations.of(context).report_tutor,
                 press: () {
                   // send data
                   Navigator.pop(context);

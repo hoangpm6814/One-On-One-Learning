@@ -4,6 +4,7 @@ import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/models/rating.dart';
 import 'package:lettutor/models/rating_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AlertDialogRating extends StatefulWidget {
   final String tutorId;
@@ -65,7 +66,7 @@ class _AlertDialogRatingState extends State<AlertDialogRating> {
   Widget build(BuildContext context) {
     return AlertDialog(
       scrollable: true,
-      title: Text('Review this tutor:'),
+      title: Text(AppLocalizations.of(context).review_this_tutor),
       content: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Form(
@@ -77,7 +78,7 @@ class _AlertDialogRatingState extends State<AlertDialogRating> {
                 height: 10,
               ),
               Text(
-                "How do you think about the tutor?",
+                AppLocalizations.of(context).how_do_you_think_tutor,
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
@@ -88,7 +89,7 @@ class _AlertDialogRatingState extends State<AlertDialogRating> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: "Write down your experience...",
+                  hintText: AppLocalizations.of(context).write_down_review,
                 ),
                 onSaved: (String value) {
                   comment = value;
@@ -99,7 +100,7 @@ class _AlertDialogRatingState extends State<AlertDialogRating> {
               ),
               SizedBox(height: 20),
               LightRoundedButtonSmallPadding(
-                text: "Review tutor",
+                text: AppLocalizations.of(context).review_tutor,
                 press: () {
                   // send data
                   _form.currentState.save();

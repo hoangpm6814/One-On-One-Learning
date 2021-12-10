@@ -14,6 +14,7 @@ import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dar
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDetailScreen extends StatefulWidget {
   static const routeName = '/tutor-detail';
@@ -43,7 +44,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text("Tutor Detail"),
+        title: Text(AppLocalizations.of(context).tutor_detail),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -111,7 +112,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               Container(
                 width: double.infinity,
                 child: RoundedButtonMediumPadding(
-                  text: "Booking",
+                  text: AppLocalizations.of(context).booking,
                   press: () {
                     showModalBottomSheet<void>(
                       context: context,
@@ -136,7 +137,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Message",
+                          AppLocalizations.of(context).message,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -163,7 +164,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Report",
+                          AppLocalizations.of(context).report,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -190,7 +191,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           color: kPrimaryColor,
                         ),
                         Text(
-                          "Reviews",
+                          AppLocalizations.of(context).reviews,
                           style: TextStyle(
                             color: kPrimaryColor,
                           ),
@@ -214,7 +215,8 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               TutorDescription(tutor: tutor),
               SizedBox(height: 10),
               Text(
-                "Rating and Comment " + "(${ratings.length})",
+                AppLocalizations.of(context).rating_and_comment +
+                    " (${ratings.length})",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
@@ -240,7 +242,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                     )
                   : Container(
                       child: Text(
-                        "Currently there is no rating for this tutor.",
+                        AppLocalizations.of(context).no_rating_tutor,
                         style: TextStyle(
                           color: kPrimaryColor,
                         ),

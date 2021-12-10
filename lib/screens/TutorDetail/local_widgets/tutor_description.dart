@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDescription extends StatelessWidget {
   const TutorDescription({
@@ -29,7 +30,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Language",
+          AppLocalizations.of(context).language,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,
@@ -55,7 +56,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Education",
+          AppLocalizations.of(context).education,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,
@@ -69,7 +70,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Experience",
+          AppLocalizations.of(context).experience,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,
@@ -83,7 +84,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Interests",
+          AppLocalizations.of(context).interests,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,
@@ -97,7 +98,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Profession",
+          AppLocalizations.of(context).profession,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,
@@ -114,7 +115,7 @@ class TutorDescription extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          "Specialties",
+          AppLocalizations.of(context).specialties,
           style: TextStyle(
             color: kPrimaryColor,
             fontSize: 15,

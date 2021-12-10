@@ -8,6 +8,7 @@ import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/schedule_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PickScheduleBottom extends StatefulWidget {
   final String tutorId;
@@ -54,7 +55,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
               Navigator.pop(context);
             }),
             child: Text(
-              "Close",
+              AppLocalizations.of(context).close,
               style: TextStyle(
                 color: Theme.of(context).errorColor,
               ),
@@ -83,7 +84,8 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       scrollable: true,
-                      title: Text('Schedule this tutor:'),
+                      title: Text(
+                          AppLocalizations.of(context).schedule_this_tutor),
                       content: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Form(
@@ -107,7 +109,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
                                 height: 10,
                               ),
                               Text(
-                                "Requirement:",
+                                AppLocalizations.of(context).requirement,
                                 style: TextStyle(
                                   color: kPrimaryColor,
                                   fontWeight: FontWeight.bold,
@@ -118,8 +120,8 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  hintText:
-                                      "Write down what you want to achieve from this schedule...",
+                                  hintText: AppLocalizations.of(context)
+                                      .write_down_requirement_booking,
                                 ),
                                 onSaved: (String value) {
                                   requirement = value;
@@ -133,7 +135,8 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   LightRoundedButtonSmallPadding(
-                                    text: "Schedule now",
+                                    text: AppLocalizations.of(context)
+                                        .schedule_now,
                                     press: () {
                                       // send data
                                       _form.currentState.save();
@@ -170,7 +173,7 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
               }
             }),
             child: Text(
-              "Submit",
+              AppLocalizations.of(context).submit,
             ),
           )
         ],
@@ -266,7 +269,12 @@ class _PickScheduleBottomState extends State<PickScheduleBottom> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            requestTitle[num],
+            // requestTitle[num] == "Pick your date:"
+            //     ? AppLocalizations.of(context).pick_your_date
+            //     : AppLocalizations.of(context).pick_your_time,
+            num == 0
+                ? AppLocalizations.of(context).pick_your_date
+                : AppLocalizations.of(context).pick_your_time,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
