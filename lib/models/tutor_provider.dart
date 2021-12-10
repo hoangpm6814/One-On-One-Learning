@@ -5,8 +5,20 @@ import 'package:lettutor/models/tutor.dart';
 class TutorProvider with ChangeNotifier {
   List<Tutor> get listTutor {
     // sort by rating
-    _tutorList.sort((a, b) => b.rating.compareTo(a.rating));
+    // _tutorList.sort((a, b) => b.rating.compareTo(a.rating));
+
+    // sort by favourite and rating, favourite in higher priority
+    _tutorList.sort(compareTutors);
     return _tutorList;
+  }
+
+  int compareTutors(Tutor tutor1, Tutor tutor2) {
+    if ((tutor1.isFavourite && !tutor2.isFavourite)) {
+      return -1;
+    } else if ((!tutor1.isFavourite && tutor2.isFavourite)) {
+      return 1;
+    } else
+      return tutor2.rating.compareTo(tutor1.rating);
   }
 
   void toggleIsFavourite(String id) {
