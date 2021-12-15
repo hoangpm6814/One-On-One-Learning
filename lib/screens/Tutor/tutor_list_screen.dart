@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/heading.dart';
 import 'package:lettutor/constants.dart';

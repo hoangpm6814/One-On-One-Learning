@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/models/schedule.dart';
-import 'package:lettutor/models/schedule_provider.dart';
+import 'package:lettutor/providers/schedule_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

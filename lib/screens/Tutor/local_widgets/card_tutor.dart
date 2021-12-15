@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/tutor_detail_screen.dart';
 import 'package:provider/provider.dart';
 

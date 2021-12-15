@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
-import 'package:lettutor/models/theme_provider.dart';
+import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
 import 'package:lettutor/screens/Course/course_list_screen.dart';

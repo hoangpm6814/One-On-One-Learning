@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/models/theme_provider.dart';
+import 'package:lettutor/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class CustomedNotification extends StatelessWidget {

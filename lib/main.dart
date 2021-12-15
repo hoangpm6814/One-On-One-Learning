@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor/l10n/l10n.dart';
-import 'package:lettutor/models/locale_provider.dart';
-import 'package:lettutor/models/rating_provider.dart';
-import 'package:lettutor/models/schedule_provider.dart';
-import 'package:lettutor/models/theme_provider.dart';
-import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/providers/locale_provider.dart';
+import 'package:lettutor/providers/rating_provider.dart';
+import 'package:lettutor/providers/schedule_provider.dart';
+import 'package:lettutor/providers/theme_provider.dart';
+import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
