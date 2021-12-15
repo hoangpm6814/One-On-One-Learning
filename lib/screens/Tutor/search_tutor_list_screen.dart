@@ -5,7 +5,7 @@ import 'package:lettutor/customWidgets/search.dart';
 import 'package:lettutor/data/data.dart';
 import 'package:lettutor/models/filter_chip.data.dart';
 import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

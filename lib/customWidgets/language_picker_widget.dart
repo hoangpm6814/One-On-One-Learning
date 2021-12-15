@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/l10n/l10n.dart';
-import 'package:lettutor/models/locale_provider.dart';
+import 'package:lettutor/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 
 class LanguageWidget extends StatelessWidget {

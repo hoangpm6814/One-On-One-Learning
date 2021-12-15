@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/models/tutor_provider.dart';
+import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

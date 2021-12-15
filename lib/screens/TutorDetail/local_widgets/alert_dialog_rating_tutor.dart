@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
 import 'package:lettutor/models/rating.dart';
-import 'package:lettutor/models/rating_provider.dart';
+import 'package:lettutor/providers/rating_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
