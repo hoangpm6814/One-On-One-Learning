@@ -21,7 +21,8 @@ class TutorListScreen extends StatelessWidget {
                     (MediaQuery.of(context).padding.top +
                         MediaQuery.of(context).padding.bottom +
                         kToolbarHeight)) *
-                0.2,
+                0.23,
+            // height: 200,
             padding: const EdgeInsets.all(15.0),
             color: kPrimaryColor,
             child: Heading(),
