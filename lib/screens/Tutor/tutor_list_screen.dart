@@ -17,12 +17,12 @@ class TutorListScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            height: (MediaQuery.of(context).size.height -
-                    (MediaQuery.of(context).padding.top +
-                        MediaQuery.of(context).padding.bottom +
-                        kToolbarHeight)) *
-                0.23,
-            // height: 200,
+            // height: (MediaQuery.of(context).size.height -
+            //         (MediaQuery.of(context).padding.top +
+            //             MediaQuery.of(context).padding.bottom +
+            //             kToolbarHeight)) *
+            //     0.26,
+            height: 170,
             padding: const EdgeInsets.all(15.0),
             color: kPrimaryColor,
             child: Heading(),
@@ -34,7 +34,7 @@ class TutorListScreen extends StatelessWidget {
                           (MediaQuery.of(context).padding.top +
                               MediaQuery.of(context).padding.bottom +
                               kToolbarHeight)) *
-                      0.63,
+                      0.6,
                   margin: EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 8,

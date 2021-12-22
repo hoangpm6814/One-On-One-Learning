@@ -37,6 +37,8 @@ dependencies:
   path_provider: ^1.6.27
   http: ^0.13.4
   flutter_pdfview: ^1.2.1
+  # form validator
+  form_field_validator: ^1.1.0
   
 
 
