@@ -18,6 +18,13 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
+  String retypePassword = "";
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passWordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   String validatePassword(String value) {
     if (value.isEmpty) {
@@ -68,24 +75,6 @@ class _BodyState extends State<Body> {
                   "assets/images/signup_img.png",
                   height: size.height * 0.4,
                 ),
-                // RoundedInputField(
-                //   hintText: AppLocalizations.of(context).your_email,
-                //   onChanged: (value) {},
-                // ),
-                // RoundedPasswordField(
-                //   onChanged: (value) {},
-                // ),
-                // RoundedButton(
-                //   text: AppLocalizations.of(context).sign_up_upper,
-                //   press: () {
-                //     Navigator.pushReplacement(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (_) => TabsScreen(),
-                //       ),
-                //     );
-                //   },
-                // ),
                 Form(
                   key: formkey,
                   autovalidateMode: AutovalidateMode.always,
@@ -94,41 +83,45 @@ class _BodyState extends State<Body> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                         child: TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(25.0),
-                                // borderSide: BorderSide(color: kPrimaryColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: kPrimaryColor,
-                                ),
-                              ),
-                              labelStyle: new TextStyle(color: kPrimaryColor),
-                              labelText:
-                                  AppLocalizations.of(context).your_email,
-                              hintText: 'abc@gmail.com',
-                              prefixIcon: Icon(
-                                Icons.person,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              // borderSide: BorderSide(color: kPrimaryColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(
                                 color: kPrimaryColor,
                               ),
                             ),
-                            cursorColor: kPrimaryColor,
-                            validator: MultiValidator([
+                            labelStyle: new TextStyle(color: kPrimaryColor),
+                            labelText: AppLocalizations.of(context).your_email,
+                            hintText: 'abc@gmail.com',
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          cursorColor: kPrimaryColor,
+                          validator: MultiValidator(
+                            [
                               RequiredValidator(errorText: "* Required"),
                               EmailValidator(errorText: "Enter a valid email"),
-                            ])),
+                            ],
+                          ),
+                          controller: emailController,
+                          onSaved: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 0, right: 0, top: 15, bottom: 0),
                         child: TextFormField(
                           obscureText: true,
-                          // decoration: InputDecoration(
-                          //     border: OutlineInputBorder(),
-                          //     labelText: AppLocalizations.of(context).password,
-                          //     hintText: 'Enter your secure password'),
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(25.0),
@@ -154,6 +147,53 @@ class _BodyState extends State<Body> {
                           ),
                           cursorColor: kPrimaryColor,
                           validator: validatePassword,
+                          onSaved: (value) {
+                            password = value;
+                          },
+                          controller: passWordController,
+                          //validatePassword,        //Function to check validation
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0, top: 15, bottom: 0),
+                        child: TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              // borderSide: BorderSide(color: kPrimaryColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(
+                                color: kPrimaryColor,
+                              ),
+                            ),
+                            labelStyle: new TextStyle(color: kPrimaryColor),
+                            labelText:
+                                AppLocalizations.of(context).retype_password,
+                            // hintText: 'Enter your secure password',
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: kPrimaryColor,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.visibility,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                          cursorColor: kPrimaryColor,
+                          validator: (value) {
+                            if (value.isEmpty) return '* Required';
+                            if (value != passWordController.text)
+                              return 'Two passwords must be identical';
+                            return null;
+                          },
+                          onSaved: (value) {
+                            retypePassword = value;
+                          },
+                          controller: confirmPasswordController,
                           //validatePassword,        //Function to check validation
                         ),
                       ),

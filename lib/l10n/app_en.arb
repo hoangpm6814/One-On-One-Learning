@@ -112,6 +112,7 @@
     "log_in_upper": "LOG IN",
     "your_email": "Your Email",
     "password": "Password",
+    "retype_password": "Retype Password",
     "do_not_have_account": "Don't have an account? ",
     "sign_up": "Sign Up",
     "sign_up_upper": "SIGN UP",
