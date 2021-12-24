@@ -5,8 +5,42 @@ import 'package:lettutor/screens/Tutor/local_widgets/heading.dart';
 import 'package:lettutor/constants.dart';
 import 'package:provider/provider.dart';
 
-class TutorListScreen extends StatelessWidget {
+class TutorListScreen extends StatefulWidget {
   static const routeName = '/tutor-list';
+
+  @override
+  State<TutorListScreen> createState() => _TutorListScreenState();
+}
+
+class _TutorListScreenState extends State<TutorListScreen> {
+  // var _showOnlyFavorites = false;
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
+    // });
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<TutorProvider>(context).fetchAndSetTutors().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {

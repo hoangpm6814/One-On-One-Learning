@@ -39,6 +39,8 @@ dependencies:
   flutter_pdfview: ^1.2.1
   # form validator
   form_field_validator: ^1.1.0
+  # video player
+  video_player: ^2.2.10
   
 
 

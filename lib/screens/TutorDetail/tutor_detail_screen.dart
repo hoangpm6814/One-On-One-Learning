@@ -13,8 +13,10 @@ import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/video/network_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:video_player/video_player.dart';
 
 class TutorDetailScreen extends StatefulWidget {
   static const routeName = '/tutor-detail';
@@ -32,6 +34,9 @@ class TutorDetailScreen extends StatefulWidget {
 class _TutorDetailScreenState extends State<TutorDetailScreen> {
   Tutor tutor;
   List<Rating> ratings;
+
+  VideoPlayerController videoPlayerController;
+
   @override
   void didChangeDependencies() {
     tutor = Provider.of<TutorProvider>(context).getById(widget.id);
@@ -213,6 +218,11 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               ),
               SizedBox(height: 10),
               TutorDescription(tutor: tutor),
+              SizedBox(height: 10),
+              const NetworkPlayerWidget(
+                url:
+                    "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+              ),
               SizedBox(height: 10),
               Text(
                 AppLocalizations.of(context).rating_and_comment +

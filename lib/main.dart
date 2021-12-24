@@ -9,6 +9,7 @@ import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
+import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
 import 'package:lettutor/screens/Welcome/welcome_screen.dart';
@@ -69,7 +70,7 @@ class _MyAppState extends State<MyApp> {
             ],
             initialRoute: '/', // default is '/'
             routes: {
-              '/': (ctx) => WelcomeScreen(),
+              '/': (ctx) => TabsScreen(),
               TutorListScreen.routeName: (ctx) => TutorListScreen(),
               // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
               ChatScreen.routeName: (ctx) => ChatScreen(),
