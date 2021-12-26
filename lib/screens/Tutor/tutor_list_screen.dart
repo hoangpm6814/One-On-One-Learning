@@ -32,7 +32,7 @@ class _TutorListScreenState extends State<TutorListScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<TutorProvider>(context).fetchAndSetTutors().then((_) {
+      Provider.of<TutorProvider>(context).fetchTutors().then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -61,8 +61,10 @@ class _TutorListScreenState extends State<TutorListScreen> {
             color: kPrimaryColor,
             child: Heading(),
           ),
-          tutors.isEmpty
-              ? Container()
+          _isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
               : Container(
                   height: (MediaQuery.of(context).size.height -
                           (MediaQuery.of(context).padding.top +
@@ -77,6 +79,10 @@ class _TutorListScreenState extends State<TutorListScreen> {
                     itemBuilder: (ctx, index) {
                       return CardTutor(tutor: tutors[index]);
                     },
+                    // itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
+                    //   value: tutors[index],
+                    //   child: CardTutor(tutor: tutors[index]),
+                    // ),
                     itemCount: tutors.length,
                   ),
                 ),
