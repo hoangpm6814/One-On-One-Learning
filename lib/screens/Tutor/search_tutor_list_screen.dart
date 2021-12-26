@@ -85,7 +85,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
   void searchTodo(String query) {
     final searchTutors = allTutors.where((todo) {
       final nameLower = todo.name.toLowerCase();
-      final nationLower = todo.nation.toLowerCase();
+      final nationLower = todo.country.toLowerCase();
       final searchLower = query.toLowerCase();
 
       return nameLower.contains(searchLower) ||

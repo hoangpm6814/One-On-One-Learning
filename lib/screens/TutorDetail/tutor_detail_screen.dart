@@ -88,7 +88,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           ),
                         ),
                         Text(
-                          tutor.nation,
+                          tutor.country,
                         ),
                       ],
                     ),
@@ -219,9 +219,8 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               SizedBox(height: 10),
               TutorDescription(tutor: tutor),
               SizedBox(height: 10),
-              const NetworkPlayerWidget(
-                url:
-                    "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+              NetworkPlayerWidget(
+                url: tutor.video,
               ),
               SizedBox(height: 10),
               Text(

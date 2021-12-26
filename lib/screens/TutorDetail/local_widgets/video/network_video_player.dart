@@ -3,7 +3,7 @@ import 'package:lettutor/screens/TutorDetail/local_widgets/video/video_player_wi
 import 'package:video_player/video_player.dart';
 
 class NetworkPlayerWidget extends StatefulWidget {
-  const NetworkPlayerWidget({
+  NetworkPlayerWidget({
     Key key,
     @required this.url,
   }) : super(key: key);

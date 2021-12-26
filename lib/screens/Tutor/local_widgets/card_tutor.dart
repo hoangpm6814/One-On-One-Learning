@@ -16,6 +16,7 @@ class CardTutor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> tutorSpecialties = tutor.specialties.split(',');
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -90,7 +91,7 @@ class CardTutor extends StatelessWidget {
                     // ),
                     Wrap(
                       children: [
-                        for (var item in tutor.specialties)
+                        for (var item in tutorSpecialties)
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
                             child: SpecialityButtonClickable(
@@ -127,7 +128,7 @@ class CardTutor extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      tutor.description,
+                      tutor.bio,
                     ),
                   ),
                 ),
