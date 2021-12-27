@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
           value: AuthProvider(),
         ),
         ChangeNotifierProxyProvider<AuthProvider, TutorProvider>(
-          create: (ctx) => TutorProvider('', DUMMY_TUTORS),
+          create: (ctx) => TutorProvider('', DUMMY_TUTORS), // init
           update: (ctx, auth, previousTutor) => TutorProvider(
               auth.token, previousTutor == null ? [] : previousTutor.listTutor),
         ),
