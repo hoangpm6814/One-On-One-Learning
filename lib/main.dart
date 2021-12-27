@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lettutor/data/data.dart';
 import 'package:lettutor/l10n/l10n.dart';
+import 'package:lettutor/providers/auth_provider.dart';
 import 'package:lettutor/providers/locale_provider.dart';
 import 'package:lettutor/providers/rating_provider.dart';
 import 'package:lettutor/providers/schedule_provider.dart';
@@ -8,6 +10,7 @@ import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
+import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
@@ -30,8 +33,16 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-          value: TutorProvider(),
+          value: AuthProvider(),
         ),
+        ChangeNotifierProxyProvider<AuthProvider, TutorProvider>(
+          create: (ctx) => TutorProvider('', DUMMY_TUTORS),
+          update: (ctx, auth, previousTutor) => TutorProvider(
+              auth.token, previousTutor == null ? [] : previousTutor.listTutor),
+        ),
+        // ChangeNotifierProvider.value(
+        //   value: TutorProvider(),
+        // ),
         ChangeNotifierProvider.value(
           value: ScheduleProvider(),
         ),
@@ -50,40 +61,43 @@ class _MyAppState extends State<MyApp> {
         builder: (context, child) {
           final localeProvider = Provider.of<LocaleProvider>(context);
           final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(
-            title: 'One-on-one App',
-            // theme: ThemeData(
-            //   primaryColor: kPrimaryColor,
-            //   scaffoldBackgroundColor: Colors.white,
-            // ),
-            themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-            locale: localeProvider.locale,
-            supportedLocales: L10n.all,
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            initialRoute: '/', // default is '/'
-            routes: {
-              '/': (ctx) => TabsScreen(),
-              TutorListScreen.routeName: (ctx) => TutorListScreen(),
-              // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
-              ChatScreen.routeName: (ctx) => ChatScreen(),
-              ScheduleListScreen.routeName: (ctx) => ScheduleListScreen(),
-              SearchTutorListScreen.routeName: (ctx) => SearchTutorListScreen(),
-              SettingScreen.routeName: (ctx) => SettingScreen(),
-            },
+          return Consumer<AuthProvider>(
+              builder: (ctx, auth, _) => MaterialApp(
+                    title: 'One-on-one App',
+                    // theme: ThemeData(
+                    //   primaryColor: kPrimaryColor,
+                    //   scaffoldBackgroundColor: Colors.white,
+                    // ),
+                    themeMode: themeProvider.themeMode,
+                    theme: MyThemes.lightTheme,
+                    darkTheme: MyThemes.darkTheme,
+                    locale: localeProvider.locale,
+                    supportedLocales: L10n.all,
+                    localizationsDelegates: [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                    ],
+                    initialRoute: '/', // default is '/'
+                    routes: {
+                      '/': (ctx) => auth.isAuth ? TabsScreen() : LoginScreen(),
+                      TutorListScreen.routeName: (ctx) => TutorListScreen(),
+                      // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
+                      ChatScreen.routeName: (ctx) => ChatScreen(),
+                      ScheduleListScreen.routeName: (ctx) =>
+                          ScheduleListScreen(),
+                      SearchTutorListScreen.routeName: (ctx) =>
+                          SearchTutorListScreen(),
+                      SettingScreen.routeName: (ctx) => SettingScreen(),
+                    },
 
-            onUnknownRoute: (settings) {
-              return MaterialPageRoute(
-                builder: (ctx) => TutorListScreen(),
-              );
-            },
-          );
+                    onUnknownRoute: (settings) {
+                      return MaterialPageRoute(
+                        builder: (ctx) => TutorListScreen(),
+                      );
+                    },
+                  ));
         },
       ),
     );

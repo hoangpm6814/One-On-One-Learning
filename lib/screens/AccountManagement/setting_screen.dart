@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
+import 'package:lettutor/providers/auth_provider.dart';
 import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
@@ -24,6 +25,42 @@ class SettingScreen extends StatelessWidget {
     final buttonColor = themeProvider.isDarkMode
         ? Theme.of(context).primaryColor
         : Theme.of(context).primaryColor;
+
+    void _showErrorDialog(String message) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('An Error Occurred!'),
+          content: Text(message),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('Okay'),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            )
+          ],
+        ),
+      );
+    }
+
+    Future<void> _logout() async {
+      // setState(() {
+      //   _isLoading = true;
+      // });
+      try {
+        // Log user in
+        await Provider.of<AuthProvider>(context, listen: false).logout();
+      } catch (error) {
+        const errorMessage = 'Could not logout. Please try again later.';
+        _showErrorDialog(errorMessage);
+      }
+
+      // setState(() {
+      //   _isLoading = false;
+      // });
+    }
+
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(24),
@@ -231,12 +268,13 @@ class SettingScreen extends StatelessWidget {
               width: double.infinity,
               child: RoundedButtonSmallPadding(
                 press: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => WelcomeScreen(),
-                    ),
-                  );
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => WelcomeScreen(),
+                  //   ),
+                  // );
+                  _logout();
                 },
                 text: AppLocalizations.of(context).log_out,
               ),

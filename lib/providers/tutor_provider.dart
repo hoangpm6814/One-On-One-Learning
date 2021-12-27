@@ -5,6 +5,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class TutorProvider with ChangeNotifier {
+  final String authToken;
+
+  TutorProvider(this.authToken, this._tutorList);
+
   List<Tutor> get listTutor {
     // sort by rating
     // _tutorList.sort((a, b) => b.rating.compareTo(a.rating));
@@ -34,16 +38,13 @@ class TutorProvider with ChangeNotifier {
     return _tutorList.firstWhere((todo) => todo.id == id);
   }
 
-  List<Tutor> _tutorList = DUMMY_TUTORS;
-  // List<Tutor> _tutorList = [];
+  // List<Tutor> _tutorList = DUMMY_TUTORS;
+  List<Tutor> _tutorList = [];
 
   Future<void> fetchTutors([bool filterByUser = false]) async {
     var url = Uri.parse(
         'https://sandbox.api.lettutor.com/tutor/more?perPage=9&page=1');
-    Map<String, String> headers = {
-      "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZTE2YjlkZC1iYWJiLTQ1OTItYmM0YS1hZThmOGE4NWYxNTIiLCJpYXQiOjE2NDA0OTExMjQsImV4cCI6MTY0MDU3NzUyNCwidHlwZSI6ImFjY2VzcyJ9.JBwNvwsa1KnB4I2eUBTdwGHw3S-maoc9wi-TMug8v5A"
-    };
+    Map<String, String> headers = {"Authorization": "Bearer ${authToken}"};
     try {
       final response = await http.get(url, headers: headers);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
