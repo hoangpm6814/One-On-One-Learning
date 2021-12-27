@@ -12,6 +12,7 @@ import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
+import 'package:lettutor/screens/Splash/splash_screen.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
@@ -81,7 +82,16 @@ class _MyAppState extends State<MyApp> {
                     ],
                     initialRoute: '/', // default is '/'
                     routes: {
-                      '/': (ctx) => auth.isAuth ? TabsScreen() : LoginScreen(),
+                      '/': (ctx) => auth.isAuth
+                          ? TabsScreen()
+                          : FutureBuilder(
+                              future: auth.tryAutoLogin(),
+                              builder: (context, authResultSnapshot) =>
+                                  authResultSnapshot.connectionState ==
+                                          ConnectionState.waiting
+                                      ? SplashScreen()
+                                      : LoginScreen(),
+                            ),
                       TutorListScreen.routeName: (ctx) => TutorListScreen(),
                       // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
                       ChatScreen.routeName: (ctx) => ChatScreen(),
