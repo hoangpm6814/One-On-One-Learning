@@ -31,8 +31,6 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> login(String email, String password) async {
-    print("Go authen func, email: " + email);
-    print("Go authen func, password: " + password);
     final url = Uri.parse('https://sandbox.api.lettutor.com/auth/login');
     Map<String, String> headers = {"Content-Type": "application/json"};
     try {
@@ -79,7 +77,52 @@ class AuthProvider with ChangeNotifier {
   }
   // Login success !!!
 
-  Future<void> signup(String email, String password) async {}
+  // Chua goi dung API
+  Future<void> signup(String email, String password) async {
+    try {
+      final url = Uri.parse('https://sandbox.api.lettutor.com/auth/register');
+      Map<String, String> headers = {
+        "Content-Type": "application/x-www-form-urlencoded"
+      };
+      final response = await http.post(
+        url,
+        body: {'email': email, 'password': password},
+        headers: headers,
+        encoding: Encoding.getByName("utf-8"),
+      );
+
+      final responseData = json.decode(response.body);
+      if (responseData['message'] != null) {
+        throw HttpException(responseData['message']);
+      }
+      print("responseData: " + responseData);
+      _token = responseData['tokens']['access']['token'];
+      _userId = responseData['user']['id'];
+      // _expiryDate = DateTime.now().add(
+      //   Duration(
+      //     seconds: int.parse(
+      //       responseData['expiresIn'],
+      //     ),
+      //   ),
+      _expiryDate = DateTime.parse(responseData['tokens']['access']['expires']);
+
+      print(_token);
+
+      _autoLogout();
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'userId': _userId,
+          'expiryDate': _expiryDate.toIso8601String(),
+        },
+      );
+      prefs.setString('userData', userData);
+    } catch (error) {
+      throw error;
+    }
+  }
 
   Future<void> logout() async {
     _token = null;

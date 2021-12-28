@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/screens/Login/login_screen.dart';
+import 'package:lettutor/models/http_exception.dart';
+import 'package:lettutor/providers/auth_provider.dart';
 import 'package:lettutor/screens/Signup/local_widgets/or_divider.dart';
 import 'package:lettutor/screens/Signup/local_widgets/social_icon.dart';
 import 'package:lettutor/customWidgets/already_have_account_check.dart';
@@ -10,6 +11,7 @@ import 'package:lettutor/customWidgets/rounded_button.dart';
 // import 'package:lettutor/customWidgets/rounded_password_field.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -43,6 +45,66 @@ class _BodyState extends State<Body> {
       return "Password must contain a special character";
     } else
       return null;
+  }
+
+  Future<void> _submit() async {
+    if (!formkey.currentState.validate()) {
+      // Invalid!
+      return;
+    }
+    formkey.currentState.save();
+    // setState(() {
+    //   _isLoading = true;
+    // });
+    try {
+      // Log user in
+      print(email);
+      print(password);
+      await Provider.of<AuthProvider>(context, listen: false).signup(
+        email,
+        password,
+      );
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage =
+          'Could not authenticate you. Please try again later.';
+      _showErrorDialog(errorMessage);
+    }
+
+    // setState(() {
+    //   _isLoading = false;
+    // });
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          ElevatedButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -148,7 +210,9 @@ class _BodyState extends State<Body> {
                           cursorColor: kPrimaryColor,
                           validator: validatePassword,
                           onSaved: (value) {
-                            password = value;
+                            setState(() {
+                              password = value;
+                            });
                           },
                           controller: passWordController,
                           //validatePassword,        //Function to check validation
@@ -191,7 +255,9 @@ class _BodyState extends State<Body> {
                             return null;
                           },
                           onSaved: (value) {
-                            retypePassword = value;
+                            setState(() {
+                              retypePassword = value;
+                            });
                           },
                           controller: confirmPasswordController,
                           //validatePassword,        //Function to check validation
@@ -218,14 +284,15 @@ class _BodyState extends State<Body> {
                 AlreadyHaveAnAccountCheck(
                   login: false,
                   press: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginScreen();
-                        },
-                      ),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return LoginScreen();
+                    //     },
+                    //   ),
+                    // );
+                    _submit();
                   },
                 ),
                 OrDivider(),
