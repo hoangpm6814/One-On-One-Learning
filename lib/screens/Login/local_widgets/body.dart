@@ -9,6 +9,7 @@ import 'package:lettutor/customWidgets/rounded_button.dart';
 // import 'package:lettutor/customWidgets/rounded_password_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
@@ -50,6 +51,12 @@ class _BodyState extends State<Body> {
       await Provider.of<AuthProvider>(context, listen: false).login(
         email,
         password,
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TabsScreen(),
+        ),
       );
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';

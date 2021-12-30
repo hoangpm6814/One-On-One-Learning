@@ -11,6 +11,7 @@ import 'package:lettutor/customWidgets/rounded_button.dart';
 // import 'package:lettutor/customWidgets/rounded_input_field.dart';
 // import 'package:lettutor/customWidgets/rounded_password_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
@@ -29,22 +30,22 @@ class _BodyState extends State<Body> {
       TextEditingController();
 
   String validatePassword(String value) {
-    // if (value.isEmpty) {
-    //   return "* Required";
-    // } else if (value.length < 6) {
-    //   return "Password should be atleast 6 characters";
-    // } else if (value.length > 30) {
-    //   return "Password should not be greater than 30 characters";
-    // } else if (!value.contains(RegExp(r'[a-z]'))) {
-    //   return "Password must contain a lowercase letter";
-    // } else if (!value.contains(RegExp(r'[A-Z]'))) {
-    //   return "Password must contain an uppercase letter";
-    // } else if (!value.contains(RegExp(r'[0-9]'))) {
-    //   return "Password must contain a number";
-    // } else if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-    //   return "Password must contain a special character";
-    // } else
-    return null;
+    if (value.isEmpty) {
+      return "* Required";
+    } else if (value.length < 6) {
+      return "Password should be atleast 6 characters";
+    } else if (value.length > 30) {
+      return "Password should not be greater than 30 characters";
+    } else if (!value.contains(RegExp(r'[a-z]'))) {
+      return "Password must contain a lowercase letter";
+    } else if (!value.contains(RegExp(r'[A-Z]'))) {
+      return "Password must contain an uppercase letter";
+    } else if (!value.contains(RegExp(r'[0-9]'))) {
+      return "Password must contain a number";
+    } else if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return "Password must contain a special character";
+    } else
+      return null;
   }
 
   Future<void> _submit() async {
@@ -58,11 +59,17 @@ class _BodyState extends State<Body> {
     // });
     try {
       // Log user in
-      print(email);
-      print(password);
+      // print(email);
+      // print(password);
       await Provider.of<AuthProvider>(context, listen: false).signup(
         email,
         password,
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TabsScreen(),
+        ),
       );
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed';

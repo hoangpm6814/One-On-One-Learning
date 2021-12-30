@@ -10,6 +10,7 @@ import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
 import 'package:lettutor/screens/Course/course_list_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/Welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -274,6 +275,12 @@ class SettingScreen extends StatelessWidget {
                   //   ),
                   // );
                   _logout();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WelcomeScreen(),
+                    ),
+                  );
                 },
                 text: AppLocalizations.of(context).log_out,
               ),
