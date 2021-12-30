@@ -79,6 +79,8 @@ class AuthProvider with ChangeNotifier {
 
   // Chua goi dung API
   Future<void> signup(String email, String password) async {
+    print(email);
+    print(password);
     try {
       final url = Uri.parse('https://sandbox.api.lettutor.com/auth/register');
       Map<String, String> headers = {
@@ -91,22 +93,19 @@ class AuthProvider with ChangeNotifier {
         encoding: Encoding.getByName("utf-8"),
       );
 
-      final responseData = json.decode(response.body);
+      final responseData = json.decode(response.body) as Map<String, dynamic>;
       if (responseData['message'] != null) {
         throw HttpException(responseData['message']);
       }
-      print("responseData: " + responseData);
+      print(response);
+      // print("responseData: " + responseData);
       _token = responseData['tokens']['access']['token'];
       _userId = responseData['user']['id'];
-      // _expiryDate = DateTime.now().add(
-      //   Duration(
-      //     seconds: int.parse(
-      //       responseData['expiresIn'],
-      //     ),
-      //   ),
       _expiryDate = DateTime.parse(responseData['tokens']['access']['expires']);
 
       print(_token);
+      print(_userId);
+      print(_expiryDate);
 
       _autoLogout();
       notifyListeners();
