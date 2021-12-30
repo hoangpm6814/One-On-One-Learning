@@ -59,7 +59,9 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                         // print(filterValues.length);
                         tutors = allTutors
                             .where((element) => filterValues.every((item) =>
-                                element.specialties.contains(item.label)))
+                                element.specialties
+                                    .toLowerCase()
+                                    .contains(item.label.toLowerCase())))
                             .toList(); // tutor that has specialties contains all filter value
 
                         // print("tutor: " + tutors.length.toString());

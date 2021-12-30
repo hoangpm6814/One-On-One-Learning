@@ -219,33 +219,40 @@ final DUMMY_SPECIALTIES = [
     color: Colors.green,
   ),
   FilterChipData(
-    label: 'IELTS',
+    label: 'Business',
     isSelected: false,
     color: Colors.red,
   ),
   FilterChipData(
-    label: 'STARTERS',
+    label: 'Kids',
+    isSelected: false,
+    color: Colors.blue,
+  ),
+  FilterChipData(
+    label: 'IELTS',
+    isSelected: false,
+    color: Colors.orange,
+  ),
+  FilterChipData(
+    label: 'TOEIC',
     isSelected: false,
     color: Colors.purple,
   ),
-  FilterChipData(
-    label: 'MOVERS',
-    isSelected: false,
-    color: Colors.blue,
-  ),
+  FilterChipData(label: 'STARTERS', isSelected: false, color: Colors.yellow),
+  FilterChipData(label: 'MOVERS', isSelected: false, color: Colors.orange),
   FilterChipData(
     label: 'FLYERS',
     isSelected: false,
-    color: Colors.orange,
+    color: Colors.red,
   ),
-  FilterChipData(
-    label: 'English for kids',
-    isSelected: false,
-    color: Colors.blue,
-  ),
-  FilterChipData(
-    label: 'English for Business',
-    isSelected: false,
-    color: Colors.orange,
-  ),
+  // FilterChipData(
+  //   label: 'English for kids',
+  //   isSelected: false,
+  //   color: Colors.blue,
+  // ),
+  // FilterChipData(
+  //   label: 'English for Business',
+  //   isSelected: false,
+  //   color: Colors.orange,
+  // ),
 ];

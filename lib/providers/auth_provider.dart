@@ -79,8 +79,6 @@ class AuthProvider with ChangeNotifier {
 
   // Chua goi dung API
   Future<void> signup(String email, String password) async {
-    print(email);
-    print(password);
     try {
       final url = Uri.parse('https://sandbox.api.lettutor.com/auth/register');
       Map<String, String> headers = {
@@ -104,8 +102,8 @@ class AuthProvider with ChangeNotifier {
       _expiryDate = DateTime.parse(responseData['tokens']['access']['expires']);
 
       print(_token);
-      print(_userId);
-      print(_expiryDate);
+      // print(_userId);
+      // print(_expiryDate);
 
       _autoLogout();
       notifyListeners();
