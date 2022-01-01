@@ -33,6 +33,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   User user;
 
+  final levels = [
+    "BEGINNER",
+    "HIGHER_BEGINNER",
+    "PRE_INTERMEDIATE",
+    "INTERMEDIATE",
+    "UPPER_INTERMEDIATE",
+    "ADVANCED",
+    "PROFICIENCY"
+  ];
+
   // @override
   // void initState() {
   //   super.initState();
@@ -86,11 +96,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _isLoading = true;
     });
-    print(_inputName);
-    print(_inputBirthday);
-    print(_inputPhone);
-    print(_inputCountry);
-    print(_inputLevel);
+    // print(_inputName);
+    // print(_inputBirthday);
+    // print(_inputPhone);
+    // print(_inputCountry);
+    // print(_inputLevel);
     Provider.of<UserProvider>(context, listen: false)
         .updateUserInfo(
       User(
@@ -278,23 +288,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // fontSize: 20,
                       ),
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                    // TextFormField(
+                    //   decoration: InputDecoration(
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //     hintText: "Enter your level",
+                    //   ),
+                    //   controller: TextEditingController(text: _inputLevel),
+                    //   validator: (value) {
+                    //     if (value.isEmpty) {
+                    //       return 'Please enter some text';
+                    //     }
+                    //     return null;
+                    //   },
+                    //   onSaved: (value) {
+                    //     _inputLevel = value;
+                    //   },
+                    // ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        hintText: "Enter your level",
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            value: _inputLevel,
+                            isExpanded: true,
+                            // iconSize: 36,
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black,
+                            ),
+                            // iconSize: 36,
+                            items: levels.map(buildMenuItem).toList(),
+                            onChanged: (value) => setState(() {
+                              _inputLevel = value as String;
+                            }),
+                          ),
+                        ),
                       ),
-                      controller: TextEditingController(text: _inputLevel),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _inputLevel = value;
-                      },
                     ),
                     SizedBox(
                       height: 30,
@@ -319,4 +355,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: const TextStyle(
+              // fontWeight: FontWeight.bold,
+              // fontSize: 36,
+              ),
+        ),
+      );
 }
