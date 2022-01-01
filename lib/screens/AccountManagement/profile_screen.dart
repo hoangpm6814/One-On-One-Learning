@@ -1,50 +1,117 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/models/user.dart';
+import 'package:lettutor/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({
-    Key key,
-    this.user,
-  }) : super(key: key);
+  // ProfileScreen({
+  //   Key key,
+  //   this.user,
+  // }) : super(key: key);
 
-  final User user;
+  // final User user;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  var _isLoading = false;
+
   final _form = GlobalKey<FormState>();
 
   String _inputName;
-  String _inputBirthday;
+  DateTime _inputBirthday;
   String _inputPhone;
   String _inputCountry;
   String _inputLevel;
+
+  User user;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    user = Provider.of<UserProvider>(context).userInfo;
+    _inputName = user.name;
+    _inputPhone = user.phone;
+    _inputCountry = user.country;
+    _inputLevel = user.level;
+    _inputBirthday = DateFormat("yyyy-MM-dd").parse(user.birthday);
+    super.didChangeDependencies();
+  }
 
   void _pickUserDate() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2022),
     ).then((date) {
       if (date == null) {
         return;
       }
       date = date;
       setState(() {
-        // _selectedDate = date;
+        _inputBirthday = date;
       });
     });
   }
 
+  void _saveForm() {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
+
+    _form.currentState.save();
+    if (_inputBirthday == null) {
+      _inputBirthday = DateTime.now();
+    }
+
+    String strDateTime = DateFormat("yyyy-MM-dd").format(_inputBirthday);
+    setState(() {
+      _isLoading = true;
+    });
+    print(_inputName);
+    print(_inputBirthday);
+    print(_inputPhone);
+    print(_inputCountry);
+    print(_inputLevel);
+    Provider.of<UserProvider>(context, listen: false)
+        .updateUserInfo(
+      User(
+        name: _inputName,
+        phone: _inputPhone,
+        country: _inputCountry,
+        birthday: strDateTime,
+        level: _inputLevel,
+      ),
+    )
+        .then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    ;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // final user = Provider.of<UserProvider>(context).userInfo;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -74,14 +141,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Column(
                         children: [
                           Text(
-                            widget.user.name,
+                            user.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
                           Text(
-                            widget.user.email,
+                            user.email,
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -117,7 +184,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // labelText: 'Name',
                         hintText: "Enter your name",
                       ),
-                      controller: TextEditingController(text: widget.user.name),
+                      controller: TextEditingController(text: _inputName),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _inputName = value;
+                      },
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -132,13 +208,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        hintText: "Enter your birthday",
+                        hintText: "Choose your birthday",
                       ),
-                      controller:
-                          TextEditingController(text: widget.user.birthday),
+                      controller: TextEditingController(
+                          text:
+                              DateFormat("yyyy-MM-dd").format(_inputBirthday)),
                       onTap: () {
                         _pickUserDate();
                       },
+                      readOnly: true,
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -155,8 +233,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         hintText: "Enter your phone",
                       ),
-                      controller:
-                          TextEditingController(text: widget.user.phone),
+                      controller: TextEditingController(text: _inputPhone),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _inputPhone = value;
+                      },
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -173,8 +259,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         hintText: "Enter your country",
                       ),
-                      controller:
-                          TextEditingController(text: widget.user.country),
+                      controller: TextEditingController(text: _inputCountry),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _inputCountry = value;
+                      },
                     ),
                     SizedBox(height: 10),
                     Text(
@@ -191,18 +285,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         hintText: "Enter your level",
                       ),
-                      controller:
-                          TextEditingController(text: widget.user.level),
+                      controller: TextEditingController(text: _inputLevel),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _inputLevel = value;
+                      },
                     ),
                     SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      width: double.infinity,
-                      child: RoundedButtonSmallPadding(
-                        text: AppLocalizations.of(context).save,
-                      ),
-                    ),
+                    _isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : Container(
+                            width: double.infinity,
+                            child: RoundedButtonSmallPadding(
+                              text: AppLocalizations.of(context).save,
+                              press: () {
+                                _saveForm();
+                              },
+                            ),
+                          ),
                   ],
                 ),
               ),

@@ -108,8 +108,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => ProfileScreen(
-                            user: user,
-                          ),
+                              // user: user,
+                              ),
                         ),
                       );
                     },
