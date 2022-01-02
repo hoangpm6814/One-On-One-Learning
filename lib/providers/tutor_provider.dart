@@ -58,10 +58,10 @@ class TutorProvider with ChangeNotifier {
       final List<Tutor> loadedTutors = [];
 
       for (int i = 0; i < tutorList.length; i++) {
-        // print(tutorList[i]);
         var feedbacks = tutorList[i]['feedbacks'];
         var feedbackList = List.from(feedbacks);
         final List<Review> loadedFeedbacks = [];
+        double rating = 0;
         for (int j = 0; j < feedbackList.length; j++) {
           print(feedbackList[j]['firstId']);
           loadedFeedbacks.add(Review(
@@ -75,11 +75,16 @@ class TutorProvider with ChangeNotifier {
             avatar: feedbackList[j]['firstInfo']['avatar'],
             name: feedbackList[j]['firstInfo']['name'],
           ));
+          rating += feedbackList[j]['rating'];
         }
+        if (feedbackList.length != 0) {
+          rating = rating / feedbackList.length;
+        }
+        print(rating);
         loadedTutors.add(Tutor(
           id: tutorList[i]['id'],
           name: tutorList[i]['name'],
-          rating: 5,
+          rating: rating == 0 ? 4 : rating,
           avatar: tutorList[i]['avatar'],
           bio: tutorList[i]['bio'],
           country: tutorList[i]['country'],
