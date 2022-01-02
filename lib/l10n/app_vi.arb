@@ -107,5 +107,8 @@
     "sign_up_upper": "ĐĂNG KÝ",
     "already_have_an_account": "Đã có tài khoản? ",
     "or_upper": "HOẶC",
-    "one_on_one_app_upper": "ỨNG DỤNG HỌC MỘT KÈM MỘT"
+    "one_on_one_app_upper": "ỨNG DỤNG HỌC MỘT KÈM MỘT",
+    "forgot_password": "Quên mật khẩu?",
+    "forgot_password_upper": "QUÊN MẬT KHẨU",
+    "send": "Gửi"
 }

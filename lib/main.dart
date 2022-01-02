@@ -11,6 +11,7 @@ import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/providers/user_provider.dart';
 import 'package:lettutor/screens/AccountManagement/setting_screen.dart';
 import 'package:lettutor/screens/Chat/chat_screen.dart';
+import 'package:lettutor/screens/ForgotPassword/forgot_password_screen.dart';
 import 'package:lettutor/screens/Schedule/schedule_list_screen.dart';
 import 'package:lettutor/screens/Splash/splash_screen.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
@@ -94,6 +95,7 @@ class _MyAppState extends State<MyApp> {
                                       ? SplashScreen()
                                       : WelcomeScreen(),
                             ),
+                      // "/": (ctx) => ForgotPasswordScreen(),
                       TutorListScreen.routeName: (ctx) => TutorListScreen(),
                       // TutorDetailScreen.routeName: (ctx) => TutorDetailScreen(),
                       ChatScreen.routeName: (ctx) => ChatScreen(),

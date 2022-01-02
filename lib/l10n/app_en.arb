@@ -118,6 +118,8 @@
     "sign_up_upper": "SIGN UP",
     "already_have_an_account": "Already have an account? ",
     "or_upper": "OR",
-    "one_on_one_app_upper": "ONE ON ONE LEARNING APP"
-
+    "one_on_one_app_upper": "ONE ON ONE LEARNING APP",
+    "forgot_password": "Forgot Password?",
+    "forgot_password_upper": "FORGOT PASSWORD",
+    "send": "Send"
 }

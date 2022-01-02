@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/http_exception.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/screens/ForgotPassword/forgot_password_screen.dart';
 import 'package:lettutor/screens/Signup/signup_screen.dart';
 import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
@@ -247,6 +248,26 @@ class _BodyState extends State<Body> {
                   ),
                 ),
 
+                SizedBox(height: size.height * 0.03),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ForgotPasswordScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).forgot_password,
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 SizedBox(height: size.height * 0.03),
                 AlreadyHaveAnAccountCheck(
                   press: () {

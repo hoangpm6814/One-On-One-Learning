@@ -75,9 +75,7 @@ class AuthProvider with ChangeNotifier {
       throw error;
     }
   }
-  // Login success !!!
 
-  // Chua goi dung API
   Future<void> signup(String email, String password) async {
     try {
       final url = Uri.parse('https://sandbox.api.lettutor.com/auth/register');
@@ -161,5 +159,30 @@ class AuthProvider with ChangeNotifier {
     }
     final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
     _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
+  }
+
+  Future<String> forgotPassword(String email) async {
+    final url =
+        Uri.parse('https://sandbox.api.lettutor.com/user/forgotPassword');
+    Map<String, String> headers = {"Content-Type": "application/json"};
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'email': email,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      if (responseData['statusCode'] != null) {
+        throw HttpException(responseData['message']);
+      }
+      var _message = responseData['message'];
+      return _message;
+    } catch (error) {
+      throw error;
+    }
   }
 }
