@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:lettutor/models/review.dart';
 
 class Tutor {
   final String id;
@@ -19,6 +20,7 @@ class Tutor {
   bool isNative;
   bool isOnline;
   final int price;
+  List<Review> reviews;
 
   Tutor({
     @required this.id,
@@ -39,5 +41,6 @@ class Tutor {
     this.isNative = false,
     this.isOnline = false,
     @required this.price,
+    this.reviews = const [],
   });
 }

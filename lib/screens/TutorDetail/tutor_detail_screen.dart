@@ -33,14 +33,14 @@ class TutorDetailScreen extends StatefulWidget {
 
 class _TutorDetailScreenState extends State<TutorDetailScreen> {
   Tutor tutor;
-  List<Rating> ratings;
+  // List<Rating> ratings;
 
   VideoPlayerController videoPlayerController;
 
   @override
   void didChangeDependencies() {
     tutor = Provider.of<TutorProvider>(context).getById(widget.id);
-    ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
+    // ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
     super.didChangeDependencies();
   }
 
@@ -225,7 +225,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               SizedBox(height: 10),
               Text(
                 AppLocalizations.of(context).rating_and_comment +
-                    " (${ratings.length})",
+                    " (${tutor.reviews.length})",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
@@ -233,7 +233,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                 ),
               ),
               SizedBox(height: 5),
-              ratings.length > 0
+              (tutor.reviews.length > 0)
                   ? Container(
                       height: (MediaQuery.of(context).size.height -
                               (MediaQuery.of(context).padding.top +
@@ -243,10 +243,10 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                       child: ListView.builder(
                         itemBuilder: (ctx, index) {
                           return CardRating(
-                            rating: ratings[index],
+                            review: tutor.reviews[index],
                           );
                         },
-                        itemCount: ratings.length,
+                        itemCount: tutor.reviews.length,
                       ),
                     )
                   : Container(

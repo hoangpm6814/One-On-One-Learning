@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/models/review.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -55,8 +56,24 @@ class TutorProvider with ChangeNotifier {
       }
 
       final List<Tutor> loadedTutors = [];
+
       for (int i = 0; i < tutorList.length; i++) {
         // print(tutorList[i]);
+        var feedbacks = tutorList[i]['feedbacks'];
+        var feedbackList = List.from(feedbacks);
+        final List<Review> loadedFeedbacks = [];
+        for (int j = 0; j < feedbackList.length; j++) {
+          print(feedbackList[j]['firstId']);
+          loadedFeedbacks.add(Review(
+            id: feedbackList[i]['id'],
+            firstId: feedbackList[i]['firstId'],
+            secondId: feedbackList[i]['secondId'],
+            rating: feedbackList[i]['rating'],
+            content: feedbackList[i]['content'],
+            createdAt: feedbackList[i]['createdAt'],
+            updatedAt: feedbackList[i]['updatedAt'],
+          ));
+        }
         loadedTutors.add(Tutor(
           id: tutorList[i]['id'],
           name: tutorList[i]['name'],
@@ -76,6 +93,7 @@ class TutorProvider with ChangeNotifier {
           isOnline: tutorList[i]['isOnline'],
           price: tutorList[i]['price'],
         ));
+        loadedTutors[i].reviews = loadedFeedbacks;
       }
 
       // tutors.forEach((index, tutorData) {

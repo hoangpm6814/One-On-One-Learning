@@ -38,7 +38,8 @@ class _BodyState extends State<Body> {
       );
       _showDialogSuccess(message);
     } catch (error) {
-      const errorMessage = 'Could not send your email. Please check.';
+      const errorMessage =
+          'Could not send your email. Please check your email account.';
       _showDialog(errorMessage);
     }
 
@@ -70,12 +71,13 @@ class _BodyState extends State<Body> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(message),
-        content: Text("Please check your email to reset your password."),
+        content: Text("Please check your email to set your new password."),
         actions: <Widget>[
           ElevatedButton(
             child: Text('Okay'),
+            style: ElevatedButton.styleFrom(primary: kPrimaryColor),
             onPressed: () {
-              // Navigator.of(ctx).pop();
+              Navigator.of(ctx).pop();
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

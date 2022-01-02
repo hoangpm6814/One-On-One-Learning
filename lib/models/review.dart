@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class Tutor {
+class Review {
   final String id;
   final String firstId;
   final String secondId;
@@ -9,7 +9,7 @@ class Tutor {
   String createdAt;
   String updatedAt;
 
-  Tutor({
+  Review({
     @required this.id,
     @required this.firstId,
     @required this.secondId,
