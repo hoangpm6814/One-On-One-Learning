@@ -65,13 +65,15 @@ class TutorProvider with ChangeNotifier {
         for (int j = 0; j < feedbackList.length; j++) {
           print(feedbackList[j]['firstId']);
           loadedFeedbacks.add(Review(
-            id: feedbackList[i]['id'],
-            firstId: feedbackList[i]['firstId'],
-            secondId: feedbackList[i]['secondId'],
-            rating: feedbackList[i]['rating'],
-            content: feedbackList[i]['content'],
-            createdAt: feedbackList[i]['createdAt'],
-            updatedAt: feedbackList[i]['updatedAt'],
+            id: feedbackList[j]['id'],
+            firstId: feedbackList[j]['firstId'],
+            secondId: feedbackList[j]['secondId'],
+            rating: feedbackList[j]['rating'],
+            content: feedbackList[j]['content'],
+            createdAt: feedbackList[j]['createdAt'],
+            updatedAt: feedbackList[j]['updatedAt'],
+            avatar: feedbackList[j]['firstInfo']['avatar'],
+            name: feedbackList[j]['firstInfo']['name'],
           ));
         }
         loadedTutors.add(Tutor(

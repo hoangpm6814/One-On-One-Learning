@@ -6,6 +6,8 @@ class Review {
   final String secondId;
   final int rating;
   final String content;
+  final String avatar;
+  final String name;
   String createdAt;
   String updatedAt;
 
@@ -15,6 +17,8 @@ class Review {
     @required this.secondId,
     @required this.rating,
     @required this.content,
+    @required this.avatar,
+    @required this.name,
     this.createdAt = null,
     this.updatedAt = null,
   });
