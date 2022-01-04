@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lettutor/models/http_exception.dart';
+import 'package:lettutor/constants.dart';
 import 'dart:convert';
 
 import 'package:lettutor/models/user.dart';
@@ -17,7 +18,7 @@ class UserProvider with ChangeNotifier {
   User _user;
 
   Future<void> fetchUserInfo() async {
-    var url = Uri.parse('https://sandbox.api.lettutor.com/user/info');
+    var url = Uri.parse('${base_url}/user/info');
     Map<String, String> headers = {
       "Authorization": "Bearer ${authToken}",
       "Content-Type": "application/json"
@@ -55,7 +56,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> updateUserInfo(User user) async {
-    final url = Uri.parse('https://sandbox.api.lettutor.com/user/info');
+    final url = Uri.parse('${base_url}/user/info');
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Authorization": "Bearer ${authToken}"

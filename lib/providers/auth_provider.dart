@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:lettutor/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/http_exception.dart';
@@ -31,7 +32,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> login(String email, String password) async {
-    final url = Uri.parse('https://sandbox.api.lettutor.com/auth/login');
+    final url = Uri.parse('${base_url}/auth/login');
     Map<String, String> headers = {"Content-Type": "application/json"};
     try {
       final response = await http.post(
@@ -78,7 +79,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> signup(String email, String password) async {
     try {
-      final url = Uri.parse('https://sandbox.api.lettutor.com/auth/register');
+      final url = Uri.parse('${base_url}/auth/register');
       Map<String, String> headers = {
         "Content-Type": "application/x-www-form-urlencoded"
       };
@@ -162,8 +163,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<String> forgotPassword(String email) async {
-    final url =
-        Uri.parse('https://sandbox.api.lettutor.com/user/forgotPassword');
+    final url = Uri.parse('${base_url}/user/forgotPassword');
     Map<String, String> headers = {"Content-Type": "application/json"};
     try {
       final response = await http.post(

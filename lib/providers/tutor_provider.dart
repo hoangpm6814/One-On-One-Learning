@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/review.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:http/http.dart' as http;
@@ -42,8 +43,7 @@ class TutorProvider with ChangeNotifier {
     notifyListeners();
     // print("go toggle favourite");
     try {
-      final url = Uri.parse(
-          'https://sandbox.api.lettutor.com/user/manageFavoriteTutor');
+      final url = Uri.parse('${base_url}/user/manageFavoriteTutor');
       Map<String, String> headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${authToken}"
@@ -75,8 +75,7 @@ class TutorProvider with ChangeNotifier {
   List<Tutor> _tutorList = [];
 
   Future<void> fetchTutors([bool filterByUser = false]) async {
-    var url = Uri.parse(
-        'https://sandbox.api.lettutor.com/tutor/more?perPage=9&page=1');
+    var url = Uri.parse('${base_url}/tutor/more?perPage=9&page=1');
     Map<String, String> headers = {"Authorization": "Bearer ${authToken}"};
     try {
       final response = await http.get(url, headers: headers);
