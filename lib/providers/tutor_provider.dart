@@ -152,9 +152,9 @@ class TutorProvider with ChangeNotifier {
         loadedTutors[index].isFavourite = true;
       }
 
-      // _tutorList = loadedTutors;
-      _tutorList.clear();
-      _tutorList.addAll(loadedTutors);
+      _tutorList = loadedTutors;
+      // _tutorList.clear();
+      // _tutorList.addAll(loadedTutors);
       notifyListeners();
     } catch (error) {
       throw (error);
