@@ -15,6 +15,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<Tutor> tutors = [
     Tutor(
       id: "1",
+      userId: "1",
       name: "Ashley Young",
       rating: 4.5,
       avatar:
@@ -38,6 +39,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ),
     Tutor(
       id: "2",
+      userId: "2",
       name: "Kathy Huynh",
       rating: 5,
       avatar:
@@ -59,6 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ),
     Tutor(
       id: "3",
+      userId: "3",
       name: "Maria Silkyza Galvez",
       rating: 4,
       avatar:
@@ -82,6 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ),
     Tutor(
       id: "4",
+      userId: "4",
       name: "April Corpuz",
       rating: 4.5,
       avatar:

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/rating.dart';
-import 'package:lettutor/models/rating.dart';
-import 'package:lettutor/providers/rating_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
@@ -107,7 +105,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                         color: Theme.of(context).errorColor,
                         onPressed: () => {
                           Provider.of<TutorProvider>(context, listen: false)
-                              .toggleIsFavourite(tutor.id),
+                              .toggleIsFavourite(tutor.userId),
                         },
                       ),
                     ],

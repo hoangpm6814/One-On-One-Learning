@@ -28,14 +28,47 @@ class TutorProvider with ChangeNotifier {
       return tutor2.rating.compareTo(tutor1.rating);
   }
 
-  void toggleIsFavourite(String id) {
-    int index = _tutorList.indexWhere((todo) => todo.id == id);
+  // void toggleIsFavourite(String id) {
+  //   int index = _tutorList.indexWhere((tutor) => tutor.id == id);
+  //   _tutorList[index].isFavourite = !_tutorList[index].isFavourite;
+  //   notifyListeners();
+  // }
+
+  Future<void> toggleIsFavourite(String userId) async {
+    int index = _tutorList.indexWhere((tutor) => tutor.userId == userId);
+    final oldStatus = _tutorList[index].isFavourite;
+    // temporarily change stutus offline
     _tutorList[index].isFavourite = !_tutorList[index].isFavourite;
     notifyListeners();
+    // print("go toggle favourite");
+    try {
+      final url = Uri.parse(
+          'https://sandbox.api.lettutor.com/user/manageFavoriteTutor');
+      Map<String, String> headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${authToken}"
+      };
+      final response = await http.post(
+        url,
+        body: {'tutorId': userId},
+        headers: headers,
+        encoding: Encoding.getByName("utf-8"),
+      );
+      if (response.statusCode >= 400) {
+        // print("go toggle favourite error");
+        _tutorList[index].isFavourite = oldStatus;
+        notifyListeners();
+      }
+    } catch (error) {
+      // print("go toggle favourite error 2");
+      _tutorList[index].isFavourite = oldStatus;
+      notifyListeners();
+      throw error;
+    }
   }
 
   Tutor getById(String id) {
-    return _tutorList.firstWhere((todo) => todo.id == id);
+    return _tutorList.firstWhere((tutor) => tutor.id == id);
   }
 
   // List<Tutor> _tutorList = DUMMY_TUTORS;
@@ -51,11 +84,20 @@ class TutorProvider with ChangeNotifier {
       var tutors = extractedData["tutors"];
       var rows = tutors["rows"];
       var tutorList = List.from(rows);
+
+      var favouriteTutorIds = extractedData["favoriteTutor"];
+      var favouriteTutorIdList = List.from(favouriteTutorIds);
+
       if (extractedData == null) {
         return;
       }
 
       final List<Tutor> loadedTutors = [];
+      final List<String> loadedfavouriteTutorIds = [];
+
+      for (int i = 0; i < favouriteTutorIdList.length; i++) {
+        loadedfavouriteTutorIds.add(favouriteTutorIdList[i]['secondId']);
+      }
 
       for (int i = 0; i < tutorList.length; i++) {
         var feedbacks = tutorList[i]['feedbacks'];
@@ -80,9 +122,10 @@ class TutorProvider with ChangeNotifier {
         if (feedbackList.length != 0) {
           rating = rating / feedbackList.length;
         }
-        print(rating);
+        // print(rating);
         loadedTutors.add(Tutor(
           id: tutorList[i]['id'],
+          userId: tutorList[i]['userId'],
           name: tutorList[i]['name'],
           rating: rating == 0 ? 4 : rating,
           avatar: tutorList[i]['avatar'],
@@ -103,37 +146,14 @@ class TutorProvider with ChangeNotifier {
         loadedTutors[i].reviews = loadedFeedbacks;
       }
 
-      // tutors.forEach((index, tutorData) {
-      //   loadedTutors.add(Tutor(
-      //     // id: tutorId,
-      //     // title: tutorData['title'],
-      //     // description: tutorData['description'],
-      //     // price: tutorData['price'],
-      //     // // isFavorite:
-      //     // //     favoriteData == null ? false : favoriteData[prodId] ?? false,
-      //     // imageUrl: tutorData['imageUrl'],
-
-      //     id: tutorData['id'],
-      //     name: tutorData['name'],
-      //     rating: 5,
-      //     avatar: tutorData['avatar'],
-      //     bio: tutorData['bio'],
-      //     country: tutorData['country'],
-      //     languages: tutorData['languages'],
-      //     education: tutorData['education'],
-      //     experience: tutorData['experience'],
-      //     interests: tutorData['interests'],
-      //     profession: tutorData['profession'],
-      //     specialties: tutorData['specialties'],
-      //     video: tutorData['video'],
-      //     targetStudent: tutorData['targetStudent'],
-      //     isNative: tutorData['isNative'],
-      //     isOnline: tutorData['isOnline'],
-      //     price: tutorData['price'],
-      //   ));
-      // });
+      for (int i = 0; i < loadedfavouriteTutorIds.length; i++) {
+        int index = loadedTutors
+            .indexWhere((tutor) => tutor.userId == loadedfavouriteTutorIds[i]);
+        loadedTutors[index].isFavourite = true;
+      }
 
       // _tutorList = loadedTutors;
+      _tutorList.clear();
       _tutorList.addAll(loadedTutors);
       notifyListeners();
     } catch (error) {

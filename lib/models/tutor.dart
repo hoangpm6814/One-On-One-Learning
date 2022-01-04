@@ -3,6 +3,7 @@ import 'package:lettutor/models/review.dart';
 
 class Tutor {
   final String id;
+  final String userId;
   final String name;
   final double rating;
   final String avatar;
@@ -24,6 +25,7 @@ class Tutor {
 
   Tutor({
     @required this.id,
+    @required this.userId,
     @required this.name,
     @required this.rating,
     @required this.avatar,

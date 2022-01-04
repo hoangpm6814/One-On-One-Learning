@@ -115,7 +115,7 @@ class CardTutor extends StatelessWidget {
                       color: Theme.of(context).errorColor,
                       onPressed: () => {
                         Provider.of<TutorProvider>(context, listen: false)
-                            .toggleIsFavourite(tutor.id),
+                            .toggleIsFavourite(tutor.userId),
                       },
                     ),
                   ],

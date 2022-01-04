@@ -5,31 +5,33 @@ import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor.dart';
 
 final DUMMY_TUTORS = [
-  Tutor(
-    id: "1",
-    name: "Ashley Young",
-    rating: 4.5,
-    avatar:
-        "https://api.app.lettutor.com/avatar/c21e521c-829e-4c99-958d-726450b5fbd8avatar1637483330267.jpg",
-    bio:
-        "While I've always longed to be an ESL teacher, the delight I had from assisting students' growth and development definitely encouraged my desire. I feel that my enthusiasm, good approach, and hands-on experience working with youngsters will make me a fantastic educator. I'm looking forward to a career that allows me to mold young minds and make a difference in the lives of the children in my community.",
-    country: "Canada",
-    languages: "English,French,Vietnamese",
-    education: "PhD. from University of Toronto",
-    experience:
-        "I have experience in online teaching, I teach student's in different levels from kids to adult.",
-    interests:
-        "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
-    profession:
-        "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
-    specialties: "Conversational,IELTS",
-    video:
-        "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
-    targetStudent: "Intermediate",
-    price: 50000,
-  ),
+  // Tutor(
+  //   id: "1",
+  //   userId: "1",
+  //   name: "Ashley Young",
+  //   rating: 4.5,
+  //   avatar:
+  //       "https://api.app.lettutor.com/avatar/c21e521c-829e-4c99-958d-726450b5fbd8avatar1637483330267.jpg",
+  //   bio:
+  //       "While I've always longed to be an ESL teacher, the delight I had from assisting students' growth and development definitely encouraged my desire. I feel that my enthusiasm, good approach, and hands-on experience working with youngsters will make me a fantastic educator. I'm looking forward to a career that allows me to mold young minds and make a difference in the lives of the children in my community.",
+  //   country: "Canada",
+  //   languages: "English,French,Vietnamese",
+  //   education: "PhD. from University of Toronto",
+  //   experience:
+  //       "I have experience in online teaching, I teach student's in different levels from kids to adult.",
+  //   interests:
+  //       "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
+  //   profession:
+  //       "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
+  //   specialties: "Conversational,IELTS",
+  //   video:
+  //       "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+  //   targetStudent: "Intermediate",
+  //   price: 50000,
+  // ),
   Tutor(
     id: "2",
+    userId: "2",
     name: "Kathy Huynh",
     rating: 5,
     avatar:
@@ -49,31 +51,33 @@ final DUMMY_TUTORS = [
     targetStudent: "Intermediate",
     price: 50000,
   ),
-  Tutor(
-    id: "3",
-    name: "Maria Silkyza Galvez",
-    rating: 4,
-    avatar:
-        "https://api.app.lettutor.com/avatar/cdb22890-fb57-4ec7-b4b7-829716c85a17avatar1637320790420.png",
-    bio:
-        "A teacher for almost a decade with lengthy teaching exposure with Vietnamese students, adult professionals, non -professionals, and executives. Teaching is a skill delivered with own style and creativity focused on YOU. YES, our lessons will be based on what really matters to you, what you want to learn in a short possible time.",
-    country: "Philippines",
-    languages: "English,Vietnamese",
-    education: "PhD. from University of Toronto",
-    experience:
-        "I have experience in online teaching, I teach student's in different levels from kids to adult.",
-    interests:
-        "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
-    profession:
-        "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
-    specialties: "Conversational,STARTERS",
-    video:
-        "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
-    targetStudent: "Intermediate",
-    price: 50000,
-  ),
+  // Tutor(
+  //   id: "3",
+  //   userId: "3",
+  //   name: "Maria Silkyza Galvez",
+  //   rating: 4,
+  //   avatar:
+  //       "https://api.app.lettutor.com/avatar/cdb22890-fb57-4ec7-b4b7-829716c85a17avatar1637320790420.png",
+  //   bio:
+  //       "A teacher for almost a decade with lengthy teaching exposure with Vietnamese students, adult professionals, non -professionals, and executives. Teaching is a skill delivered with own style and creativity focused on YOU. YES, our lessons will be based on what really matters to you, what you want to learn in a short possible time.",
+  //   country: "Philippines",
+  //   languages: "English,Vietnamese",
+  //   education: "PhD. from University of Toronto",
+  //   experience:
+  //       "I have experience in online teaching, I teach student's in different levels from kids to adult.",
+  //   interests:
+  //       "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
+  //   profession:
+  //       "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
+  //   specialties: "Conversational,STARTERS",
+  //   video:
+  //       "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+  //   targetStudent: "Intermediate",
+  //   price: 50000,
+  // ),
   Tutor(
     id: "4",
+    userId: "4",
     name: "April Corpuz",
     rating: 4.5,
     avatar:
@@ -93,50 +97,52 @@ final DUMMY_TUTORS = [
     targetStudent: "Intermediate",
     price: 50000,
   ),
-  Tutor(
-    id: "5",
-    name: "Michael Owen",
-    rating: 5,
-    avatar:
-        "https://api.app.lettutor.com/avatar/9f896616-72d6-4d28-8859-de0e90f3c4adavatar1634393619087.jpg",
-    bio:
-        "I am an online English tutor for more than 2 years now. I love meeting new people, talking with them and sit on a meaningful conversation while learning about their different cultures at the same time. I could say that I am a people-person because I love stirring up interesting topics relatable to my students' lives. I can help you out with your conversation skills because I am creative, patient and has a great passion in teaching meaningfully. I'll slowly build your pronunciation and vocabulary.",
-    country: "Philippines",
-    languages: "English,French,Vietnamese",
-    education: "PhD. from University of Toronto",
-    experience:
-        "I have experience in online teaching, I teach student's in different levels from kids to adult.",
-    interests:
-        "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
-    profession:
-        "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
-    specialties: "Conversational,IELTS",
-    video:
-        "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
-    targetStudent: "Intermediate",
-    price: 50000,
-  ),
-  Tutor(
-    id: "6",
-    name: "Johnny Nguyen",
-    rating: 3,
-    avatar:
-        "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
-    bio:
-        "Hi, how are you? I am teacher Ca! I am a professional teacher and I've been teaching for 5 years and more than a year online. I handled diverse students level from kids to adults. Teaching is fun. You can teach anytime and anywhere. Pandemic is not a hindrance for continuous learning to our dear students. Everything is on the tip of our fingers and done virtually.",
-    country: "Viet Nam",
-    languages: "English,French,Vietnamese",
-    education: "Bachelor from University of Technology",
-    experience: "5 years of English teaching experience",
-    interests: "Finance, gardening, travelling",
-    profession:
-        "Teaching Assistant at ILA VietNam, English Teacher at Pathway School",
-    specialties: "Conversational,IELTS",
-    video:
-        "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
-    targetStudent: "Intermediate",
-    price: 50000,
-  ),
+  // Tutor(
+  //   id: "5",
+  //   userId: "5",
+  //   name: "Michael Owen",
+  //   rating: 5,
+  //   avatar:
+  //       "https://api.app.lettutor.com/avatar/9f896616-72d6-4d28-8859-de0e90f3c4adavatar1634393619087.jpg",
+  //   bio:
+  //       "I am an online English tutor for more than 2 years now. I love meeting new people, talking with them and sit on a meaningful conversation while learning about their different cultures at the same time. I could say that I am a people-person because I love stirring up interesting topics relatable to my students' lives. I can help you out with your conversation skills because I am creative, patient and has a great passion in teaching meaningfully. I'll slowly build your pronunciation and vocabulary.",
+  //   country: "Philippines",
+  //   languages: "English,French,Vietnamese",
+  //   education: "PhD. from University of Toronto",
+  //   experience:
+  //       "I have experience in online teaching, I teach student's in different levels from kids to adult.",
+  //   interests:
+  //       "I am music enthusiast, my hobbies are playing guitar, singing and dancing.",
+  //   profession:
+  //       "I'm an Assistant Instructor in ACLC College. I teach senior high school student and I handle English.",
+  //   specialties: "Conversational,IELTS",
+  //   video:
+  //       "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+  //   targetStudent: "Intermediate",
+  //   price: 50000,
+  // ),
+  // Tutor(
+  //   id: "6",
+  //   userId: "6",
+  //   name: "Johnny Nguyen",
+  //   rating: 3,
+  //   avatar:
+  //       "https://i.pinimg.com/originals/26/ee/73/26ee73636f3429e3df522ae219c064fd.png",
+  //   bio:
+  //       "Hi, how are you? I am teacher Ca! I am a professional teacher and I've been teaching for 5 years and more than a year online. I handled diverse students level from kids to adults. Teaching is fun. You can teach anytime and anywhere. Pandemic is not a hindrance for continuous learning to our dear students. Everything is on the tip of our fingers and done virtually.",
+  //   country: "Viet Nam",
+  //   languages: "English,French,Vietnamese",
+  //   education: "Bachelor from University of Technology",
+  //   experience: "5 years of English teaching experience",
+  //   interests: "Finance, gardening, travelling",
+  //   profession:
+  //       "Teaching Assistant at ILA VietNam, English Teacher at Pathway School",
+  //   specialties: "Conversational,IELTS",
+  //   video:
+  //       "https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4",
+  //   targetStudent: "Intermediate",
+  //   price: 50000,
+  // ),
 ];
 
 final DUMMY_SCHEDULES = [
