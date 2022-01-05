@@ -148,7 +148,9 @@ class TutorProvider with ChangeNotifier {
       for (int i = 0; i < loadedfavouriteTutorIds.length; i++) {
         int index = loadedTutors
             .indexWhere((tutor) => tutor.userId == loadedfavouriteTutorIds[i]);
-        loadedTutors[index].isFavourite = true;
+        if (index != -1) {
+          loadedTutors[index].isFavourite = true;
+        }
       }
 
       _tutorList = loadedTutors;
