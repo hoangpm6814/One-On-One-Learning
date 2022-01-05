@@ -75,4 +75,41 @@ class TutorScheduleProvider with ChangeNotifier {
       throw (error);
     }
   }
+
+  Future<String> bookingClass(String scheduleDetailId, String note) async {
+    final url = Uri.parse('${base_url}/booking');
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${authToken}"
+    };
+    final List<String> data = [];
+    data.add(scheduleDetailId);
+    // print(data);
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'scheduleDetailIds': data,
+            'note': note,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+
+      if (response.statusCode >= 400) {
+        print("booking failed");
+        print(responseData['message']);
+        return responseData['message'];
+      }
+
+      print("booking success");
+      return responseData['message'];
+    } catch (error) {
+      // throw (error);
+      print("booking failed error");
+      return error;
+    }
+  }
 }

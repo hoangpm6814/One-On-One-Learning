@@ -166,21 +166,22 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
                                   LightRoundedButtonSmallPadding(
                                     text: AppLocalizations.of(context)
                                         .schedule_now,
-                                    press: () {
+                                    press: () async {
                                       // send data
                                       _form.currentState.save();
-                                      // Provider.of<ScheduleProvider>(context,
-                                      //         listen: false)
-                                      //     .createNewSchedule(
-                                      //   Schedule(
-                                      //     id: '6',
-                                      //     studentId: '1',
-                                      //     tutorId: widget.tutorId,
-                                      //     date: selectedDateToSubmit,
-                                      //     shift: selectedShiftToSubmit,
-                                      //     requirement: requirement,
-                                      //   ),
-                                      // );
+
+                                      String message = await Provider.of<
+                                                  TutorScheduleProvider>(
+                                              context,
+                                              listen: false)
+                                          .bookingClass(
+                                              selectedScheduleId, requirement);
+                                      var snackBar = SnackBar(
+                                        content: Text(message),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+
                                       Navigator.pop(context);
                                     },
                                   ),
