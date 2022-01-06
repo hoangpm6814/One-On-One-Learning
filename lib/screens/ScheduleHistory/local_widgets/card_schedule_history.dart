@@ -48,7 +48,7 @@ class CardScheduleHistory extends StatelessWidget {
                           // dateDiff(schedule.startTimeDateTime) +
                           //     " " +
                           //     AppLocalizations.of(context).days_ago,
-                          getTimeDiff(schedule.endTimeDateTime),
+                          getTimeDiff(schedule.endTimeDateTime, context),
                         ),
                       ],
                     ),
@@ -155,7 +155,8 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.studentRequest ?? "No request for lesson",
+                      schedule.studentRequest ??
+                          AppLocalizations.of(context).no_request_for_lesson,
                     ),
                   ),
                 ),
@@ -181,7 +182,8 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.tutorReview ?? "Tutor haven't reviewed yet",
+                      schedule.tutorReview ??
+                          AppLocalizations.of(context).tutor_not_review_yet,
                       // "Tutor haven't reviewed yet",
                     ),
                   ),
@@ -218,16 +220,20 @@ class CardScheduleHistory extends StatelessWidget {
     return now.difference(date).inDays.toString();
   }
 
-  String getTimeDiff(DateTime time) {
+  String getTimeDiff(DateTime time, BuildContext context) {
     if (DateTime.now().difference(time).inMinutes < 2) {
-      return "a few seconds ago";
+      return AppLocalizations.of(context).senconds_ago;
     } else if (DateTime.now().difference(time).inMinutes < 60) {
-      return "${DateTime.now().difference(time).inHours} mins ago";
+      return "${DateTime.now().difference(time).inHours} " +
+          AppLocalizations.of(context).mins_ago;
     } else if (DateTime.now().difference(time).inMinutes < 1440) {
-      return "${DateTime.now().difference(time).inHours} hours ago";
+      return "${DateTime.now().difference(time).inHours} " +
+          AppLocalizations.of(context).hours_ago;
     } else if (DateTime.now().difference(time).inMinutes > 1440) {
-      return "${DateTime.now().difference(time).inDays} days ago";
+      return "${DateTime.now().difference(time).inDays} " +
+          AppLocalizations.of(context).days_ago;
     }
-    return "${DateTime.now().difference(time).inDays} days ago";
+    return "${DateTime.now().difference(time).inDays} " +
+        AppLocalizations.of(context).days_ago;
   }
 }

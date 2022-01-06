@@ -206,7 +206,8 @@ class CardSchedule extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.studentRequest ?? "No request for lesson",
+                      schedule.studentRequest ??
+                          AppLocalizations.of(context).no_request_for_lesson,
                     ),
                   ),
                 ),
