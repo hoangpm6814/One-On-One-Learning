@@ -5,9 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
-import 'package:lettutor/models/schedule.dart';
 import 'package:lettutor/models/tutor_schedule.dart';
-import 'package:lettutor/providers/schedule_provider.dart';
 import 'package:lettutor/providers/tutor_schedule_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -208,6 +206,19 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
           )
         ],
       );
+  int compareTutorSchedules(
+      TutorSchedule tutorSchedule1, TutorSchedule tutorSchedule2) {
+    int hour1 = int.parse(tutorSchedule1.startTime.split(":")[0]);
+    int minute1 = int.parse(tutorSchedule1.startTime.split(":")[1]);
+    int hour2 = int.parse(tutorSchedule2.startTime.split(":")[0]);
+    int minute2 = int.parse(tutorSchedule2.startTime.split(":")[1]);
+    if (hour1 < hour2) return -1;
+    if (hour1 > hour2) return 1;
+    if (minute1 < minute2) return -1;
+    if (minute1 > minute2) return 1;
+    return 0;
+    //  return tutorSchedule2.startTime.compareTo(tutorSchedule1.startTime);
+  }
 
   Widget buildChipDate(int option, BuildContext context) {
     final isSelected = selectedDateDiff == option;
@@ -226,6 +237,7 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
         listDateSchedule = listSchedule
             .where((schedule) => schedule.date == selectedDateString)
             .toList();
+        listDateSchedule.sort(compareTutorSchedules);
       }),
       child: Chip(
         shape: StadiumBorder(
