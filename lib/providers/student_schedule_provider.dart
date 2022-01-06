@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lettutor/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/student_schedule.dart';
 import 'dart:convert';
 
@@ -16,8 +16,12 @@ class StudentScheduleProvider with ChangeNotifier {
   }
 
   Future<void> fetchStudentSchedules() async {
+    DateTime fiveMinutesAgoFromNow =
+        DateTime.now().subtract(const Duration(minutes: 5)); //DateTime
+    String timestamp = fiveMinutesAgoFromNow.millisecondsSinceEpoch.toString();
+    // print("timestamp: " + timestamp);
     var url = Uri.parse(
-        '${base_url}/booking/list/student?page=1&perPage=20&dateTimeGte=1641459185815&orderBy=meeting&sortBy=asc');
+        '${base_url}/booking/list/student?page=1&perPage=20&dateTimeGte=${timestamp}&orderBy=meeting&sortBy=asc');
     Map<String, String> headers = {
       "Authorization": "Bearer ${authToken}",
       "Content-Type": "application/json"

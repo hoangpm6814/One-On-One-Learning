@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/providers/schedule_provider.dart';
 import 'package:lettutor/providers/student_schedule_provider.dart';
 import 'package:lettutor/screens/Schedule/local_widgets/card_schedule.dart';
 import 'package:provider/provider.dart';
