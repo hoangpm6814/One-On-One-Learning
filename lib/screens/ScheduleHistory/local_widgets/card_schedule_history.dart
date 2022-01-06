@@ -188,6 +188,21 @@ class CardScheduleHistory extends StatelessWidget {
                 ),
               ],
             ),
+            // schedule.showRecordUrl
+            //     ? Row(
+            //         children: [
+            //           Expanded(
+            //             child: Container(
+            //               width: 150,
+            //               child: Text(
+            //                 schedule.recordUrl,
+            //                 // "Tutor haven't reviewed yet",
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       )
+            //     : Container(),
           ]),
         ),
       ),

@@ -13,6 +13,8 @@ class StudentSchedule {
   final DateTime endTimeDateTime;
   final String studentRequest;
   final String tutorReview;
+  final bool showRecordUrl;
+  final String recordUrl;
 
   StudentSchedule({
     @required this.id,
@@ -27,5 +29,7 @@ class StudentSchedule {
     @required this.endTimeDateTime,
     @required this.studentRequest,
     @required this.tutorReview,
+    @required this.showRecordUrl,
+    @required this.recordUrl,
   });
 }

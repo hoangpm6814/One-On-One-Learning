@@ -52,6 +52,8 @@ class StudentScheduleProvider with ChangeNotifier {
         var scheduleDetailId = scheduleList[i]['scheduleDetailId'];
         var studentRequest = scheduleList[i]['studentRequest'];
         var tutorReview = scheduleList[i]['tutorReview'];
+        var showRecordUrl = scheduleList[i]['showRecordUrl'];
+        var recordUrl = scheduleList[i]['recordUrl'];
         var scheduleDetailInfo = scheduleList[i]['scheduleDetailInfo'];
         var startDateTime = new DateTime.fromMillisecondsSinceEpoch(
             scheduleDetailInfo['startPeriodTimestamp']);
@@ -90,6 +92,8 @@ class StudentScheduleProvider with ChangeNotifier {
           endTimeDateTime: endDateTime,
           studentRequest: studentRequest,
           tutorReview: tutorReview,
+          showRecordUrl: showRecordUrl,
+          recordUrl: recordUrl,
         ));
       }
       print(scheduleList.length);
@@ -133,6 +137,8 @@ class StudentScheduleProvider with ChangeNotifier {
         var scheduleDetailId = scheduleList[i]['scheduleDetailId'];
         var studentRequest = scheduleList[i]['studentRequest'];
         var tutorReview = scheduleList[i]['tutorReview'];
+        var showRecordUrl = scheduleList[i]['showRecordUrl'];
+        var recordUrl = scheduleList[i]['recordUrl'];
         var scheduleDetailInfo = scheduleList[i]['scheduleDetailInfo'];
         var startDateTime = new DateTime.fromMillisecondsSinceEpoch(
             scheduleDetailInfo['startPeriodTimestamp']);
@@ -171,6 +177,8 @@ class StudentScheduleProvider with ChangeNotifier {
           endTimeDateTime: endDateTime,
           studentRequest: studentRequest,
           tutorReview: tutorReview,
+          showRecordUrl: showRecordUrl,
+          recordUrl: recordUrl,
         ));
       }
       print(scheduleList.length);
