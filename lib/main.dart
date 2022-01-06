@@ -6,6 +6,7 @@ import 'package:lettutor/providers/auth_provider.dart';
 import 'package:lettutor/providers/locale_provider.dart';
 import 'package:lettutor/providers/rating_provider.dart';
 import 'package:lettutor/providers/schedule_provider.dart';
+import 'package:lettutor/providers/student_schedule_provider.dart';
 import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/providers/tutor_schedule_provider.dart';
@@ -52,6 +53,11 @@ class _MyAppState extends State<MyApp> {
           create: (ctx) => TutorScheduleProvider(''), // init
           update: (ctx, auth, previousUser) =>
               TutorScheduleProvider(auth.token),
+        ),
+        ChangeNotifierProxyProvider<AuthProvider, StudentScheduleProvider>(
+          create: (ctx) => StudentScheduleProvider(''), // init
+          update: (ctx, auth, previousUser) =>
+              StudentScheduleProvider(auth.token),
         ),
         ChangeNotifierProvider.value(
           value: ScheduleProvider(),
