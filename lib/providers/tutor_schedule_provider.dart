@@ -67,6 +67,7 @@ class TutorScheduleProvider with ChangeNotifier {
           startTime: startTime,
           endTime: endTime,
           date: date,
+          startTimeDateTime: startDateTime,
           isBooked: isBooked,
         ));
       }

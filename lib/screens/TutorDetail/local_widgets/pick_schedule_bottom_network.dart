@@ -235,7 +235,9 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
             Provider.of<TutorScheduleProvider>(context, listen: false)
                 .listSchedule;
         listDateSchedule = listSchedule
-            .where((schedule) => schedule.date == selectedDateString)
+            .where((schedule) =>
+                schedule.date == selectedDateString &&
+                schedule.startTimeDateTime.difference(now).inHours > 2)
             .toList();
         listDateSchedule.sort(compareTutorSchedules);
       }),
