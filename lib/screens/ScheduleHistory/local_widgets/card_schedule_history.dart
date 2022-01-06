@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/models/schedule.dart';
-import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/providers/tutor_provider.dart';
+import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardScheduleHistory extends StatelessWidget {
@@ -14,12 +11,10 @@ class CardScheduleHistory extends StatelessWidget {
     @required this.schedule,
   }) : super(key: key);
 
-  final Schedule schedule;
+  final StudentSchedule schedule;
 
   @override
   Widget build(BuildContext context) {
-    final Tutor tutor =
-        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -42,14 +37,15 @@ class CardScheduleHistory extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
+                          DateFormat('EEE, MMM d, yyyy')
+                              .format(schedule.startTimeDateTime),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
                         ),
                         Text(
-                          dateDiff(schedule.date) +
+                          dateDiff(schedule.startTimeDateTime) +
                               " " +
                               AppLocalizations.of(context).days_ago,
                         ),
@@ -66,7 +62,7 @@ class CardScheduleHistory extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(tutor.avatar),
+                      backgroundImage: NetworkImage(schedule.tutorAvatar),
                     ),
                   ],
                 ),
@@ -76,13 +72,13 @@ class CardScheduleHistory extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tutor.name,
+                        schedule.tutorName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
-                      Text("Viet Nam"),
+                      Text(schedule.tutorCountry),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -126,7 +122,7 @@ class CardScheduleHistory extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context).lesson_time +
                             " " +
-                            getTimeShift(schedule.shift),
+                            getStringShiftFromShift(schedule),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -158,7 +154,8 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.requirement,
+                      schedule.studentRequest ??
+                          "Student does not have any request",
                     ),
                   ),
                 ),
@@ -196,23 +193,8 @@ class CardScheduleHistory extends StatelessWidget {
     );
   }
 
-  String getTimeShift(int shift) {
-    switch (shift) {
-      case 1:
-        return "08:00 - 09:30";
-      case 2:
-        return "09:30 - 11:00";
-      case 3:
-        return "13:30 - 15:00";
-      case 4:
-        return "15:00 - 16:30";
-      case 5:
-        return "20:00 - 21:30";
-      case 6:
-        return "21:30 - 23:00";
-      default:
-        return "21:30 - 23:00";
-    }
+  String getStringShiftFromShift(StudentSchedule schedule) {
+    return "${schedule.startTime} - ${schedule.endTime}";
   }
 
   String dateDiff(DateTime date) {
