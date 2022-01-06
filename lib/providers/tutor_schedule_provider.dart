@@ -53,6 +53,7 @@ class TutorScheduleProvider with ChangeNotifier {
         var startTime = DateFormat("HH:mm").format(startDateTime);
         var endTime = DateFormat("HH:mm").format(endDateTime);
         var date = DateFormat("dd/MM/yyyy").format(startDateTime);
+        var isBooked = scheduleList[i]['isBooked'];
         print("--------");
         print(id);
         print(scheduleDetailId);
@@ -66,6 +67,7 @@ class TutorScheduleProvider with ChangeNotifier {
           startTime: startTime,
           endTime: endTime,
           date: date,
+          isBooked: isBooked,
         ));
       }
       print(scheduleList.length);

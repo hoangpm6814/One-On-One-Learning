@@ -6,6 +6,7 @@ class TutorSchedule {
   final String startTime;
   final String endTime;
   final String date;
+  final bool isBooked;
   // final int shift;
   // final String requirement;
 
@@ -15,6 +16,7 @@ class TutorSchedule {
     @required this.startTime,
     @required this.endTime,
     @required this.date,
+    @required this.isBooked,
     // @required this.shift,
     // @required this.requirement,
   });

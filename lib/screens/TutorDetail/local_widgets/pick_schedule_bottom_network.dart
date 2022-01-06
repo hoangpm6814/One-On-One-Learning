@@ -262,30 +262,48 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
     final isSelected = selectedShift == getStringShiftFromShift(schedule);
     final foregroundColor = isSelected ? Colors.white : Colors.black;
     final backgroundColor = isSelected ? kPrimaryColor : Colors.white;
-    return GestureDetector(
-      onTap: () => setState(() {
-        selectedShift = getStringShiftFromShift(schedule);
-        selectedScheduleId = schedule.scheduleDetailId;
-        print(selectedScheduleId);
-      }),
-      child: Chip(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        shape: StadiumBorder(
-          side: BorderSide(
-            color: kPrimaryColor,
-          ),
-        ),
-        label: Text(
-          getStringShiftFromShift(schedule),
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: foregroundColor,
-          ),
-        ),
-        backgroundColor: backgroundColor,
-      ),
-    );
+    return schedule.isBooked
+        ? Chip(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            shape: StadiumBorder(
+              side: BorderSide(
+                color: kPrimaryButtonUnchosenColor,
+              ),
+            ),
+            label: Text(
+              getStringShiftFromShift(schedule),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: kPrimaryButtonUnchosenColor,
+              ),
+            ),
+            backgroundColor: Colors.white,
+          )
+        : GestureDetector(
+            onTap: () => setState(() {
+              selectedShift = getStringShiftFromShift(schedule);
+              selectedScheduleId = schedule.scheduleDetailId;
+              print(selectedScheduleId);
+            }),
+            child: Chip(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              shape: StadiumBorder(
+                side: BorderSide(
+                  color: kPrimaryColor,
+                ),
+              ),
+              label: Text(
+                getStringShiftFromShift(schedule),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: foregroundColor,
+                ),
+              ),
+              backgroundColor: backgroundColor,
+            ),
+          );
   }
 
   String getStringDateFromDateDiff(int datediff) {
@@ -294,6 +312,9 @@ class _PickScheduleBottomNetworkState extends State<PickScheduleBottomNetwork> {
   }
 
   String getStringShiftFromShift(TutorSchedule schedule) {
+    if (schedule.isBooked) {
+      return "  Reserved   ";
+    }
     return "${schedule.startTime} - ${schedule.endTime}";
     // switch (shift) {
     //   case 1:
