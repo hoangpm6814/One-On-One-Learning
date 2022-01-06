@@ -78,7 +78,7 @@ class ScheduleHistoryListScreenState extends State<ScheduleHistoryListScreen> {
                                     (MediaQuery.of(context).padding.top +
                                         MediaQuery.of(context).padding.bottom +
                                         kToolbarHeight)) *
-                                0.82,
+                                0.9,
                             child: ListView.builder(
                               itemBuilder: (ctx, index) {
                                 return CardScheduleHistory(

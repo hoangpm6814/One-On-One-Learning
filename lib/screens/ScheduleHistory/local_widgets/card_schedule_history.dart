@@ -45,9 +45,10 @@ class CardScheduleHistory extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          dateDiff(schedule.startTimeDateTime) +
-                              " " +
-                              AppLocalizations.of(context).days_ago,
+                          // dateDiff(schedule.startTimeDateTime) +
+                          //     " " +
+                          //     AppLocalizations.of(context).days_ago,
+                          getTimeDiff(schedule.endTimeDateTime),
                         ),
                       ],
                     ),
@@ -154,8 +155,7 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.studentRequest ??
-                          "Student does not have any request",
+                      schedule.studentRequest ?? "No request for lesson",
                     ),
                   ),
                 ),
@@ -181,7 +181,8 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      'Actually, your English is very well. There are just few aspects that you need to improve. Hope you are doing better next time.',
+                      schedule.tutorReview ?? "Tutor haven't reviewed yet",
+                      // "Tutor haven't reviewed yet",
                     ),
                   ),
                 ),
@@ -200,5 +201,18 @@ class CardScheduleHistory extends StatelessWidget {
   String dateDiff(DateTime date) {
     final DateTime now = DateTime.now();
     return now.difference(date).inDays.toString();
+  }
+
+  String getTimeDiff(DateTime time) {
+    if (DateTime.now().difference(time).inMinutes < 2) {
+      return "a few seconds ago";
+    } else if (DateTime.now().difference(time).inMinutes < 60) {
+      return "${DateTime.now().difference(time).inHours} mins ago";
+    } else if (DateTime.now().difference(time).inMinutes < 1440) {
+      return "${DateTime.now().difference(time).inHours} hours ago";
+    } else if (DateTime.now().difference(time).inMinutes > 1440) {
+      return "${DateTime.now().difference(time).inDays} days ago";
+    }
+    return "${DateTime.now().difference(time).inDays} days ago";
   }
 }

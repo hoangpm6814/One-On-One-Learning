@@ -51,6 +51,7 @@ class StudentScheduleProvider with ChangeNotifier {
         var id = scheduleList[i]['id'];
         var scheduleDetailId = scheduleList[i]['scheduleDetailId'];
         var studentRequest = scheduleList[i]['studentRequest'];
+        var tutorReview = scheduleList[i]['tutorReview'];
         var scheduleDetailInfo = scheduleList[i]['scheduleDetailInfo'];
         var startDateTime = new DateTime.fromMillisecondsSinceEpoch(
             scheduleDetailInfo['startPeriodTimestamp']);
@@ -64,6 +65,7 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorName = tutorInfo['name'];
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
+
         print("--------");
         print(id);
         print(scheduleDetailId);
@@ -85,7 +87,9 @@ class StudentScheduleProvider with ChangeNotifier {
           endTime: endTime,
           date: date,
           startTimeDateTime: startDateTime,
+          endTimeDateTime: endDateTime,
           studentRequest: studentRequest,
+          tutorReview: tutorReview,
         ));
       }
       print(scheduleList.length);
@@ -128,6 +132,7 @@ class StudentScheduleProvider with ChangeNotifier {
         var id = scheduleList[i]['id'];
         var scheduleDetailId = scheduleList[i]['scheduleDetailId'];
         var studentRequest = scheduleList[i]['studentRequest'];
+        var tutorReview = scheduleList[i]['tutorReview'];
         var scheduleDetailInfo = scheduleList[i]['scheduleDetailInfo'];
         var startDateTime = new DateTime.fromMillisecondsSinceEpoch(
             scheduleDetailInfo['startPeriodTimestamp']);
@@ -141,6 +146,7 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorName = tutorInfo['name'];
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
+
         print("--------");
         print(id);
         print(scheduleDetailId);
@@ -162,7 +168,9 @@ class StudentScheduleProvider with ChangeNotifier {
           endTime: endTime,
           date: date,
           startTimeDateTime: startDateTime,
+          endTimeDateTime: endDateTime,
           studentRequest: studentRequest,
+          tutorReview: tutorReview,
         ));
       }
       print(scheduleList.length);

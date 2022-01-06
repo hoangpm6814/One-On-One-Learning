@@ -10,9 +10,9 @@ class StudentSchedule {
   final String endTime;
   final String date;
   final DateTime startTimeDateTime;
+  final DateTime endTimeDateTime;
   final String studentRequest;
-  // final int shift;
-  // final String requirement;
+  final String tutorReview;
 
   StudentSchedule({
     @required this.id,
@@ -24,8 +24,8 @@ class StudentSchedule {
     @required this.endTime,
     @required this.date,
     @required this.startTimeDateTime,
+    @required this.endTimeDateTime,
     @required this.studentRequest,
-    // @required this.shift,
-    // @required this.requirement,
+    @required this.tutorReview,
   });
 }
