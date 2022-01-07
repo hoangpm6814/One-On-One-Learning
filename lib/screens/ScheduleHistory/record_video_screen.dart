@@ -22,7 +22,7 @@ class RecordVideoScreenState extends State<RecordVideoScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
-        title: Text(AppLocalizations.of(context).schedule_history),
+        title: Text(AppLocalizations.of(context).record_video),
       ),
       body: Container(
         color: Colors.black,

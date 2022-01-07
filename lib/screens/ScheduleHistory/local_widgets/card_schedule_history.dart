@@ -167,7 +167,7 @@ class CardScheduleHistory extends StatelessWidget {
                                 ),
                                 SizedBox(width: 3),
                                 Text(
-                                  "Record",
+                                  AppLocalizations.of(context).record,
                                 ),
                               ],
                             ),

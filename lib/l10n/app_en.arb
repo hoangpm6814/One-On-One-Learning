@@ -77,6 +77,8 @@
     "no_request_for_lesson": "No request for lesson.",
     "tutor_not_review_yet": "Tutor has not reviewed yet.",
     "tutor_judgement": "Tutor's judgement",
+    "record": "Record",
+    "record_video": "Record Video",
     "no_history_schedule": "Currently you do not have any booking history. Try booking your own schedule...",
     "switch_mode": "Switch Light / Dark Mode",
     "meeting_room": "Meeting room",
