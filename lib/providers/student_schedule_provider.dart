@@ -188,4 +188,44 @@ class StudentScheduleProvider with ChangeNotifier {
       throw (error);
     }
   }
+
+  Future<String> cancelBookingClass(String scheduleDetailId) async {
+    final url = Uri.parse('${base_url}/booking');
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${authToken}"
+    };
+    final List<String> data = [];
+    data.add(scheduleDetailId);
+    // print(data);
+    try {
+      final response = await http.delete(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'scheduleDetailIds': data,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+
+      if (response.statusCode >= 400) {
+        print("booking failed");
+        print(responseData['message']);
+        await fetchStudentSchedules();
+        return responseData['message'];
+      }
+
+      print("booking success");
+      _scheduleList.removeWhere(
+          (schedule) => schedule.scheduleDetailId == scheduleDetailId);
+      notifyListeners();
+      return responseData['message'];
+    } catch (error) {
+      // throw (error);
+      print("booking failed error");
+      return error;
+    }
+  }
 }

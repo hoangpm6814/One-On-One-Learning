@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
 import 'package:lettutor/models/student_schedule.dart';
-import 'package:lettutor/providers/schedule_provider.dart';
+import 'package:lettutor/providers/student_schedule_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +21,8 @@ class CardSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
     // final Tutor tutor =
     //     Provider.of<TutorProvider>(context).getById(schedule.tutorId);
+    final now = DateTime.now();
+    bool canDelete = schedule.startTimeDateTime.difference(now).inHours > 2;
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -54,43 +56,55 @@ class CardSchedule extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.cancel, color: Colors.red, size: 20.0),
-                        SizedBox(width: 5),
-                        Text(
-                          AppLocalizations.of(context).cancel,
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Provider.of<ScheduleProvider>(context, listen: false)
-                          .removeSchedule(schedule.id);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context).scaffoldBackgroundColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Colors.red,
-                            width: 1,
-                            style: BorderStyle.solid,
+                  canDelete
+                      ? ElevatedButton(
+                          child: Row(
+                            children: [
+                              Icon(Icons.cancel, color: Colors.red, size: 20.0),
+                              SizedBox(width: 5),
+                              Text(
+                                AppLocalizations.of(context).cancel,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
                           ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      textStyle: MaterialStateProperty.all(
-                        TextStyle(
-                          color: Colors.red,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                          onPressed: () async {
+                            // Provider.of<ScheduleProvider>(context, listen: false)
+                            //     .removeSchedule(schedule.id);
+                            String message = await Provider.of<
+                                        StudentScheduleProvider>(context,
+                                    listen: false)
+                                .cancelBookingClass(schedule.scheduleDetailId);
+                            var snackBar = SnackBar(
+                              content: Text(message),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Theme.of(context).scaffoldBackgroundColor),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.red,
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            textStyle: MaterialStateProperty.all(
+                              TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
