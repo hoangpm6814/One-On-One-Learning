@@ -60,7 +60,7 @@ class _BodyState extends State<Body> {
         ),
       );
     } on HttpException catch (error) {
-      var errorMessage = 'Authentication failed';
+      var errorMessage = 'Authentication failed. Incorrect email or password.';
       if (error.toString().contains('EMAIL_EXISTS')) {
         errorMessage = 'This email address is already in use.';
       } else if (error.toString().contains('INVALID_EMAIL')) {
@@ -74,8 +74,7 @@ class _BodyState extends State<Body> {
       }
       _showErrorDialog(errorMessage);
     } catch (error) {
-      const errorMessage =
-          'Could not authenticate you. Please try again later.';
+      const errorMessage = 'Incorrect email or password.';
       _showErrorDialog(errorMessage);
     }
 
@@ -92,7 +91,8 @@ class _BodyState extends State<Body> {
         content: Text(message),
         actions: <Widget>[
           ElevatedButton(
-            child: Text('Okay'),
+            child: Text('Cancel'),
+            style: ElevatedButton.styleFrom(primary: kPrimaryColor),
             onPressed: () {
               Navigator.of(ctx).pop();
             },

@@ -4,6 +4,7 @@ import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/ScheduleHistory/record_video_screen.dart';
 
 class CardScheduleHistory extends StatelessWidget {
   const CardScheduleHistory({
@@ -132,7 +133,49 @@ class CardScheduleHistory extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 15),
+                schedule.showRecordUrl
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => RecordVideoScreen(
+                                    url: schedule.recordUrl,
+                                  ),
+                                ),
+                              );
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  kPrimaryColor),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.video_library,
+                                  size: 20.0,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  "Record",
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                SizedBox(width: 10),
               ],
             ),
             SizedBox(height: 10),
