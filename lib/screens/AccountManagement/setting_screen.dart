@@ -121,8 +121,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             CircleAvatar(
                               radius: 30,
                               // maxRadius: 70,
-                              backgroundImage: NetworkImage(
-                                  "https://api.app.lettutor.com/avatar/86248137-6f7d-4cf5-ad2e-34da42722b28avatar1628058042246.jpg"),
+                              backgroundImage: NetworkImage(user.avatar),
                             ),
                           ],
                         ),
