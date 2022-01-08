@@ -161,4 +161,35 @@ class TutorProvider with ChangeNotifier {
       throw (error);
     }
   }
+
+  Future<String> reportTutor(String tutorId, String content) async {
+    final url = Uri.parse('${base_url}/report');
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${authToken}"
+    };
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'tutorId': tutorId,
+            'content': content,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+
+      if (response.statusCode >= 400) {
+        print("report failed");
+        return responseData['message'];
+      }
+
+      print("report success");
+      return responseData['message'];
+    } catch (error) {
+      throw error;
+    }
+  }
 }

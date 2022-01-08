@@ -179,7 +179,9 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialogReport();
+                          return AlertDialogReport(
+                            tutorId: tutor.userId,
+                          );
                         },
                       );
                     },
