@@ -51,8 +51,7 @@ dependencies:
   firebase_auth:
   firebase_core: 
   google_sign_in: ^5.0.3
-
-  open_file: ^3.2.1
+  open_file: ^3.2.1 # fix flutter_pdfview package issue
   
 
 

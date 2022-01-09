@@ -58,9 +58,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     user = Provider.of<UserProvider>(context).userInfo;
     _inputName = user.name;
     _inputPhone = user.phone;
-    _inputCountry = user.country;
+    _inputCountry = user.country ?? "Viet Nam";
     _inputLevel = user.level;
-    _inputBirthday = DateFormat("yyyy-MM-dd").parse(user.birthday);
+    _inputBirthday = user.birthday == null
+        ? DateTime.now()
+        : DateFormat("yyyy-MM-dd").parse(user.birthday);
     super.didChangeDependencies();
   }
 

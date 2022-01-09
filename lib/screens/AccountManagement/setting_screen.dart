@@ -106,7 +106,7 @@ class _SettingScreenState extends State<SettingScreen> {
       }
     }
 
-    return _isLoading
+    return _isLoading || user == null
         ? Center(
             child: CircularProgressIndicator(),
           )
