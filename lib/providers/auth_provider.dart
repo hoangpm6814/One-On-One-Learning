@@ -77,6 +77,51 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  Future<void> loginWithGoogle(String access_token) async {
+    final url = Uri.parse('${base_url}/auth/google');
+    Map<String, String> headers = {"Content-Type": "application/json"};
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'access_token': access_token,
+          },
+        ),
+      );
+      final responseData = json.decode(response.body);
+      if (responseData['message'] != null) {
+        throw HttpException(responseData['message']);
+      }
+      _token = responseData['tokens']['access']['token'];
+      _userId = responseData['user']['id'];
+      // _expiryDate = DateTime.now().add(
+      //   Duration(
+      //     seconds: int.parse(
+      //       responseData['expiresIn'],
+      //     ),
+      //   ),
+      _expiryDate = DateTime.parse(responseData['tokens']['access']['expires']);
+
+      print(_token);
+
+      _autoLogout();
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'userId': _userId,
+          'expiryDate': _expiryDate.toIso8601String(),
+        },
+      );
+      prefs.setString('userData', userData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   Future<void> signup(String email, String password) async {
     try {
       final url = Uri.parse('${base_url}/auth/register');

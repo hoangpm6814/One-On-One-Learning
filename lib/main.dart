@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor/data/data.dart';
 import 'package:lettutor/l10n/l10n.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/locale_provider.dart';
 import 'package:lettutor/providers/rating_provider.dart';
 import 'package:lettutor/providers/schedule_provider.dart';
@@ -21,8 +22,25 @@ import 'package:lettutor/screens/Tutor/tutor_list_screen.dart';
 import 'package:lettutor/screens/Welcome/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // Note: haven't initializeApp Firebase
+  // https://www.youtube.com/watch?v=1k-gITZA9CI
+  // final String name = 'foo';
+  // final FirebaseOptions options = const FirebaseOptions(
+  //   googleAppID: '1:825785584678:android:7354333a0c1cc0a9716ae7',
+  //   gcmSenderID: '825785584678',
+
+  //   // apiKey: 'AIzaSyBq6mcufFXfyqr79uELCiqM_O_1-G72PVU',
+  // );
+
+  // await FirebaseApp.configure(name: name, options: options);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({Key key}) : super(key: key);
@@ -44,6 +62,9 @@ class _MyAppState extends State<MyApp> {
           // create: (ctx) => TutorProvider('', []),
           update: (ctx, auth, previousTutor) => TutorProvider(
               auth.token, previousTutor == null ? [] : previousTutor.listTutor),
+        ),
+        ChangeNotifierProvider.value(
+          value: GoogleSignInProvider(),
         ),
         ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
           create: (ctx) => UserProvider(''), // init
