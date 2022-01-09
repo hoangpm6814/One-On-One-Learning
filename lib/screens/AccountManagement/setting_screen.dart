@@ -5,6 +5,7 @@ import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/facebook_signin_provider.dart';
 import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/providers/user_provider.dart';
@@ -105,6 +106,18 @@ class _SettingScreenState extends State<SettingScreen> {
         _showErrorDialog(errorMessage);
       }
     }
+
+    // Future<void> _logoutFacebook() async {
+    //   try {
+    //     // Log user in
+    //     await Provider.of<AuthProvider>(context, listen: false).logout();
+    //     await Provider.of<FacebookSignInProvider>(context, listen: false)
+    //         .logout();
+    //   } catch (error) {
+    //     const errorMessage = 'Could not logout. Please try again.';
+    //     _showErrorDialog(errorMessage);
+    //   }
+    // }
 
     return _isLoading || user == null
         ? Center(

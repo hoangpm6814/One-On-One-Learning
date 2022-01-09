@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor/data/data.dart';
 import 'package:lettutor/l10n/l10n.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/facebook_signin_provider.dart';
 import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/locale_provider.dart';
 import 'package:lettutor/providers/rating_provider.dart';
@@ -65,6 +66,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider.value(
           value: GoogleSignInProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: FacebookSignInProvider(),
         ),
         ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
           create: (ctx) => UserProvider(''), // init
