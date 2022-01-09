@@ -3,13 +3,13 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/models/http_exception.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/facebook_signin_provider.dart';
+import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/screens/Login/login_screen.dart';
 import 'package:lettutor/screens/Signup/local_widgets/or_divider.dart';
 import 'package:lettutor/screens/Signup/local_widgets/social_icon.dart';
 import 'package:lettutor/customWidgets/already_have_account_check.dart';
 import 'package:lettutor/customWidgets/rounded_button.dart';
-// import 'package:lettutor/customWidgets/rounded_input_field.dart';
-// import 'package:lettutor/customWidgets/rounded_password_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/screens/Tabs/tabs_screen.dart';
 import 'package:provider/provider.dart';
@@ -95,6 +95,68 @@ class _BodyState extends State<Body> {
     // setState(() {
     //   _isLoading = false;
     // });
+  }
+
+  Future<void> _submitGoogle(String access_token) async {
+    try {
+      // Log user in
+      await Provider.of<AuthProvider>(context, listen: false)
+          .loginWithGoogle(access_token);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TabsScreen(),
+        ),
+      );
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed. Email not valid.';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage = 'Email not valid.';
+      _showErrorDialog(errorMessage);
+    }
+  }
+
+  Future<void> _submitFacebook(String access_token) async {
+    try {
+      // Log user in
+      await Provider.of<AuthProvider>(context, listen: false)
+          .loginWithFacebook(access_token);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TabsScreen(),
+        ),
+      );
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed. Email not valid.';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage = 'Email not valid.';
+      _showErrorDialog(errorMessage);
+    }
   }
 
   void _showErrorDialog(String message) {
@@ -309,11 +371,23 @@ class _BodyState extends State<Body> {
                   children: <Widget>[
                     SocalIcon(
                       iconSrc: "assets/icons/facebook_icon.svg",
-                      press: () {},
+                      press: () async {
+                        String access_token =
+                            await Provider.of<FacebookSignInProvider>(context,
+                                    listen: false)
+                                .signInWithFacebook();
+                        await _submitFacebook(access_token);
+                      },
                     ),
                     SocalIcon(
                       iconSrc: "assets/icons/google_icon.svg",
-                      press: () {},
+                      press: () async {
+                        String access_token =
+                            await Provider.of<GoogleSignInProvider>(context,
+                                    listen: false)
+                                .googleLogin();
+                        await _submitGoogle(access_token);
+                      },
                     ),
                   ],
                 )

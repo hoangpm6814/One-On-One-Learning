@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "825785584678",
+    "project_id": "oneonone-f90bd",
+    "storage_bucket": "oneonone-f90bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825785584678:android:7354333a0c1cc0a9716ae7",
+        "android_client_info": {
+          "package_name": "com.lettutor.oneonone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825785584678-1d54ioe4jq7ss902tkl1pfupiec0bec8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTcZ0A096WVxCHa1DNZofbMGiQT_fU_vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825785584678-1d54ioe4jq7ss902tkl1pfupiec0bec8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/facebook_signin_provider.dart';
+import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/providers/user_provider.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
@@ -92,7 +95,31 @@ class _SettingScreenState extends State<SettingScreen> {
       // });
     }
 
-    return _isLoading
+    Future<void> _logoutGoogle() async {
+      try {
+        // Log user in
+        await Provider.of<AuthProvider>(context, listen: false).logout();
+        await Provider.of<GoogleSignInProvider>(context, listen: false)
+            .logout();
+      } catch (error) {
+        const errorMessage = 'Could not logout. Please try again.';
+        _showErrorDialog(errorMessage);
+      }
+    }
+
+    // Future<void> _logoutFacebook() async {
+    //   try {
+    //     // Log user in
+    //     await Provider.of<AuthProvider>(context, listen: false).logout();
+    //     await Provider.of<FacebookSignInProvider>(context, listen: false)
+    //         .logout();
+    //   } catch (error) {
+    //     const errorMessage = 'Could not logout. Please try again.';
+    //     _showErrorDialog(errorMessage);
+    //   }
+    // }
+
+    return _isLoading || user == null
         ? Center(
             child: CircularProgressIndicator(),
           )
@@ -121,7 +148,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             CircleAvatar(
                               radius: 30,
                               // maxRadius: 70,
-                              backgroundImage: NetworkImage(user.avatar),
+                              backgroundImage: NetworkImage(user.avatar ??
+                                  "https://api.app.lettutor.com/avatar/86248137-6f7d-4cf5-ad2e-34da42722b28avatar1628058042246.jpg"),
                             ),
                           ],
                         ),
@@ -303,14 +331,16 @@ class _SettingScreenState extends State<SettingScreen> {
                   Container(
                     width: double.infinity,
                     child: RoundedButtonSmallPadding(
-                      press: () {
+                      press: () async {
                         // Navigator.pushReplacement(
                         //   context,
                         //   MaterialPageRoute(
                         //     builder: (_) => WelcomeScreen(),
                         //   ),
                         // );
-                        _logout();
+                        FirebaseAuth.instance.currentUser == null
+                            ? await _logout()
+                            : await _logoutGoogle();
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
