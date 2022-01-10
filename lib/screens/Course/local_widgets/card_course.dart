@@ -17,7 +17,9 @@ class CardCourse extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => CourseDetailScreen(),
+            builder: (_) => CourseDetailScreen(
+              course: course,
+            ),
           ),
         );
       },
