@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor/data/data.dart';
 import 'package:lettutor/l10n/l10n.dart';
 import 'package:lettutor/providers/auth_provider.dart';
+import 'package:lettutor/providers/course_provider.dart';
 import 'package:lettutor/providers/facebook_signin_provider.dart';
 import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/locale_provider.dart';
@@ -29,17 +30,6 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // Note: haven't initializeApp Firebase
-  // https://www.youtube.com/watch?v=1k-gITZA9CI
-  // final String name = 'foo';
-  // final FirebaseOptions options = const FirebaseOptions(
-  //   googleAppID: '1:825785584678:android:7354333a0c1cc0a9716ae7',
-  //   gcmSenderID: '825785584678',
-
-  //   // apiKey: 'AIzaSyBq6mcufFXfyqr79uELCiqM_O_1-G72PVU',
-  // );
-
-  // await FirebaseApp.configure(name: name, options: options);
   runApp(const MyApp());
 }
 
@@ -84,6 +74,16 @@ class _MyAppState extends State<MyApp> {
           update: (ctx, auth, previousUser) =>
               StudentScheduleProvider(auth.token),
         ),
+        ChangeNotifierProxyProvider<AuthProvider, CourseProvider>(
+          create: (ctx) => CourseProvider(''), // init
+          update: (ctx, auth, previousUser) => CourseProvider(auth.token),
+        ),
+        // ChangeNotifierProxyProvider<AuthProvider, CourseProvider>(
+        //   create: (ctx) => CourseProvider('', []), // init
+        //   // create: (ctx) => TutorProvider('', []),
+        //   update: (ctx, auth, previousCourse) => CourseProvider(auth.token,
+        //       previousCourse == null ? [] : previousCourse.listCourse),
+        // ),
         ChangeNotifierProvider.value(
           value: ScheduleProvider(),
         ),

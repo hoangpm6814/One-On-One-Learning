@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_small_padding.dart';
-// import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +12,12 @@ class AlertDialogReport extends StatelessWidget {
   }) : super(key: key);
 
   final String tutorId;
-  final _form = GlobalKey<FormState>();
-  String content = '';
 
   @override
   Widget build(BuildContext context) {
+    final _form = GlobalKey<FormState>();
+    String content = '';
+
     return AlertDialog(
       scrollable: true,
       title: Text(AppLocalizations.of(context).report_this_tutor),

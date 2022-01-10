@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/models/course.dart';
 import 'package:lettutor/screens/CourseDetail/course_detail_screen.dart';
 
 class CardCourse extends StatelessWidget {
   const CardCourse({
     Key key,
-    @required this.avatar,
-    @required this.title,
-    @required this.description,
-    @required this.level,
+    @required this.course,
   }) : super(key: key);
 
-  final String avatar;
-  final String title;
-  final String description;
-  final String level;
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +42,7 @@ class CardCourse extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(avatar),
+                      image: NetworkImage(course.imageUrl),
                     ),
                   ),
                 ),
@@ -64,7 +59,7 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  title,
+                                  course.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -82,7 +77,7 @@ class CardCourse extends StatelessWidget {
                             child: Container(
                               width: 150,
                               child: Text(
-                                description,
+                                course.description,
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),
@@ -100,7 +95,7 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  level,
+                                  course.level,
                                   style: TextStyle(
                                     // fontWeight: FontWeight.w700,
                                     fontSize: 15,

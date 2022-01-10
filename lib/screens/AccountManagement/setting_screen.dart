@@ -5,13 +5,12 @@ import 'package:lettutor/customWidgets/change_theme_button_widget.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/customWidgets/rounded_setting_button.dart';
 import 'package:lettutor/providers/auth_provider.dart';
-import 'package:lettutor/providers/facebook_signin_provider.dart';
 import 'package:lettutor/providers/google_signin_provider.dart';
 import 'package:lettutor/providers/theme_provider.dart';
 import 'package:lettutor/providers/user_provider.dart';
 import 'package:lettutor/screens/AccountManagement/profile_screen.dart';
 import 'package:lettutor/screens/BecomeATutor/become_a_tutor_screen.dart';
-import 'package:lettutor/screens/Course/course_list_screen.dart';
+import 'package:lettutor/screens/Course/search_course_list_screen.dart';
 import 'package:lettutor/screens/ScheduleHistory/schedule_history_list_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/screens/Welcome/welcome_screen.dart';
@@ -231,7 +230,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => CourseListScreen(),
+                          builder: (_) => SearchCourseListScreen(),
                         ),
                       );
                     },
