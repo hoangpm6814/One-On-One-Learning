@@ -24,6 +24,7 @@ class CardCourse extends StatelessWidget {
         );
       },
       child: Container(
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
@@ -97,7 +98,7 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  course.level,
+                                  levelToString(int.parse(course.level)),
                                   style: TextStyle(
                                     // fontWeight: FontWeight.w700,
                                     fontSize: 15,
@@ -117,5 +118,20 @@ class CardCourse extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String levelToString(int level) {
+    if (level == 0) {
+      return "Any Level";
+    } else if (level == 1) {
+      return "Beginner";
+    } else if (level == 2) {
+      return "Post Beginner";
+    } else if (level == 3) {
+      return "Pre-Intermediate";
+    } else if (level == 4) {
+      return "Intermediate";
+    }
+    return "Super Advanced";
   }
 }

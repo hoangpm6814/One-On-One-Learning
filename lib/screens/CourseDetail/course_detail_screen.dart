@@ -115,7 +115,7 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      course.level,
+                      levelToString(int.parse(course.level)),
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -183,4 +183,19 @@ class CourseDetailScreen extends StatelessWidget {
   void openPDF(BuildContext context, File file) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => PDFViewerScreen(file: file)),
       );
+
+  String levelToString(int level) {
+    if (level == 0) {
+      return "Any Level";
+    } else if (level == 1) {
+      return "Beginner";
+    } else if (level == 2) {
+      return "Post Beginner";
+    } else if (level == 3) {
+      return "Pre-Intermediate";
+    } else if (level == 4) {
+      return "Intermediate";
+    }
+    return "Super Advanced";
+  }
 }

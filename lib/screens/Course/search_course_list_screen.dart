@@ -86,6 +86,9 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   buildSearch(),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   courses.isEmpty
                       ? Center(
                           child: Column(
@@ -106,7 +109,7 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
                       : Container(
                           height: (MediaQuery.of(context).size.height -
                                   MediaQuery.of(context).padding.top) *
-                              0.83,
+                              0.81,
                           child: ListView.builder(
                             itemBuilder: (ctx, index) {
                               return CardCourse(course: courses[index]);
