@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/providers/user_provider.dart';
+import 'package:lettutor/screens/Tutor/local_widgets/upcomming_lesson.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,9 @@ class _HeadingState extends State<Heading> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<UserProvider>(context).fetchUserTotalTime().then((_) {
+      Provider.of<UserProvider>(context, listen: false)
+          .fetchUserTotalTime()
+          .then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -40,9 +43,20 @@ class _HeadingState extends State<Heading> {
     super.didChangeDependencies();
   }
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     Provider.of<StudentScheduleProvider>(context, listen: false)
+  //         .fetchStudentSchedules();
+  //     Provider.of<UserProvider>(context, listen: false).fetchUserTotalTime();
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
-    var time = Provider.of<UserProvider>(context).totalTime;
+    final time = Provider.of<UserProvider>(context).totalTime;
+
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(),
@@ -60,21 +74,23 @@ class _HeadingState extends State<Heading> {
                 ),
               ),
               Text(
-                AppLocalizations.of(context).upcomming_lession,
+                AppLocalizations.of(context).upcomming_lesson,
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 15,
                   color: Theme.of(context).scaffoldBackgroundColor,
                 ),
               ),
-              Text(
-                "Wed, 24 Oct 6:30 - 6:55",
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 15,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-              ),
+              // Text(
+              //   // "Wed, 24 Oct 6:30 - 6:55",
+              //   earliestLessonToShow,
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.normal,
+              //     fontSize: 15,
+              //     color: Theme.of(context).scaffoldBackgroundColor,
+              //   ),
+              // ),
+              UpcommingLesson(),
               SizedBox(
                 height: 10,
               ),

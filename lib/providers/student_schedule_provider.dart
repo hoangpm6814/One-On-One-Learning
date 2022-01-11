@@ -13,11 +13,34 @@ class StudentScheduleProvider with ChangeNotifier {
   StudentScheduleProvider(this.authToken);
 
   List<StudentSchedule> get listSchedule {
-    return [..._scheduleList];
+    return _scheduleList;
   }
 
   List<StudentSchedule> get listScheduleHistory {
     return [..._scheduleListHistory];
+  }
+
+  StudentSchedule get earliestUpcommingLesson {
+    // get first one in schedule list (have been sorted by day by API)
+    return _scheduleList.firstWhere(
+      (element) => element.endTimeDateTime.isAfter(DateTime.now()),
+      orElse: () => StudentSchedule(
+        id: "id",
+        tutorName: "tutorName",
+        tutorAvatar: "tutorAvatar",
+        tutorCountry: "tutorCountry",
+        scheduleDetailId: "scheduleDetailId",
+        startTime: "08:00",
+        endTime: "08:25",
+        date: "date",
+        startTimeDateTime: DateTime.now(),
+        endTimeDateTime: DateTime.now(),
+        studentRequest: "studentRequest",
+        tutorReview: "tutorReview",
+        showRecordUrl: false,
+        recordUrl: "recordUrl",
+      ),
+    );
   }
 
   Future<void> fetchStudentSchedules() async {
@@ -68,17 +91,17 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
 
-        print("--------");
-        print(id);
-        print(scheduleDetailId);
-        print(tutorName);
-        print(tutorAvatar);
-        print(tutorCountry);
-        print(startTime);
-        print(endTime);
-        print(date);
-        print(studentRequest);
-        print("--------");
+        // print("--------");
+        // print(id);
+        // print(scheduleDetailId);
+        // print(tutorName);
+        // print(tutorAvatar);
+        // print(tutorCountry);
+        // print(startTime);
+        // print(endTime);
+        // print(date);
+        // print(studentRequest);
+        // print("--------");
         loadedSchedules.add(StudentSchedule(
           id: id,
           scheduleDetailId: scheduleDetailId,
@@ -153,17 +176,17 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
 
-        print("--------");
-        print(id);
-        print(scheduleDetailId);
-        print(tutorName);
-        print(tutorAvatar);
-        print(tutorCountry);
-        print(startTime);
-        print(endTime);
-        print(date);
-        print(studentRequest);
-        print("--------");
+        // print("--------");
+        // print(id);
+        // print(scheduleDetailId);
+        // print(tutorName);
+        // print(tutorAvatar);
+        // print(tutorCountry);
+        // print(startTime);
+        // print(endTime);
+        // print(date);
+        // print(studentRequest);
+        // print("--------");
         loadedSchedules.add(StudentSchedule(
           id: id,
           scheduleDetailId: scheduleDetailId,

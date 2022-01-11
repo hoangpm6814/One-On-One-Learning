@@ -5,9 +5,9 @@
     "tutors": "Tutors",
     "settings": "Settings",
     "go_to_class": "Go to class",
-    "lesson_time_spent": "Total lession time is {hours} hour(s) and {minutes} minute(s)",
+    "lesson_time_spent": "Total lesson time is {hours} hour(s) and {minutes} minute(s)",
     "@lesson_time_spent": {
-      "description": "Lession time spent",
+      "description": "Lesson time spent",
       "placeholders": {
          "hours": {
            "type": "String"
@@ -17,7 +17,7 @@
          }
       }
     },
-    "upcomming_lession": "Upcomming lession",
+    "upcomming_lesson": "Upcomming lesson",
     "become_a_tutor": "Become A Tutor",
     "course_for_you": "Course For You",
     "booking_history": "Booking History",

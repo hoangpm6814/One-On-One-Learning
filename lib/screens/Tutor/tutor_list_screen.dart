@@ -51,7 +51,7 @@ class _TutorListScreenState extends State<TutorListScreen> {
             //             MediaQuery.of(context).padding.bottom +
             //             kToolbarHeight)) *
             //     0.26,
-            height: 170,
+            height: 180,
             padding: const EdgeInsets.all(15.0),
             color: kPrimaryColor,
             child: Heading(),
