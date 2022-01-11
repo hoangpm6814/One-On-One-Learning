@@ -190,12 +190,16 @@ class CourseDetailScreen extends StatelessWidget {
     } else if (level == 1) {
       return "Beginner";
     } else if (level == 2) {
-      return "Post Beginner";
+      return "Higher Beginner";
     } else if (level == 3) {
-      return "Pre-Intermediate";
+      return "Pre Intermediate";
     } else if (level == 4) {
       return "Intermediate";
+    } else if (level == 5) {
+      return "Upper Intermediate";
+    } else if (level == 6) {
+      return "Advanced";
     }
-    return "Super Advanced";
+    return "Proficiency";
   }
 }
