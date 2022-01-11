@@ -5,7 +5,7 @@
     "tutors": "Tutors",
     "settings": "Settings",
     "go_to_class": "Go to class",
-    "lesson_time_spent": "Total lession time is {hours} hours and {minutes} minutes",
+    "lesson_time_spent": "Total lession time is {hours} hour(s) and {minutes} minute(s)",
     "@lesson_time_spent": {
       "description": "Lession time spent",
       "placeholders": {

@@ -15,7 +15,12 @@ class UserProvider with ChangeNotifier {
     return _user;
   }
 
+  int get totalTime {
+    return _totalTime;
+  }
+
   User _user;
+  int _totalTime;
 
   Future<void> fetchUserInfo() async {
     var url = Uri.parse('${base_url}/user/info');
@@ -99,6 +104,28 @@ class UserProvider with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       throw error;
+    }
+  }
+
+  Future<void> fetchUserTotalTime() async {
+    var url = Uri.parse('${base_url}/call/total');
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken}",
+      "Content-Type": "application/json"
+    };
+    try {
+      final response = await http.get(url, headers: headers);
+      final extractedData = json.decode(response.body);
+      if (extractedData == null) {
+        return 0;
+      }
+      var total = extractedData["total"];
+      print(total);
+
+      _totalTime = total;
+      notifyListeners();
+    } catch (error) {
+      throw (error);
     }
   }
 }
