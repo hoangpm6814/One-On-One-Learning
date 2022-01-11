@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor/models/course.dart';
 import 'package:lettutor/screens/CourseDetail/course_detail_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardCourse extends StatelessWidget {
   const CardCourse({
@@ -98,7 +99,8 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  levelToString(int.parse(course.level)),
+                                  levelToString(
+                                      int.parse(course.level), context),
                                   style: TextStyle(
                                     // fontWeight: FontWeight.w700,
                                     fontSize: 15,
@@ -120,22 +122,22 @@ class CardCourse extends StatelessWidget {
     );
   }
 
-  String levelToString(int level) {
+  String levelToString(int level, BuildContext context) {
     if (level == 0) {
-      return "Any Level";
+      return AppLocalizations.of(context).any_level;
     } else if (level == 1) {
-      return "Beginner";
+      return AppLocalizations.of(context).beginner;
     } else if (level == 2) {
-      return "Higher Beginner";
+      return AppLocalizations.of(context).higher_beginner;
     } else if (level == 3) {
-      return "Pre Intermediate";
+      return AppLocalizations.of(context).pre_intermediate;
     } else if (level == 4) {
-      return "Intermediate";
+      return AppLocalizations.of(context).intermediate;
     } else if (level == 5) {
-      return "Upper Intermediate";
+      return AppLocalizations.of(context).upper_intermediate;
     } else if (level == 6) {
-      return "Advanced";
+      return AppLocalizations.of(context).advanced;
     }
-    return "Proficiency";
+    return AppLocalizations.of(context).proficiency;
   }
 }

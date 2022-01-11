@@ -45,6 +45,7 @@
     "what_you_can_do": "Bạn có thể làm được gì",
     "search_message": "Tìm kiếm tin nhắn",
     "search_tutor": "Tìm kiếm giáo viên",
+    "search_course": "Tìm kiếm khóa học",
     "online": "Đang hoạt động",
     "write_message": "Viết tin nhắn...",
     "no_tutor_match": "Hiện không có giáo viên nào khớp yêu cầu của bạn",
@@ -117,5 +118,14 @@
     "one_on_one_app_upper": "ỨNG DỤNG HỌC MỘT KÈM MỘT",
     "forgot_password": "Quên mật khẩu?",
     "forgot_password_upper": "QUÊN MẬT KHẨU",
-    "send": "Gửi"
+    "send": "Gửi",
+    "any_level": "Bất cứ trình độ nào",
+    "beginner": "Mới bắt đầu",
+    "higher_beginner": "Sau mới bắt đầu",
+    "pre_intermediate": "Trước trung cấp",
+    "intermediate": "Trung cấp",
+    "upper_intermediate": "Trên trung cấp",
+    "advanced": "Nâng cao",
+    "proficiency": "Thông thạo",
+    "topics": "Chủ đề"
 }

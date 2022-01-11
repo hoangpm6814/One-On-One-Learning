@@ -115,7 +115,7 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      levelToString(int.parse(course.level)),
+                      levelToString(int.parse(course.level), context),
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -133,7 +133,9 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      course.topics.length.toString() + " " + "Topics",
+                      course.topics.length.toString() +
+                          " " +
+                          AppLocalizations.of(context).topics,
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -184,22 +186,22 @@ class CourseDetailScreen extends StatelessWidget {
         MaterialPageRoute(builder: (context) => PDFViewerScreen(file: file)),
       );
 
-  String levelToString(int level) {
+  String levelToString(int level, BuildContext context) {
     if (level == 0) {
-      return "Any Level";
+      return AppLocalizations.of(context).any_level;
     } else if (level == 1) {
-      return "Beginner";
+      return AppLocalizations.of(context).beginner;
     } else if (level == 2) {
-      return "Higher Beginner";
+      return AppLocalizations.of(context).higher_beginner;
     } else if (level == 3) {
-      return "Pre Intermediate";
+      return AppLocalizations.of(context).pre_intermediate;
     } else if (level == 4) {
-      return "Intermediate";
+      return AppLocalizations.of(context).intermediate;
     } else if (level == 5) {
-      return "Upper Intermediate";
+      return AppLocalizations.of(context).upper_intermediate;
     } else if (level == 6) {
-      return "Advanced";
+      return AppLocalizations.of(context).advanced;
     }
-    return "Proficiency";
+    return AppLocalizations.of(context).proficiency;
   }
 }

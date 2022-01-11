@@ -22,7 +22,7 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: AppLocalizations.of(context).search_tutor,
+        hintText: AppLocalizations.of(context).search_course,
         onChanged: searchCourse,
       );
 
