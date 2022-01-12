@@ -60,6 +60,7 @@
     "online": "Online",
     "write_message": "Write message...",
     "no_tutor_match": "Currently there is no tutor matching your search.",
+    "no_course_match": "Currently there is no course matching your search.",
     "your_booked_schedules": "Your booked schedules:",
     "lesson": "lesson",
     "chat": "Chat",

@@ -97,7 +97,7 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
                                 height: 30,
                               ),
                               Text(
-                                "No courses match...",
+                                AppLocalizations.of(context).no_course_match,
                                 style: TextStyle(
                                   color: kPrimaryColor,
                                   fontWeight: FontWeight.bold,
