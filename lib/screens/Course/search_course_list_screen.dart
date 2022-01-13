@@ -16,6 +16,11 @@ class SearchCourseListScreen extends StatefulWidget {
 }
 
 class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
+  var _isInit = true;
+  var _isLoading = false;
+  int _page = 1;
+  ScrollController _scrollController = new ScrollController();
+
   String query = '';
   List<Course> courses;
   List<Course> allCourses;
@@ -40,12 +45,17 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
     });
   }
 
-  var _isInit = true;
-  var _isLoading = false;
-
   @override
   void initState() {
     super.initState();
+
+    var courseProvider = Provider.of<CourseProvider>(context, listen: false);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        courseProvider.fetchCoursesPage(++_page);
+      }
+    });
   }
 
   @override
@@ -54,7 +64,7 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<CourseProvider>(context).fetchCourses().then((_) {
+      Provider.of<CourseProvider>(context).fetchCoursesPage(1).then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -69,7 +79,18 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final courseProvider = Provider.of<CourseProvider>(context);
+    final courseLength = courseProvider.listCourse.length;
+    print("courseLength: " + courseLength.toString());
+    final totalRecords = courseProvider.totalRecords;
+    print("totalRecords: " + totalRecords.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -110,11 +131,21 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
                           height: (MediaQuery.of(context).size.height -
                                   MediaQuery.of(context).padding.top) *
                               0.81,
-                          child: ListView.builder(
-                            itemBuilder: (ctx, index) {
-                              return CardCourse(course: courses[index]);
-                            },
-                            itemCount: courses.length,
+                          // child: ListView.builder(
+                          //   itemBuilder: (ctx, index) {
+                          //     return CardCourse(course: courses[index]);
+                          //   },
+                          //   itemCount: courses.length,
+                          // ),
+                          child: ListView(
+                            controller: _scrollController,
+                            children: [
+                              ...courses.map(
+                                (course) => CardCourse(course: course),
+                              ),
+                              if (courseLength < totalRecords)
+                                Center(child: CircularProgressIndicator()),
+                            ],
                           ),
                         ),
                 ],

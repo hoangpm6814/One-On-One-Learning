@@ -19,9 +19,17 @@ class CourseProvider with ChangeNotifier {
   }
 
   List<Course> _courseList = [];
+  int totalPages = 1;
+  int pageSize = 4;
+  int _totalRecords = 0;
 
-  Future<void> fetchCourses() async {
-    var url = Uri.parse('${base_url}/course?page=1&size=100');
+  double get totalRecords => _totalRecords.toDouble();
+
+  Future<List<Course>> fetchCourses(int pageNumber) async {
+    // int _pageNumber = pageNumber;
+    var url =
+        Uri.parse('${base_url}/course?page=${pageNumber}&size=${pageSize}');
+    print(url);
     Map<String, String> headers = {
       "Authorization": "Bearer ${authToken}",
       "Content-Type": "application/x-www-form-urlencoded",
@@ -31,11 +39,12 @@ class CourseProvider with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
       if (extractedData == null) {
-        return;
+        return [];
       }
 
       var courses = extractedData["data"];
       var rows = courses["rows"];
+      _totalRecords = courses['count'];
       var courseList = List.from(rows);
 
       final List<Course> loadedCourses = [];
@@ -73,10 +82,42 @@ class CourseProvider with ChangeNotifier {
         loadedCourses[i].topics = loadedTopics;
       }
 
-      _courseList = loadedCourses;
-      notifyListeners();
+      // _courseList = loadedCourses;
+      // notifyListeners();
+      return loadedCourses;
     } catch (error) {
       throw (error);
+    }
+  }
+
+  Future<void> fetchCoursesPage(int pageNumber) async {
+    if (pageNumber <= totalPages) {
+      var loadedSchedules = await fetchCourses(pageNumber);
+      if (_courseList.length == 0) {
+        totalPages = countTotalPage(totalRecords, pageSize);
+        print("totalPages: " + totalPages.toString());
+        _courseList = loadedSchedules;
+      } else {
+        if (pageNumber == 1 && _totalRecords > 0) {
+          _courseList.clear();
+        }
+        _courseList.addAll(loadedSchedules);
+      }
+      print("_courseList: " + _courseList.length.toString());
+      notifyListeners();
+    }
+
+    if (pageNumber > totalPages) {
+      notifyListeners();
+    }
+  }
+
+  int countTotalPage(double totalRecords, int pageSize) {
+    if (totalRecords % pageSize == 0) {
+      return totalRecords ~/ pageSize;
+    } else {
+      int whole = totalRecords ~/ pageSize;
+      return whole + 1;
     }
   }
 }
