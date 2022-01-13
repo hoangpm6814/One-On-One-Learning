@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/providers/student_schedule_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +41,7 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
         _isLoading = true;
       });
       Provider.of<StudentScheduleProvider>(context, listen: false)
-          .fetchStudentSchedules()
+          .fetchStudentSchedules(1)
           .whenComplete(() {
         setState(() {
           _isLoading = false;

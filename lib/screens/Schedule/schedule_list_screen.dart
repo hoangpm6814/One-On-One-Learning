@@ -18,21 +18,31 @@ class ScheduleListScreen extends StatefulWidget {
 class ScheduleListScreenState extends State<ScheduleListScreen> {
   var _isInit = true;
   var _isLoading = false;
+  int _page = 1;
+  ScrollController _scrollController = new ScrollController();
 
   @override
   void initState() {
     super.initState();
+
+    var scheduleProvider =
+        Provider.of<StudentScheduleProvider>(context, listen: false);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        scheduleProvider.fetchSchedules(++_page);
+      }
+    });
   }
 
   @override
   void didChangeDependencies() {
+    print(_isInit);
     if (_isInit) {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<StudentScheduleProvider>(context)
-          .fetchStudentSchedules()
-          .then((_) {
+      Provider.of<StudentScheduleProvider>(context).fetchSchedules(1).then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -43,9 +53,20 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final schedules =
-        Provider.of<StudentScheduleProvider>(context).listSchedule;
+    final scheduleProvider = Provider.of<StudentScheduleProvider>(context);
+    final schedules = scheduleProvider.listSchedule;
+    final scheduleLength = scheduleProvider.listSchedule.length;
+    print("scheduleLength: " + scheduleLength.toString());
+    final totalRecords = scheduleProvider.totalRecords;
+    print("totalRecords: " + totalRecords.toString());
+    print("schedules: " + schedules.length.toString());
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(),
@@ -77,14 +98,35 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
                                       MediaQuery.of(context).padding.bottom +
                                       kToolbarHeight)) *
                               0.78,
-                          child: ListView.builder(
-                            itemBuilder: (ctx, index) {
-                              return CardSchedule(
-                                key: Key(schedules[index].id),
-                                schedule: schedules[index],
-                              );
-                            },
-                            itemCount: schedules.length,
+                          // child: ListView.builder(
+                          //   controller: _scrollController,
+                          //   // shrinkWrap: true,
+                          //   // physics: const AlwaysScrollableScrollPhysics(),
+                          //   itemBuilder: (ctx, index) {
+                          //     if ((index == scheduleLength - 1) &&
+                          //         scheduleLength < totalRecords) {
+                          //       return Center(
+                          //           child: CircularProgressIndicator());
+                          //     }
+                          //     return CardSchedule(
+                          //       key: Key(schedules[index].id),
+                          //       schedule: schedules[index],
+                          //     );
+                          //   },
+                          //   itemCount: schedules.length,
+                          // ),
+                          child: ListView(
+                            controller: _scrollController,
+                            children: [
+                              ...schedules.map(
+                                (schedule) => CardSchedule(
+                                  key: Key(schedule.id),
+                                  schedule: schedule,
+                                ),
+                              ),
+                              if (scheduleLength < totalRecords)
+                                Center(child: CircularProgressIndicator()),
+                            ],
                           ),
                         )
                       : Container(
@@ -105,15 +147,6 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
                             ],
                           ),
                         ),
-                  // CardSchedule(
-                  //   schedule: schedules[0],
-                  // ),
-                  // CardSchedule(
-                  //   schedule: schedules[1],
-                  // ),
-                  // CardSchedule(
-                  //   schedule: schedules[2],
-                  // ),
                 ],
               ),
             ),

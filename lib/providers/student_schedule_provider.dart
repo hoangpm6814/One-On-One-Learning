@@ -9,6 +9,11 @@ class StudentScheduleProvider with ChangeNotifier {
   final String authToken;
   List<StudentSchedule> _scheduleList = [];
   List<StudentSchedule> _scheduleListHistory = [];
+  int totalPages = 1;
+  int pageSize = 4;
+  int _totalRecords = 0;
+
+  double get totalRecords => _totalRecords.toDouble();
 
   StudentScheduleProvider(this.authToken);
 
@@ -43,13 +48,16 @@ class StudentScheduleProvider with ChangeNotifier {
     );
   }
 
-  Future<void> fetchStudentSchedules() async {
+  Future<List<StudentSchedule>> fetchStudentSchedules(int pageNumber) async {
     DateTime fiveMinutesAgoFromNow =
         DateTime.now().subtract(const Duration(minutes: 5)); //DateTime
     String timestamp = fiveMinutesAgoFromNow.millisecondsSinceEpoch.toString();
     // print("timestamp: " + timestamp);
+    int _pageNumber = pageNumber;
+    // int _pageSize = pageSize;
     var url = Uri.parse(
-        '${base_url}/booking/list/student?page=1&perPage=20&dateTimeGte=${timestamp}&orderBy=meeting&sortBy=asc');
+        '${base_url}/booking/list/student?page=${_pageNumber}&perPage=${pageSize}&dateTimeGte=${timestamp}&orderBy=meeting&sortBy=asc');
+    print(url);
     Map<String, String> headers = {
       "Authorization": "Bearer ${authToken}",
       "Content-Type": "application/json"
@@ -61,11 +69,12 @@ class StudentScheduleProvider with ChangeNotifier {
       );
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData == null) {
-        return;
+        return [];
       }
 
       var data = extractedData["data"];
       var rows = data['rows'];
+      _totalRecords = data['count'];
       var scheduleList = List.from(rows);
 
       final List<StudentSchedule> loadedSchedules = [];
@@ -91,17 +100,6 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
 
-        // print("--------");
-        // print(id);
-        // print(scheduleDetailId);
-        // print(tutorName);
-        // print(tutorAvatar);
-        // print(tutorCountry);
-        // print(startTime);
-        // print(endTime);
-        // print(date);
-        // print(studentRequest);
-        // print("--------");
         loadedSchedules.add(StudentSchedule(
           id: id,
           scheduleDetailId: scheduleDetailId,
@@ -120,10 +118,41 @@ class StudentScheduleProvider with ChangeNotifier {
         ));
       }
       print(scheduleList.length);
-      _scheduleList = loadedSchedules;
-      notifyListeners();
+      return loadedSchedules;
+      // notifyListeners();
     } catch (error) {
       throw (error);
+    }
+  }
+
+  Future<void> fetchSchedules(int pageNumber) async {
+    if (pageNumber <= totalPages) {
+      var loadedSchedules = await fetchStudentSchedules(pageNumber);
+      if (_scheduleList.length == 0) {
+        totalPages = countTotalPage(totalRecords, pageSize);
+        print("totalPages: " + totalPages.toString());
+        _scheduleList = loadedSchedules;
+      } else {
+        if (pageNumber == 1 && _totalRecords > 0) {
+          _scheduleList.clear();
+        }
+        _scheduleList.addAll(loadedSchedules);
+      }
+      print("_scheduleList" + _scheduleList.length.toString());
+      notifyListeners();
+    }
+
+    if (pageNumber > totalPages) {
+      notifyListeners();
+    }
+  }
+
+  int countTotalPage(double totalRecords, int pageSize) {
+    if (totalRecords % pageSize == 0) {
+      return totalRecords ~/ pageSize;
+    } else {
+      int whole = totalRecords ~/ pageSize;
+      return whole + 1;
     }
   }
 
@@ -236,7 +265,7 @@ class StudentScheduleProvider with ChangeNotifier {
       if (response.statusCode >= 400) {
         print("booking failed");
         print(responseData['message']);
-        await fetchStudentSchedules();
+        // await fetchStudentSchedules();
         return responseData['message'];
       }
 
