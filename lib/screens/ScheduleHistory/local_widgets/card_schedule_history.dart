@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
 import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/screens/ScheduleHistory/record_video_screen.dart';
+import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 
 class CardScheduleHistory extends StatelessWidget {
   const CardScheduleHistory({
@@ -233,6 +235,27 @@ class CardScheduleHistory extends StatelessWidget {
                 ),
               ],
             ),
+            // used for test ongoing and history schedule timer up
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     LightRoundedButtonMediumPadding(
+            //       press: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (_) => VideoConferenceScreen(
+            //               schedule: schedule,
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //       color: kPrimaryColor,
+            //       textColor: Theme.of(context).scaffoldBackgroundColor,
+            //       text: AppLocalizations.of(context).enter_lesson,
+            //     ),
+            //   ],
+            // ),
             // schedule.showRecordUrl
             //     ? Row(
             //         children: [

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lettutor/constants.dart';
+import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/providers/student_schedule_provider.dart';
+import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpcommingLesson extends StatefulWidget {
   UpcommingLesson({Key key}) : super(key: key);
@@ -41,7 +45,7 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
         _isLoading = true;
       });
       Provider.of<StudentScheduleProvider>(context, listen: false)
-          .fetchStudentSchedules(1)
+          .fetchSchedules(1)
           .whenComplete(() {
         setState(() {
           _isLoading = false;
@@ -93,14 +97,36 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : Text(
-            // "Wed, 24 Oct 6:30 - 6:55",
-            earliestLessonToShow,
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 15,
-              color: Theme.of(context).scaffoldBackgroundColor,
-            ),
+        : Column(
+            children: [
+              Text(
+                // "Wed, 24 Oct 6:30 - 6:55",
+                earliestLessonToShow,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              RoundedButtonSmallPadding(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                textColor: kPrimaryColor,
+                text: AppLocalizations.of(context).go_to_class,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => VideoConferenceScreen(
+                        schedule: firstLesson,
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
           );
   }
 }

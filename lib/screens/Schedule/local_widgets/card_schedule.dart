@@ -235,7 +235,9 @@ class CardSchedule extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => VideoConferenceScreen(),
+                        builder: (_) => VideoConferenceScreen(
+                          schedule: schedule,
+                        ),
                       ),
                     );
                   },
