@@ -27,11 +27,12 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
       ),
       backgroundColor: Colors.black,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 50,
-            margin: EdgeInsets.symmetric(vertical: 40),
-            padding: const EdgeInsets.all(10.0),
+            // margin: EdgeInsets.symmetric(vertical: 40),
+            // padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -94,6 +95,15 @@ class _VideoConferenceScreenState extends State<VideoConferenceScreen> {
                 ),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/icons/app_logo_oneonone.png",
+                height: 90,
+              ),
+            ],
           ),
         ],
       ),
