@@ -59,41 +59,49 @@ class CardTutor extends StatelessWidget {
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      tutor.name,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              tutor.name,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            RatingStar(
+                              rating: tutor.rating,
+                            ),
+                          ],
+                        ),
+                        // SizedBox(
+                        //   width: 15,
+                        // ),
+                        Column(
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(tutor.isFavourite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined),
+                              color: Theme.of(context).errorColor,
+                              onPressed: () => {
+                                Provider.of<TutorProvider>(context,
+                                        listen: false)
+                                    .toggleIsFavourite(tutor.userId),
+                              },
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                    RatingStar(
-                      rating: tutor.rating,
-                    ),
-                    // Container(
-                    //   height: 30,
-                    //   child: ListView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     children: <Widget>[
-                    //       SpecialityButtonClickable(
-                    //         text: "English for kids",
-                    //         isChosen: true,
-                    //       ),
-                    //       SizedBox(width: 5),
-                    //       SpecialityButtonClickable(
-                    //         text: "English for Business",
-                    //       ),
-                    //       SizedBox(width: 5),
-                    //       SpecialityButtonClickable(
-                    //         text: "Conversational",
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Wrap(
                       children: [
                         for (var item in tutorSpecialties)
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                            padding: EdgeInsets.fromLTRB(0, 0, 3, 0),
                             child: SpecialityButtonClickable(
                               text: item,
                               isChosen: true,
@@ -103,23 +111,6 @@ class CardTutor extends StatelessWidget {
                     ),
                   ],
                 )),
-                SizedBox(
-                  width: 15,
-                ),
-                Column(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(tutor.isFavourite
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined),
-                      color: Theme.of(context).errorColor,
-                      onPressed: () => {
-                        Provider.of<TutorProvider>(context, listen: false)
-                            .toggleIsFavourite(tutor.userId),
-                      },
-                    ),
-                  ],
-                )
               ],
             ),
             Row(
