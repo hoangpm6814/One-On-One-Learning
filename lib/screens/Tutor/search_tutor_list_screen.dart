@@ -81,9 +81,10 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                             .then((value) {
                           print("go to then");
                           print("tutor: " + tutors.length.toString());
-                          tutors =
+                          allTutors =
                               Provider.of<TutorProvider>(context, listen: false)
                                   .listSearchTutor;
+                          tutors = allTutors;
                           print("tutor: " + tutors.length.toString());
                           print("go to then 2");
                         });
@@ -108,7 +109,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
       );
 
   void searchTutor(String query) {
-    final searchTutors = tutors.where((todo) {
+    final searchTutors = allTutors.where((todo) {
       final nameLower = todo.name.toLowerCase();
       final nationLower = todo.country.toLowerCase();
       final searchLower = query.toLowerCase();
