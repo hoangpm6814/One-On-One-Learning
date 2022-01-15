@@ -69,9 +69,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _pickUserDate() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: _inputBirthday,
       firstDate: DateTime(1900),
-      lastDate: DateTime(2022),
+      lastDate: DateTime(DateTime.now().year + 1),
+      // initialEntryMode: DatePickerEntryMode.input,
     ).then((date) {
       if (date == null) {
         return;

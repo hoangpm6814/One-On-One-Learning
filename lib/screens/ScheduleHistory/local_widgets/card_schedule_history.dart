@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
 import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/screens/ScheduleHistory/record_video_screen.dart';
-import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 
 class CardScheduleHistory extends StatelessWidget {
   const CardScheduleHistory({
