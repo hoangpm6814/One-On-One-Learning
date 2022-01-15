@@ -6,7 +6,7 @@ import 'package:lettutor/data/data.dart';
 import 'package:lettutor/models/filter_chip.data.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
-import 'package:lettutor/screens/Tutor/local_widgets/card_tutor.dart';
+import 'package:lettutor/screens/Tutor/local_widgets/search_card_tutor.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,6 +18,7 @@ class SearchTutorListScreen extends StatefulWidget {
 }
 
 class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
+  var _isInit = true;
   String query = '';
   List<Tutor> tutors;
   List<Tutor> allTutors;
@@ -56,14 +57,32 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                         final filterValues = filterChips
                             .where((element) => element.isSelected == true)
                             .toList();
-                        // print(filterValues.length);
-                        tutors = allTutors
-                            .where((element) => filterValues.every((item) =>
-                                element.specialties
-                                    .toLowerCase()
-                                    .contains(item.label.toLowerCase())))
-                            .toList(); // tutor that has specialties contains all filter value
+                        // // print(filterValues.length);
+                        // tutors = allTutors
+                        //     .where((element) => filterValues.every((item) =>
+                        //         element.specialties
+                        //             .toLowerCase()
+                        //             .contains(item.label.toLowerCase())))
+                        //     .toList(); // tutor that has specialties contains all filter value
 
+                        final List<String> specialties = [];
+                        for (int i = 0; i < filterValues.length; i++) {
+                          print(filterValues[i].label.toLowerCase());
+                          specialties.add(filterValues[i].label.toLowerCase());
+                        }
+                        print("specialties length: " +
+                            specialties.length.toString());
+                        Provider.of<TutorProvider>(context, listen: false)
+                            .fetchSearchTutors(specialties)
+                            .then((value) {
+                          print("go to then");
+                          print("tutor: " + tutors.length.toString());
+                          tutors =
+                              Provider.of<TutorProvider>(context, listen: false)
+                                  .listSearchTutor;
+                          print("tutor: " + tutors.length.toString());
+                          print("go to then 2");
+                        });
                         // print("tutor: " + tutors.length.toString());
                       }),
                       selected: filterChip.isSelected,
@@ -102,8 +121,14 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
 
   @override
   void didChangeDependencies() {
-    allTutors = Provider.of<TutorProvider>(context).listTutor;
-    tutors = allTutors;
+    print("go to didChangeDependencies");
+    if (_isInit) {
+      allTutors = Provider.of<TutorProvider>(context).listTutor;
+      tutors = allTutors;
+    }
+    _isInit = false;
+    // allTutors = Provider.of<TutorProvider>(context).listTutor;
+    // tutors = allTutors;
     super.didChangeDependencies();
   }
 
@@ -140,7 +165,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                       0.67,
                   child: ListView.builder(
                     itemBuilder: (ctx, index) {
-                      return CardTutor(tutor: tutors[index]);
+                      return SearchCardTutor(tutor: tutors[index]);
                     },
                     itemCount: tutors.length,
                   ),

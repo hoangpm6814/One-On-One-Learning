@@ -10,6 +10,10 @@ class TutorProvider with ChangeNotifier {
 
   TutorProvider(this.authToken, this._tutorList);
 
+  // List<Tutor> _tutorList = DUMMY_TUTORS;
+  List<Tutor> _tutorList = [];
+  List<Tutor> _tutorSearchList = [];
+
   List<Tutor> get listTutor {
     // sort by rating
     // _tutorList.sort((a, b) => b.rating.compareTo(a.rating));
@@ -18,6 +22,11 @@ class TutorProvider with ChangeNotifier {
     _tutorList.sort(compareTutors);
     return _tutorList;
     // return [..._tutorList];
+  }
+
+  List<Tutor> get listSearchTutor {
+    _tutorSearchList.sort(compareTutors);
+    return _tutorSearchList;
   }
 
   int compareTutors(Tutor tutor1, Tutor tutor2) {
@@ -70,9 +79,6 @@ class TutorProvider with ChangeNotifier {
   Tutor getById(String id) {
     return _tutorList.firstWhere((tutor) => tutor.id == id);
   }
-
-  // List<Tutor> _tutorList = DUMMY_TUTORS;
-  List<Tutor> _tutorList = [];
 
   Future<void> fetchTutors([bool filterByUser = false]) async {
     var url = Uri.parse('${base_url}/tutor/more?perPage=9&page=1');
@@ -158,6 +164,106 @@ class TutorProvider with ChangeNotifier {
       // _tutorList.addAll(loadedTutors);
       notifyListeners();
     } catch (error) {
+      throw (error);
+    }
+  }
+
+  Future<void> fetchSearchTutors(List<String> specialties) async {
+    var url = Uri.parse('${base_url}/tutor/search');
+    Map<String, String> headers = {
+      "Authorization": "Bearer ${authToken}",
+      "Content-Type": "application/json",
+    };
+    // List<String> data = [];
+    // // data.add(scheduleDetailId);
+    // data = specialties;
+    for (int i = 0; i < specialties.length; i++) {
+      print("specialties in provider: " + specialties[i]);
+    }
+    // var filters = json.encode(
+    //   {
+    //     'specialties': specialties,
+    //   },
+    // );
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: json.encode(
+          {
+            'filters': {
+              'specialties': specialties,
+            },
+            'page': 1,
+            'perPage': 12,
+          },
+        ),
+      );
+
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
+
+      var rows = extractedData["rows"];
+      var tutorList = List.from(rows);
+
+      final List<Tutor> loadedTutors = [];
+
+      for (int i = 0; i < tutorList.length; i++) {
+        var feedbacks = tutorList[i]['feedbacks'];
+        var feedbackList = List.from(feedbacks);
+        final List<Review> loadedFeedbacks = [];
+        double rating = 0;
+        for (int j = 0; j < feedbackList.length; j++) {
+          print(feedbackList[j]['firstId']);
+          loadedFeedbacks.add(Review(
+            id: feedbackList[j]['id'],
+            firstId: feedbackList[j]['firstId'],
+            secondId: feedbackList[j]['secondId'],
+            rating: feedbackList[j]['rating'],
+            content: feedbackList[j]['content'],
+            createdAt: feedbackList[j]['createdAt'],
+            updatedAt: feedbackList[j]['updatedAt'],
+            avatar: feedbackList[j]['firstInfo']['avatar'],
+            name: feedbackList[j]['firstInfo']['name'],
+          ));
+          rating += feedbackList[j]['rating'];
+        }
+        if (feedbackList.length != 0) {
+          rating = rating / feedbackList.length;
+        }
+        // print(rating);
+        loadedTutors.add(Tutor(
+          id: tutorList[i]['id'],
+          userId: tutorList[i]['userId'],
+          name: tutorList[i]['name'],
+          rating: rating == 0 ? 4 : rating,
+          avatar: tutorList[i]['avatar'],
+          bio: tutorList[i]['bio'],
+          country: tutorList[i]['country'],
+          languages: tutorList[i]['languages'],
+          education: tutorList[i]['education'],
+          experience: tutorList[i]['experience'],
+          interests: tutorList[i]['interests'],
+          profession: tutorList[i]['profession'],
+          specialties: tutorList[i]['specialties'],
+          video: tutorList[i]['video'],
+          targetStudent: tutorList[i]['targetStudent'],
+          isNative: tutorList[i]['isNative'],
+          isOnline: tutorList[i]['isOnline'],
+          price: tutorList[i]['price'],
+        ));
+        loadedTutors[i].reviews = loadedFeedbacks;
+      }
+      print("loadedTutors: " + loadedTutors.length.toString());
+      _tutorSearchList = loadedTutors;
+      // _tutorList.clear();
+      // _tutorList.addAll(loadedTutors);
+      notifyListeners();
+    } catch (error) {
+      // throw (error);
+      print("get search error");
       throw (error);
     }
   }
