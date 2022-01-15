@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/providers/student_schedule_provider.dart';
+import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -86,6 +87,8 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
     //         firstLesson.endTime;
     final firstLesson =
         Provider.of<StudentScheduleProvider>(context).earliestUpcommingLesson;
+    final schedules =
+        Provider.of<StudentScheduleProvider>(context).listSchedule;
 
     String earliestLessonToShow =
         DateFormat("EEE, dd/MM/yyyy").format(firstLesson.startTimeDateTime) +
@@ -97,36 +100,71 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : Column(
-            children: [
-              Text(
-                // "Wed, 24 Oct 6:30 - 6:55",
-                earliestLessonToShow,
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 15,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              RoundedButtonSmallPadding(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                textColor: kPrimaryColor,
-                text: AppLocalizations.of(context).go_to_class,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => VideoConferenceScreen(
-                        schedule: firstLesson,
-                      ),
+        : schedules.length > 0
+            ? Column(
+                children: [
+                  Text(
+                    // "Wed, 24 Oct 6:30 - 6:55",
+                    earliestLessonToShow,
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                     ),
-                  );
-                },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  RoundedButtonSmallPadding(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    textColor: kPrimaryColor,
+                    text: AppLocalizations.of(context).go_to_class,
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VideoConferenceScreen(
+                            schedule: firstLesson,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ],
               )
-            ],
-          );
+            : Column(
+                children: [
+                  Text(
+                    // "Wed, 24 Oct 6:30 - 6:55",
+                    AppLocalizations.of(context).no_upcomming_lesson,
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    // "Wed, 24 Oct 6:30 - 6:55",
+                    AppLocalizations.of(context).try_booking_new_lesson,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                  ),
+                  // RoundedButtonSmallPadding(
+                  //   color: Theme.of(context).scaffoldBackgroundColor,
+                  //   textColor: kPrimaryColor,
+                  //   text: "Go booking...",
+                  //   press: () {
+                  //     Navigator.pushNamed(
+                  //         context, SearchTutorListScreen.routeName);
+                  //   },
+                  // )
+                ],
+              );
   }
 }

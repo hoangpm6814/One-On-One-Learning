@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lettutor/customWidgets/rating.dart';
 import 'package:lettutor/customWidgets/speciality_button_clickable.dart';
 import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/TutorDetail/tutor_detail_screen.dart';
-import 'package:provider/provider.dart';
 
-class CardTutor extends StatelessWidget {
-  const CardTutor({
+class SearchCardTutor extends StatelessWidget {
+  const SearchCardTutor({
     Key key,
     @required this.tutor,
   }) : super(key: key);
@@ -56,61 +54,54 @@ class CardTutor extends StatelessWidget {
                   width: 15,
                 ),
                 Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              tutor.name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tutor.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      RatingStar(
+                        rating: tutor.rating,
+                      ),
+                      // Container(
+                      //   height: 30,
+                      //   child: ListView(
+                      //     scrollDirection: Axis.horizontal,
+                      //     children: <Widget>[
+                      //       SpecialityButtonClickable(
+                      //         text: "English for kids",
+                      //         isChosen: true,
+                      //       ),
+                      //       SizedBox(width: 5),
+                      //       SpecialityButtonClickable(
+                      //         text: "English for Business",
+                      //       ),
+                      //       SizedBox(width: 5),
+                      //       SpecialityButtonClickable(
+                      //         text: "Conversational",
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      Wrap(
+                        children: [
+                          for (var item in tutorSpecialties)
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 3, 0),
+                              child: SpecialityButtonClickable(
+                                text: item,
+                                isChosen: true,
                               ),
                             ),
-                            RatingStar(
-                              rating: tutor.rating,
-                            ),
-                          ],
-                        ),
-                        // SizedBox(
-                        //   width: 15,
-                        // ),
-                        Column(
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(tutor.isFavourite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined),
-                              color: Theme.of(context).errorColor,
-                              onPressed: () => {
-                                Provider.of<TutorProvider>(context,
-                                        listen: false)
-                                    .toggleIsFavourite(tutor.userId),
-                              },
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Wrap(
-                      children: [
-                        for (var item in tutorSpecialties)
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 3, 0),
-                            child: SpecialityButtonClickable(
-                              text: item,
-                              isChosen: true,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ],
-                )),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
             Row(

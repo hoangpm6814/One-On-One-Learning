@@ -141,7 +141,8 @@ class _SearchCourseListScreenState extends State<SearchCourseListScreen> {
                             controller: _scrollController,
                             children: [
                               ...courses.map(
-                                (course) => CardCourse(course: course),
+                                (course) => CardCourse(
+                                    key: Key(course.id), course: course),
                               ),
                               if (courseLength < totalRecords)
                                 Center(child: CircularProgressIndicator()),
