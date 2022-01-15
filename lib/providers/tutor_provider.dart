@@ -13,6 +13,11 @@ class TutorProvider with ChangeNotifier {
   // List<Tutor> _tutorList = DUMMY_TUTORS;
   List<Tutor> _tutorList = [];
   List<Tutor> _tutorSearchList = [];
+  int totalPages = 1;
+  int pageSize = 3;
+  int _totalRecords = 0;
+
+  double get totalRecords => _totalRecords.toDouble();
 
   List<Tutor> get listTutor {
     // sort by rating
@@ -168,7 +173,8 @@ class TutorProvider with ChangeNotifier {
     }
   }
 
-  Future<void> fetchSearchTutors(List<String> specialties) async {
+  Future<List<Tutor>> fetchSearchTutors(
+      List<String> specialties, int pageNumber) async {
     var url = Uri.parse('${base_url}/tutor/search');
     Map<String, String> headers = {
       "Authorization": "Bearer ${authToken}",
@@ -194,18 +200,19 @@ class TutorProvider with ChangeNotifier {
             'filters': {
               'specialties': specialties,
             },
-            'page': 1,
-            'perPage': 12,
+            'page': pageNumber,
+            'perPage': pageSize,
           },
         ),
       );
 
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData == null) {
-        return;
+        return [];
       }
 
       var rows = extractedData["rows"];
+      _totalRecords = extractedData['count'];
       var tutorList = List.from(rows);
 
       final List<Tutor> loadedTutors = [];
@@ -257,14 +264,46 @@ class TutorProvider with ChangeNotifier {
         loadedTutors[i].reviews = loadedFeedbacks;
       }
       print("loadedTutors: " + loadedTutors.length.toString());
-      _tutorSearchList = loadedTutors;
-      // _tutorList.clear();
-      // _tutorList.addAll(loadedTutors);
-      notifyListeners();
+      // _tutorSearchList = loadedTutors;
+      // notifyListeners();
+
+      return loadedTutors;
     } catch (error) {
       // throw (error);
       print("get search error");
       throw (error);
+    }
+  }
+
+  Future<void> fetchSearchTutorsPage(List<String> specialties, int pageNumber,
+      [bool isBegin = false]) async {
+    if (pageNumber <= totalPages) {
+      var loadedTutors = await fetchSearchTutors(specialties, pageNumber);
+      if (isBegin) {
+        totalPages = countTotalPage(totalRecords, pageSize);
+        print("totalPages: " + totalPages.toString());
+        _tutorSearchList = loadedTutors;
+      } else {
+        if (pageNumber == 1 && _totalRecords > 0) {
+          _tutorSearchList.clear();
+        }
+        _tutorSearchList.addAll(loadedTutors);
+      }
+      // print("_courseList: " + _tutorSearchList.length.toString());
+      notifyListeners();
+    }
+
+    if (pageNumber > totalPages) {
+      notifyListeners();
+    }
+  }
+
+  int countTotalPage(double totalRecords, int pageSize) {
+    if (totalRecords % pageSize == 0) {
+      return totalRecords ~/ pageSize;
+    } else {
+      int whole = totalRecords ~/ pageSize;
+      return whole + 1;
     }
   }
 

@@ -19,10 +19,14 @@ class SearchTutorListScreen extends StatefulWidget {
 
 class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
   var _isInit = true;
+  var _isLoading = false;
   String query = '';
   List<Tutor> tutors;
   List<Tutor> allTutors;
   List<FilterChipData> filterChips = DUMMY_SPECIALTIES;
+  int _page = 1;
+  ScrollController _scrollController = new ScrollController();
+  List<FilterChipData> filterValues = [];
 
   Widget buildFilterChips() => Container(
         height: (MediaQuery.of(context).size.height -
@@ -54,7 +58,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                         //     .where((element) => element.isSelected == true)
                         //     .toList()
                         //     .length);
-                        final filterValues = filterChips
+                        filterValues = filterChips
                             .where((element) => element.isSelected == true)
                             .toList();
                         // // print(filterValues.length);
@@ -73,7 +77,7 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
                         print("specialties length: " +
                             specialties.length.toString());
                         Provider.of<TutorProvider>(context, listen: false)
-                            .fetchSearchTutors(specialties)
+                            .fetchSearchTutorsPage(specialties, _page = 1, true)
                             .then((value) {
                           print("go to then");
                           print("tutor: " + tutors.length.toString());
@@ -100,11 +104,11 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
   Widget buildSearch() => SearchWidget(
         text: query,
         hintText: AppLocalizations.of(context).search_tutor,
-        onChanged: searchTodo,
+        onChanged: searchTutor,
       );
 
-  void searchTodo(String query) {
-    final searchTutors = allTutors.where((todo) {
+  void searchTutor(String query) {
+    final searchTutors = tutors.where((todo) {
       final nameLower = todo.name.toLowerCase();
       final nationLower = todo.country.toLowerCase();
       final searchLower = query.toLowerCase();
@@ -120,11 +124,52 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    final List<String> specialties = [];
+    for (int i = 0; i < filterValues.length; i++) {
+      print(filterValues[i].label.toLowerCase());
+      specialties.add(filterValues[i].label.toLowerCase());
+    }
+
+    var courseProvider = Provider.of<TutorProvider>(context, listen: false);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        courseProvider.fetchSearchTutorsPage(specialties, ++_page);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     print("go to didChangeDependencies");
     if (_isInit) {
-      allTutors = Provider.of<TutorProvider>(context).listTutor;
-      tutors = allTutors;
+      setState(() {
+        _isLoading = true;
+      });
+      final List<String> specialties = [];
+      for (int i = 0; i < filterValues.length; i++) {
+        print(filterValues[i].label.toLowerCase());
+        specialties.add(filterValues[i].label.toLowerCase());
+      }
+      Provider.of<TutorProvider>(context, listen: false)
+          .fetchSearchTutorsPage(specialties, 1, true)
+          .then((_) {
+        allTutors =
+            Provider.of<TutorProvider>(context, listen: false).listSearchTutor;
+        tutors = allTutors;
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
     _isInit = false;
     // allTutors = Provider.of<TutorProvider>(context).listTutor;
@@ -134,6 +179,11 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tutorProvider = Provider.of<TutorProvider>(context);
+    final tutorLength = tutorProvider.listSearchTutor.length;
+    print("tutorLength: " + tutorLength.toString());
+    final totalRecords = tutorProvider.totalRecords;
+    print("totalRecords: " + totalRecords.toString());
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
       child: Column(
@@ -142,34 +192,48 @@ class _SearchTutorListScreenState extends State<SearchTutorListScreen> {
         children: <Widget>[
           buildSearch(),
           buildFilterChips(),
-          tutors.isEmpty
+          _isLoading
               ? Center(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        AppLocalizations.of(context).no_tutor_match,
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: CircularProgressIndicator(),
                 )
-              : Container(
-                  height: (MediaQuery.of(context).size.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.67,
-                  child: ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return SearchCardTutor(tutor: tutors[index]);
-                    },
-                    itemCount: tutors.length,
-                  ),
-                ),
+              : tutors.length == 0
+                  ? Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            AppLocalizations.of(context).no_tutor_match,
+                            style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(
+                      height: (MediaQuery.of(context).size.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.67,
+                      child: ListView(
+                        controller: _scrollController,
+                        children: [
+                          ...tutors.map(
+                            (tutor) => SearchCardTutor(tutor: tutor),
+                          ),
+                          if (tutorLength < totalRecords)
+                            Center(child: CircularProgressIndicator()),
+                        ],
+                      ),
+                      // child: ListView.builder(
+                      //   itemBuilder: (ctx, index) {
+                      //     return SearchCardTutor(tutor: tutors[index]);
+                      //   },
+                      //   itemCount: tutors.length,
+                      // ),
+                    ),
         ],
       ),
     );
