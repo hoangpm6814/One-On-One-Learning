@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor/constants.dart';
-import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/providers/user_provider.dart';
 import 'package:lettutor/screens/Tutor/local_widgets/upcomming_lesson.dart';
-import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
@@ -91,22 +88,6 @@ class _HeadingState extends State<Heading> {
               //   ),
               // ),
               UpcommingLesson(),
-              SizedBox(
-                height: 10,
-              ),
-              RoundedButtonSmallPadding(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                textColor: kPrimaryColor,
-                text: AppLocalizations.of(context).go_to_class,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => VideoConferenceScreen(),
-                    ),
-                  );
-                },
-              )
             ],
           );
   }
