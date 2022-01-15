@@ -7,6 +7,8 @@
     "go_to_class": "Vào lớp học",
     "lesson_time_spent": "Tổng thời gian học là {hours} giờ và {minutes} phút",
     "upcomming_lesson": "Lớp học sắp tới",
+    "no_upcomming_lesson": "Bạn không có lớp học nào trong thời gian tới.",
+    "try_booking_new_lesson": "Hãy đặt lớp học cho riêng mình!",
     "become_a_tutor": "Trở Thành Giáo Viên",
     "course_for_you": "Khóa Học Dành Cho Bạn",
     "booking_history": "Lịch Sử Đặt Lớp",

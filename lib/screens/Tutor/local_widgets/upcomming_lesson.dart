@@ -136,7 +136,7 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
                 children: [
                   Text(
                     // "Wed, 24 Oct 6:30 - 6:55",
-                    "You do not have any upcomming lessons.",
+                    AppLocalizations.of(context).no_upcomming_lesson,
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 15,
@@ -148,7 +148,7 @@ class _UpcommingLessonState extends State<UpcommingLesson> {
                   ),
                   Text(
                     // "Wed, 24 Oct 6:30 - 6:55",
-                    "Try booking your own new lessons!",
+                    AppLocalizations.of(context).try_booking_new_lesson,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
