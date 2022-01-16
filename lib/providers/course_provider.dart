@@ -107,9 +107,9 @@ class CourseProvider with ChangeNotifier {
       notifyListeners();
     }
 
-    if (pageNumber > totalPages) {
-      notifyListeners();
-    }
+    // if (pageNumber > totalPages) {
+    //   notifyListeners();
+    // }
   }
 
   int countTotalPage(double totalRecords, int pageSize) {
