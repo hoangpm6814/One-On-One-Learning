@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>825785584678-1qpd3sp3o9kdhne9ubddm45ub6quj7vp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.825785584678-1qpd3sp3o9kdhne9ubddm45ub6quj7vp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>825785584678-3u0nrpes6jmkhkm8e4aei58hbiirv8ka.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBe5Sr2uxbSehNqxVMNH23-7cRtP4VyS5g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>825785584678</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lettutor.oneonone</string>
+	<key>PROJECT_ID</key>
+	<string>oneonone-f90bd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>oneonone-f90bd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:825785584678:ios:a5e31b675a80f730716ae7</string>
+</dict>
+</plist>

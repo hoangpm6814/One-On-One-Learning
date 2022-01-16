@@ -48,8 +48,8 @@ dependencies:
   # firebase_auth: 
   # firebase_core: ^0.7.0
   # google_sign_in: ^4.5.1
-  firebase_auth:
-  firebase_core: 
+  firebase_auth: ^3.3.5
+  firebase_core: ^1.11.0
   flutter_facebook_auth: ^3.5.0
   google_sign_in: ^5.0.3
   open_file: ^3.2.1 # fix flutter_pdfview package issue
