@@ -125,10 +125,10 @@ class StudentScheduleProvider with ChangeNotifier {
     }
   }
 
-  Future<void> fetchSchedules(int pageNumber) async {
+  Future<void> fetchSchedules(int pageNumber, [bool isBegin = false]) async {
     if (pageNumber <= totalPages) {
       var loadedSchedules = await fetchStudentSchedules(pageNumber);
-      if (_scheduleList.length == 0) {
+      if (isBegin) {
         totalPages = countTotalPage(totalRecords, pageSize);
         print("totalPages: " + totalPages.toString());
         _scheduleList = loadedSchedules;
@@ -272,6 +272,7 @@ class StudentScheduleProvider with ChangeNotifier {
       print("booking success");
       _scheduleList.removeWhere(
           (schedule) => schedule.scheduleDetailId == scheduleDetailId);
+      _totalRecords--;
       notifyListeners();
       return responseData['message'];
     } catch (error) {

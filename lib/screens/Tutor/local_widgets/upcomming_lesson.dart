@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_small_padding.dart';
 import 'package:lettutor/providers/student_schedule_provider.dart';
-import 'package:lettutor/screens/Tutor/search_tutor_list_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

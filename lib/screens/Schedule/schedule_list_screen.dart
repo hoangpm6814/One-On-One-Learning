@@ -42,7 +42,9 @@ class ScheduleListScreenState extends State<ScheduleListScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<StudentScheduleProvider>(context).fetchSchedules(1).then((_) {
+      Provider.of<StudentScheduleProvider>(context)
+          .fetchSchedules(1, true)
+          .then((_) {
         setState(() {
           _isLoading = false;
         });
