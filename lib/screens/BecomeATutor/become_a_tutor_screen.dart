@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
 import 'package:lettutor/screens/BecomeATutor/local_widgets/custom_border_noti.dart';
-import 'package:lettutor/screens/BecomeATutor/local_widgets/avatar_picker.dart';
 import 'package:lettutor/screens/BecomeATutor/local_widgets/part_divider.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:video_player/video_player.dart';
 
 class BecomeATutorScreen extends StatefulWidget {
   @override
@@ -31,6 +31,8 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
   String _specialties;
   String _price;
   File imageFile;
+  File videoFile;
+  VideoPlayerController _videoPlayerController;
   // Default Radio Button Selected Item When App Starts.
   String radioButtonItem = 'beginner';
   // Group Value for Radio Button. // default
@@ -101,7 +103,30 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
       }
       setState(() {
         imageFile = File(image.path);
+        print("imageFile: " + image.path);
       });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future pickVideo(ImageSource source) async {
+    try {
+      final video = await ImagePicker().pickVideo(source: source);
+      if (video == null) {
+        return;
+      }
+
+      // videoFile = File(video.path);
+      setState(() {
+        videoFile = File(video.path);
+        print("videoFile: " + video.path);
+      });
+      _videoPlayerController = VideoPlayerController.file(videoFile)
+        ..initialize().then((_) {
+          setState(() {});
+          _videoPlayerController.play();
+        });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -461,7 +486,25 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                   // color: Colors.white,
                   // textColor: kPrimaryColor,
                   text: "Choose video",
+                  press: () {
+                    pickVideo(ImageSource.gallery);
+                  },
                 ),
+                SizedBox(height: 10),
+                videoFile != null
+                    ? Center(
+                        child: Text(
+                          videoFile.path,
+                        ),
+                      )
+                    : Container(),
+                // if (videoFile != null)
+                //   _videoPlayerController.value.isInitialized
+                //       ? AspectRatio(
+                //           aspectRatio: _videoPlayerController.value.aspectRatio,
+                //           child: VideoPlayer(_videoPlayerController),
+                //         )
+                //       : Container(),
                 SizedBox(height: 30),
                 RoundedButtonMediumPadding(
                   color: kPrimaryColor,
