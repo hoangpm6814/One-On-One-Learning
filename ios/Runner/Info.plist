@@ -99,5 +99,12 @@
 	<string>fbauth2</string>
 	<string>fbshareextension</string>
 	</array>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To choose avatar picture</string>
+	<key>NSCameraUsageDescription </key>
+	<string>To take avatar picture</string>
+	<key>NSMicrophoneUsageDescription  </key>
+	<string>To record videos</string>
 </dict>
 </plist>
