@@ -79,6 +79,7 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/icons/app_logo_oneonone.png"
+  adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/icons/app_logo_oneonone.png"
 
 # For information on the generic Dart part of this file, see the
