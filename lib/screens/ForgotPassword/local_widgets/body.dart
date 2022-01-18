@@ -188,6 +188,38 @@ class _BodyState extends State<Body> {
                     ],
                   ),
                 ),
+                SizedBox(height: size.height * 0.03),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.arrow_back,
+                        color: kPrimaryColor,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        AppLocalizations.of(context).log_in,
+                        style: TextStyle(
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 // RoundedButton(
                 //   text: "Send",
                 //   press: () {},

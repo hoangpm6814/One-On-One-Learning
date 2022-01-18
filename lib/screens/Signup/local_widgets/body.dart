@@ -204,7 +204,7 @@ class _BodyState extends State<Body> {
                 ),
                 SizedBox(height: size.height * 0.03),
                 Image.asset(
-                  "assets/images/signup_img.png",
+                  "assets/icons/app_logo_oneonone.png",
                   height: size.height * 0.4,
                 ),
                 Form(
