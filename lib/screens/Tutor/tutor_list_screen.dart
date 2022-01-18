@@ -46,12 +46,12 @@ class _TutorListScreenState extends State<TutorListScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            // height: (MediaQuery.of(context).size.height -
-            //         (MediaQuery.of(context).padding.top +
-            //             MediaQuery.of(context).padding.bottom +
-            //             kToolbarHeight)) *
-            //     0.26,
-            height: 180,
+            height: (MediaQuery.of(context).size.height -
+                    (MediaQuery.of(context).padding.top +
+                        MediaQuery.of(context).padding.bottom +
+                        kToolbarHeight)) *
+                0.26,
+            // height: 180,
             padding: const EdgeInsets.all(15.0),
             color: kPrimaryColor,
             child: Heading(),
