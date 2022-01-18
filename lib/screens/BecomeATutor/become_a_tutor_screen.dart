@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
+import 'package:lettutor/providers/user_provider.dart';
 import 'package:lettutor/screens/BecomeATutor/local_widgets/custom_border_noti.dart';
 import 'package:lettutor/screens/BecomeATutor/local_widgets/part_divider.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class BecomeATutorScreen extends StatefulWidget {
@@ -38,7 +40,10 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
   // Group Value for Radio Button. // default
   int id = 1;
 
+  var _isLoading = false;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   Future<void> _submit() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
@@ -59,17 +64,36 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
       print("_price: " + _price);
       print("radioButtonItem: " + radioButtonItem);
 
-      // // Log user in
-      // await Provider.of<AuthProvider>(context, listen: false).login(
-      //   email,
-      //   password,
-      // );
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (_) => TabsScreen(),
-      //   ),
-      // );
+      setState(() {
+        _isLoading = true;
+      });
+
+      final message = await Provider.of<UserProvider>(context, listen: false)
+          .becomeATutor(
+        _name,
+        _country,
+        _dateOfBirth,
+        _interest,
+        _education,
+        _experience,
+        _job,
+        _language,
+        _introduction,
+        radioButtonItem,
+        _specialties,
+        _price,
+        imageFile.path,
+        videoFile.path,
+      )
+          .whenComplete(() {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+      var snackBar = SnackBar(
+        content: Text(message),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } catch (error) {
       const errorMessage = 'Incorrect email or password.';
       _showErrorDialog(errorMessage);
@@ -403,6 +427,7 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Price'),
+                  keyboardType: TextInputType.number,
                   maxLength: 30,
                   validator: (String value) {
                     if (value.isEmpty) {
@@ -506,13 +531,15 @@ class BecomeATutorScreenState extends State<BecomeATutorScreen> {
                 //         )
                 //       : Container(),
                 SizedBox(height: 30),
-                RoundedButtonMediumPadding(
-                  color: kPrimaryColor,
-                  text: 'Press to become a tutor!',
-                  press: () {
-                    _submit();
-                  },
-                )
+                _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : RoundedButtonMediumPadding(
+                        color: kPrimaryColor,
+                        text: 'Press to become a tutor!',
+                        press: () {
+                          _submit();
+                        },
+                      )
               ],
             ),
           ),

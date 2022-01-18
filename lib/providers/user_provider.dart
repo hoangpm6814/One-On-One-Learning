@@ -107,6 +107,87 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  Future<String> becomeATutor(
+    String name,
+    String country,
+    String birthday,
+    String interests,
+    String education,
+    String experience,
+    String profession,
+    String languages,
+    String bio,
+    String targetStudent,
+    String specialties,
+    String price,
+    String imagePath,
+    String videoPath,
+  ) async {
+    final url = Uri.parse('${base_url}/tutor/register');
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer ${authToken}"
+    };
+
+    try {
+      final multipartRequest = new http.MultipartRequest('POST', url);
+      multipartRequest.headers.addAll(headers);
+      multipartRequest.fields['name'] = name;
+      multipartRequest.fields['country'] = country;
+      multipartRequest.fields['birthday'] = birthday;
+      multipartRequest.fields['interests'] = interests;
+      multipartRequest.fields['education'] = education;
+      multipartRequest.fields['experience'] = experience;
+      multipartRequest.fields['profession'] = profession;
+      multipartRequest.fields['languages'] = languages;
+      multipartRequest.fields['bio'] = bio;
+      multipartRequest.fields['targetStudent'] = targetStudent;
+      multipartRequest.fields['specialties'] = specialties;
+      multipartRequest.fields['price'] = price;
+      var multipartFile =
+          await http.MultipartFile.fromPath("avatar", imagePath);
+      multipartRequest.files.add(multipartFile);
+      var multipartFile2 =
+          await http.MultipartFile.fromPath("video", videoPath);
+      multipartRequest.files.add(multipartFile2);
+
+      // await multipartRequest.send().then((response) {
+      //   var response2 = await http.Response.fromStream(response);
+      //   if (response.statusCode >= 400) {
+      //     print("Failed!");
+      //     // print(response.stream.bytesToString());
+      //     print("Received streamedResponse.statusCode:${response.statusCode}");
+      //     response.stream.toStringStream();
+      //     response.stream.listen((data) {
+      //       print("Received data:$data");
+      //     });
+      //     // return response.stream.bytesToString();
+      //     return "User has already been a tutor";
+      //   } else if (response.statusCode == 200) {
+      //     print("Uploaded!");
+      //     // return response.stream.bytesToString();
+      //   }
+      // });
+      var response = await multipartRequest.send();
+      var response2 = await http.Response.fromStream(response);
+      final responseData = json.decode(response2.body);
+      if (response.statusCode >= 400) {
+        print("failed");
+        print(responseData['message']);
+        // await fetchStudentSchedules();
+        return responseData['message'];
+      } else if (response.statusCode == 200) {
+        print("Uploaded!");
+        return "Successfully register to become a tutor."; // data response with body tutor detail
+        // return response.stream.bytesToString();
+      }
+
+      return 'Error to come. Check your form again.';
+    } catch (error) {
+      throw error;
+    }
+  }
+
   Future<void> fetchUserTotalTime() async {
     var url = Uri.parse('${base_url}/call/total');
     Map<String, String> headers = {
