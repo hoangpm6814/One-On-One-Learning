@@ -44,6 +44,7 @@ class StudentScheduleProvider with ChangeNotifier {
         tutorReview: "tutorReview",
         showRecordUrl: false,
         recordUrl: "recordUrl",
+        meetingToken: "meetingToken",
       ),
     );
   }
@@ -99,6 +100,10 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorName = tutorInfo['name'];
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
+        String studentMeetingLink = scheduleList[i]['studentMeetingLink'];
+        var studentMeetingLinkLength = studentMeetingLink.length;
+        var token = studentMeetingLink.substring(13,
+            studentMeetingLinkLength); // get subString from BE: "/call/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
 
         loadedSchedules.add(StudentSchedule(
           id: id,
@@ -115,6 +120,7 @@ class StudentScheduleProvider with ChangeNotifier {
           tutorReview: tutorReview,
           showRecordUrl: showRecordUrl,
           recordUrl: recordUrl,
+          meetingToken: token,
         ));
       }
       print(scheduleList.length);
@@ -204,6 +210,10 @@ class StudentScheduleProvider with ChangeNotifier {
         var tutorName = tutorInfo['name'];
         var tutorAvatar = tutorInfo['avatar'];
         var tutorCountry = tutorInfo['country'];
+        String studentMeetingLink = scheduleList[i]['studentMeetingLink'];
+        var studentMeetingLinkLength = studentMeetingLink.length;
+        var token = studentMeetingLink.substring(13,
+            studentMeetingLinkLength); // get subString from BE: "/call/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
 
         // print("--------");
         // print(id);
@@ -231,6 +241,7 @@ class StudentScheduleProvider with ChangeNotifier {
           tutorReview: tutorReview,
           showRecordUrl: showRecordUrl,
           recordUrl: recordUrl,
+          meetingToken: token,
         ));
       }
       print(scheduleList.length);
