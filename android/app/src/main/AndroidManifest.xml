@@ -1,10 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lettutor.oneonone">
+    package="com.lettutor.oneonone"
+    xmlns:tools="http://schemas.android.com/tools">
    <uses-permission android:name="android.permission.WAKE_LOCK"/>
    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="One On One"
         android:usesCleartextTraffic="true"
+        tools:replace="android:label"  
+        android:name="io.flutter.app.FlutterApplication"
+        android:label="One On One"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

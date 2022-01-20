@@ -15,6 +15,7 @@ class StudentSchedule {
   final String tutorReview;
   final bool showRecordUrl;
   final String recordUrl;
+  final String meetingToken;
 
   StudentSchedule({
     @required this.id,
@@ -31,5 +32,6 @@ class StudentSchedule {
     @required this.tutorReview,
     @required this.showRecordUrl,
     @required this.recordUrl,
+    @required this.meetingToken,
   });
 }
