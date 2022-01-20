@@ -6,3 +6,5 @@ const kPrimaryLightColor = Color(0xFFecf0fb);
 const kPrimaryButtonUnchosenColor = Color(0xFFe4e6ea);
 const kPrimaryButtonChosenColor = Color(0xFFdfeafd);
 const kPrimaryRatingStar = Color(0xFFFDD835);
+
+const base_url = "https://sandbox.api.lettutor.com";

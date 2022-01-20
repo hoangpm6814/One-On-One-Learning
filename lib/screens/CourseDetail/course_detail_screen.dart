@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:lettutor/api/pdf_api.dart';
+import 'package:lettutor/models/course.dart';
 import 'package:lettutor/screens/CourseDetail/local_widgets/part_divider.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
@@ -8,6 +9,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor/screens/CourseDetail/pdf_viewer_screen.dart';
 
 class CourseDetailScreen extends StatelessWidget {
+  const CourseDetailScreen({
+    Key key,
+    @required this.course,
+  }) : super(key: key);
+
+  final Course course;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +37,7 @@ class CourseDetailScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          AppLocalizations.of(context).course_title_1,
+                          course.name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -63,7 +71,7 @@ class CourseDetailScreen extends StatelessWidget {
                       child: Container(
                         width: 150,
                         child: Text(
-                          "It can be intimidating to speak with a foreigner, no matter how much grammar and vocabulary you've mastered. If you have basic knowledge of English but have not spent much time speaking, this course will help you ease into your first English conversations.",
+                          course.reason,
                         ),
                       ),
                     ),
@@ -90,7 +98,7 @@ class CourseDetailScreen extends StatelessWidget {
                       child: Container(
                         width: 150,
                         child: Text(
-                          "This course covers vocabulary at the CEFR A2 level. You will build confidence while learning to speak about a variety of common, everyday topics. In addition, you will build implicit grammar knowledge as your tutor models correct answers and corrects your mistakes.",
+                          course.purpose,
                         ),
                       ),
                     ),
@@ -107,7 +115,7 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      "Beginner",
+                      levelToString(int.parse(course.level), context),
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -125,7 +133,9 @@ class CourseDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      "10 Topics",
+                      course.topics.length.toString() +
+                          " " +
+                          AppLocalizations.of(context).topics,
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -134,18 +144,14 @@ class CourseDetailScreen extends StatelessWidget {
                   ],
                 ),
                 PartDivider(text: AppLocalizations.of(context).topic_list),
-                Row(
+                Container(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Container(
-                        width: 150,
-                        child: Text(
-                          "1. Foods You Love\n2. Your Job\n3. Playing and Watching Sports\n4. The Best Pet\n5. Having Fun in Your Free Time\n6. Your Daily Routine\n7. Childhood Memories\n8. Your Family Members\n9. Your Hometown\n10. Shopping Habits",
-                        ),
-                      ),
-                    ),
+                    for (int i = 0; i < course.topics.length; i++)
+                      Text((i + 1).toString() + ") " + course.topics[i].name)
                   ],
-                ),
+                )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -155,16 +161,15 @@ class CourseDetailScreen extends StatelessWidget {
                       text: AppLocalizations.of(context).explore,
                       press: () async {
                         // pdf from assets
-                        final path =
-                            'assets/files/Basic_Conversation_Topics.pdf';
-                        final file = await PDFApi.loadAsset(path);
-                        openPDF(context, file);
+                        // final path =
+                        //     'assets/files/Basic_Conversation_Topics.pdf';
+                        // final file = await PDFApi.loadAsset(path);
+                        // openPDF(context, file);
 
                         // pdf from network
-                        // final url =
-                        //     'https://www.cambridgeenglish.org/images/291264-learning-tips-pdf.pdf';
-                        // final file = await PDFApi.loadNetwork(url);
-                        // openPDF(context, file);
+                        final url = course.topics[0].nameFile;
+                        final file = await PDFApi.loadNetwork(url);
+                        openPDF(context, file);
                       },
                     ),
                   ],
@@ -180,4 +185,23 @@ class CourseDetailScreen extends StatelessWidget {
   void openPDF(BuildContext context, File file) => Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => PDFViewerScreen(file: file)),
       );
+
+  String levelToString(int level, BuildContext context) {
+    if (level == 0) {
+      return AppLocalizations.of(context).any_level;
+    } else if (level == 1) {
+      return AppLocalizations.of(context).beginner;
+    } else if (level == 2) {
+      return AppLocalizations.of(context).higher_beginner;
+    } else if (level == 3) {
+      return AppLocalizations.of(context).pre_intermediate;
+    } else if (level == 4) {
+      return AppLocalizations.of(context).intermediate;
+    } else if (level == 5) {
+      return AppLocalizations.of(context).upper_intermediate;
+    } else if (level == 6) {
+      return AppLocalizations.of(context).advanced;
+    }
+    return AppLocalizations.of(context).proficiency;
+  }
 }

@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lettutor/customWidgets/rating.dart';
-import 'package:lettutor/models/rating.dart';
-import 'package:lettutor/providers/rating_provider.dart';
 import 'package:lettutor/models/tutor.dart';
 import 'package:lettutor/providers/tutor_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_rating_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/alert_dialog_report_tutor.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/card_rating.dart';
-import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.dart';
+// import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/pick_schedule_bottom_network.dart';
 import 'package:lettutor/screens/TutorDetail/local_widgets/tutor_description.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/rounded_button_medium_padding.dart';
+import 'package:lettutor/screens/TutorDetail/local_widgets/video/network_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:video_player/video_player.dart';
 
 class TutorDetailScreen extends StatefulWidget {
   static const routeName = '/tutor-detail';
@@ -31,11 +32,14 @@ class TutorDetailScreen extends StatefulWidget {
 
 class _TutorDetailScreenState extends State<TutorDetailScreen> {
   Tutor tutor;
-  List<Rating> ratings;
+  // List<Rating> ratings;
+
+  VideoPlayerController videoPlayerController;
+
   @override
   void didChangeDependencies() {
     tutor = Provider.of<TutorProvider>(context).getById(widget.id);
-    ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
+    // ratings = Provider.of<RatingProvider>(context).getByTutorId(widget.id);
     super.didChangeDependencies();
   }
 
@@ -83,7 +87,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                           ),
                         ),
                         Text(
-                          tutor.nation,
+                          tutor.country,
                         ),
                       ],
                     ),
@@ -102,7 +106,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                         color: Theme.of(context).errorColor,
                         onPressed: () => {
                           Provider.of<TutorProvider>(context, listen: false)
-                              .toggleIsFavourite(tutor.id),
+                              .toggleIsFavourite(tutor.userId),
                         },
                       ),
                     ],
@@ -117,7 +121,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
-                        return PickScheduleBottom(tutorId: tutor.id);
+                        return PickScheduleBottomNetwork(tutorId: tutor.userId);
                       },
                     );
                   },
@@ -175,7 +179,9 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialogReport();
+                          return AlertDialogReport(
+                            tutorId: tutor.userId,
+                          );
                         },
                       );
                     },
@@ -214,9 +220,13 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
               SizedBox(height: 10),
               TutorDescription(tutor: tutor),
               SizedBox(height: 10),
+              NetworkPlayerWidget(
+                url: tutor.video,
+              ),
+              SizedBox(height: 10),
               Text(
                 AppLocalizations.of(context).rating_and_comment +
-                    " (${ratings.length})",
+                    " (${tutor.reviews.length})",
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 15,
@@ -224,7 +234,7 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                 ),
               ),
               SizedBox(height: 5),
-              ratings.length > 0
+              (tutor.reviews.length > 0)
                   ? Container(
                       height: (MediaQuery.of(context).size.height -
                               (MediaQuery.of(context).padding.top +
@@ -234,10 +244,10 @@ class _TutorDetailScreenState extends State<TutorDetailScreen> {
                       child: ListView.builder(
                         itemBuilder: (ctx, index) {
                           return CardRating(
-                            rating: ratings[index],
+                            review: tutor.reviews[index],
                           );
                         },
-                        itemCount: ratings.length,
+                        itemCount: tutor.reviews.length,
                       ),
                     )
                   : Container(

@@ -13,6 +13,8 @@ class TutorDescription extends StatelessWidget {
   final Tutor tutor;
   @override
   Widget build(BuildContext context) {
+    List<String> tutorLanguages = tutor.languages.split(',');
+    List<String> tutorSpecialties = tutor.specialties.split(',');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,7 +24,7 @@ class TutorDescription extends StatelessWidget {
               child: Container(
                 width: 150,
                 child: Text(
-                  tutor.description,
+                  tutor.bio,
                 ),
               ),
             ),
@@ -43,7 +45,7 @@ class TutorDescription extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              for (var item in tutor.languages)
+              for (var item in tutorLanguages)
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
                   child: SpecialityButtonClickable(
@@ -93,7 +95,7 @@ class TutorDescription extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
           child: Text(
-            tutor.interest,
+            tutor.interests,
           ),
         ),
         SizedBox(height: 10),
@@ -128,7 +130,7 @@ class TutorDescription extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              for (var item in tutor.specialties)
+              for (var item in tutorSpecialties)
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
                   child: SpecialityButtonClickable(

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
-import 'package:lettutor/models/schedule.dart';
-import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/providers/tutor_provider.dart';
+import 'package:lettutor/models/student_schedule.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor/screens/ScheduleHistory/record_video_screen.dart';
 
 class CardScheduleHistory extends StatelessWidget {
   const CardScheduleHistory({
@@ -14,12 +12,10 @@ class CardScheduleHistory extends StatelessWidget {
     @required this.schedule,
   }) : super(key: key);
 
-  final Schedule schedule;
+  final StudentSchedule schedule;
 
   @override
   Widget build(BuildContext context) {
-    final Tutor tutor =
-        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -42,16 +38,18 @@ class CardScheduleHistory extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
+                          DateFormat('EEE, MMM d, yyyy')
+                              .format(schedule.startTimeDateTime),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                           ),
                         ),
                         Text(
-                          dateDiff(schedule.date) +
-                              " " +
-                              AppLocalizations.of(context).days_ago,
+                          // dateDiff(schedule.startTimeDateTime) +
+                          //     " " +
+                          //     AppLocalizations.of(context).days_ago,
+                          getTimeDiff(schedule.endTimeDateTime, context),
                         ),
                       ],
                     ),
@@ -66,7 +64,7 @@ class CardScheduleHistory extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(tutor.avatar),
+                      backgroundImage: NetworkImage(schedule.tutorAvatar),
                     ),
                   ],
                 ),
@@ -76,13 +74,13 @@ class CardScheduleHistory extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tutor.name,
+                        schedule.tutorName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
-                      Text("Viet Nam"),
+                      Text(schedule.tutorCountry),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -126,7 +124,7 @@ class CardScheduleHistory extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context).lesson_time +
                             " " +
-                            getTimeShift(schedule.shift),
+                            getStringShiftFromShift(schedule),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -135,7 +133,49 @@ class CardScheduleHistory extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(width: 15),
+                schedule.showRecordUrl
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => RecordVideoScreen(
+                                    url: schedule.recordUrl,
+                                  ),
+                                ),
+                              );
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  kPrimaryColor),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.video_library,
+                                  size: 20.0,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  AppLocalizations.of(context).record,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                SizedBox(width: 10),
               ],
             ),
             SizedBox(height: 10),
@@ -158,7 +198,8 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.requirement,
+                      schedule.studentRequest ??
+                          AppLocalizations.of(context).no_request_for_lesson,
                     ),
                   ),
                 ),
@@ -184,39 +225,79 @@ class CardScheduleHistory extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      'Actually, your English is very well. There are just few aspects that you need to improve. Hope you are doing better next time.',
+                      schedule.tutorReview ??
+                          AppLocalizations.of(context).tutor_not_review_yet,
+                      // "Tutor haven't reviewed yet",
                     ),
                   ),
                 ),
               ],
             ),
+            // used for test ongoing and history schedule timer up
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     LightRoundedButtonMediumPadding(
+            //       press: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (_) => VideoConferenceScreen(
+            //               schedule: schedule,
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //       color: kPrimaryColor,
+            //       textColor: Theme.of(context).scaffoldBackgroundColor,
+            //       text: AppLocalizations.of(context).enter_lesson,
+            //     ),
+            //   ],
+            // ),
+            // schedule.showRecordUrl
+            //     ? Row(
+            //         children: [
+            //           Expanded(
+            //             child: Container(
+            //               width: 150,
+            //               child: Text(
+            //                 schedule.recordUrl,
+            //                 // "Tutor haven't reviewed yet",
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       )
+            //     : Container(),
           ]),
         ),
       ),
     );
   }
 
-  String getTimeShift(int shift) {
-    switch (shift) {
-      case 1:
-        return "08:00 - 09:30";
-      case 2:
-        return "09:30 - 11:00";
-      case 3:
-        return "13:30 - 15:00";
-      case 4:
-        return "15:00 - 16:30";
-      case 5:
-        return "20:00 - 21:30";
-      case 6:
-        return "21:30 - 23:00";
-      default:
-        return "21:30 - 23:00";
-    }
+  String getStringShiftFromShift(StudentSchedule schedule) {
+    return "${schedule.startTime} - ${schedule.endTime}";
   }
 
   String dateDiff(DateTime date) {
     final DateTime now = DateTime.now();
     return now.difference(date).inDays.toString();
+  }
+
+  String getTimeDiff(DateTime time, BuildContext context) {
+    if (DateTime.now().difference(time).inMinutes < 2) {
+      return AppLocalizations.of(context).senconds_ago;
+    } else if (DateTime.now().difference(time).inMinutes < 60) {
+      return "${DateTime.now().difference(time).inHours} " +
+          AppLocalizations.of(context).mins_ago;
+    } else if (DateTime.now().difference(time).inMinutes < 1440) {
+      return "${DateTime.now().difference(time).inHours} " +
+          AppLocalizations.of(context).hours_ago;
+    } else if (DateTime.now().difference(time).inMinutes > 1440) {
+      return "${DateTime.now().difference(time).inDays} " +
+          AppLocalizations.of(context).days_ago;
+    }
+    return "${DateTime.now().difference(time).inDays} " +
+        AppLocalizations.of(context).days_ago;
   }
 }

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor/models/course.dart';
 import 'package:lettutor/screens/CourseDetail/course_detail_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardCourse extends StatelessWidget {
   const CardCourse({
     Key key,
-    @required this.avatar,
-    @required this.title,
-    @required this.description,
-    @required this.level,
+    @required this.course,
   }) : super(key: key);
 
-  final String avatar;
-  final String title;
-  final String description;
-  final String level;
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +18,14 @@ class CardCourse extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => CourseDetailScreen(),
+            builder: (_) => CourseDetailScreen(
+              course: course,
+            ),
           ),
         );
       },
       child: Container(
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
@@ -47,7 +46,7 @@ class CardCourse extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(avatar),
+                      image: NetworkImage(course.imageUrl),
                     ),
                   ),
                 ),
@@ -64,7 +63,7 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  title,
+                                  course.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -82,7 +81,7 @@ class CardCourse extends StatelessWidget {
                             child: Container(
                               width: 150,
                               child: Text(
-                                description,
+                                course.description,
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),
@@ -100,7 +99,8 @@ class CardCourse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  level,
+                                  levelToString(
+                                      int.parse(course.level), context),
                                   style: TextStyle(
                                     // fontWeight: FontWeight.w700,
                                     fontSize: 15,
@@ -120,5 +120,24 @@ class CardCourse extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String levelToString(int level, BuildContext context) {
+    if (level == 0) {
+      return AppLocalizations.of(context).any_level;
+    } else if (level == 1) {
+      return AppLocalizations.of(context).beginner;
+    } else if (level == 2) {
+      return AppLocalizations.of(context).higher_beginner;
+    } else if (level == 3) {
+      return AppLocalizations.of(context).pre_intermediate;
+    } else if (level == 4) {
+      return AppLocalizations.of(context).intermediate;
+    } else if (level == 5) {
+      return AppLocalizations.of(context).upper_intermediate;
+    } else if (level == 6) {
+      return AppLocalizations.of(context).advanced;
+    }
+    return AppLocalizations.of(context).proficiency;
   }
 }

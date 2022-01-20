@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lettutor/constants.dart';
 import 'package:lettutor/customWidgets/light_rounded_button_medium_padding.dart';
-import 'package:lettutor/models/schedule.dart';
-import 'package:lettutor/providers/schedule_provider.dart';
-import 'package:lettutor/models/tutor.dart';
-import 'package:lettutor/providers/tutor_provider.dart';
+import 'package:lettutor/models/student_schedule.dart';
+import 'package:lettutor/providers/student_schedule_provider.dart';
 import 'package:lettutor/screens/Chat/chat_detail_screen.dart';
 import 'package:lettutor/screens/VideoConference/video_conference_screen.dart';
 import 'package:provider/provider.dart';
@@ -17,12 +15,14 @@ class CardSchedule extends StatelessWidget {
     @required this.schedule,
   }) : super(key: key);
 
-  final Schedule schedule;
+  final StudentSchedule schedule;
 
   @override
   Widget build(BuildContext context) {
-    final Tutor tutor =
-        Provider.of<TutorProvider>(context).getById(schedule.tutorId);
+    // final Tutor tutor =
+    //     Provider.of<TutorProvider>(context).getById(schedule.tutorId);
+    final now = DateTime.now();
+    bool canDelete = schedule.startTimeDateTime.difference(now).inHours > 2;
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -45,7 +45,8 @@ class CardSchedule extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          DateFormat('EEE, MMM d, yyyy').format(schedule.date),
+                          DateFormat('EEE, MMM d, yyyy')
+                              .format(schedule.startTimeDateTime),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -55,43 +56,55 @@ class CardSchedule extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ElevatedButton(
-                    child: Row(
-                      children: [
-                        Icon(Icons.cancel, color: Colors.red, size: 20.0),
-                        SizedBox(width: 5),
-                        Text(
-                          AppLocalizations.of(context).cancel,
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Provider.of<ScheduleProvider>(context, listen: false)
-                          .removeSchedule(schedule.id);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context).scaffoldBackgroundColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          side: BorderSide(
-                            color: Colors.red,
-                            width: 1,
-                            style: BorderStyle.solid,
+                  canDelete
+                      ? ElevatedButton(
+                          child: Row(
+                            children: [
+                              Icon(Icons.cancel, color: Colors.red, size: 20.0),
+                              SizedBox(width: 5),
+                              Text(
+                                AppLocalizations.of(context).cancel,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
                           ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      textStyle: MaterialStateProperty.all(
-                        TextStyle(
-                          color: Colors.red,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                          onPressed: () async {
+                            // Provider.of<ScheduleProvider>(context, listen: false)
+                            //     .removeSchedule(schedule.id);
+                            String message = await Provider.of<
+                                        StudentScheduleProvider>(context,
+                                    listen: false)
+                                .cancelBookingClass(schedule.scheduleDetailId);
+                            var snackBar = SnackBar(
+                              content: Text(message),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Theme.of(context).scaffoldBackgroundColor),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.red,
+                                  width: 1,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            textStyle: MaterialStateProperty.all(
+                              TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -102,7 +115,7 @@ class CardSchedule extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(tutor.avatar),
+                      backgroundImage: NetworkImage(schedule.tutorAvatar),
                     ),
                   ],
                 ),
@@ -112,7 +125,7 @@ class CardSchedule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tutor.name,
+                        schedule.tutorName,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -162,7 +175,7 @@ class CardSchedule extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context).lesson_time +
                             " " +
-                            getTimeShift(schedule.shift),
+                            getStringShiftFromShift(schedule),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -207,7 +220,8 @@ class CardSchedule extends StatelessWidget {
                   child: Container(
                     width: 150,
                     child: Text(
-                      schedule.requirement,
+                      schedule.studentRequest ??
+                          AppLocalizations.of(context).no_request_for_lesson,
                     ),
                   ),
                 ),
@@ -221,7 +235,9 @@ class CardSchedule extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => VideoConferenceScreen(),
+                        builder: (_) => VideoConferenceScreen(
+                          schedule: schedule,
+                        ),
                       ),
                     );
                   },
@@ -237,22 +253,7 @@ class CardSchedule extends StatelessWidget {
     );
   }
 
-  String getTimeShift(int shift) {
-    switch (shift) {
-      case 1:
-        return "08:00 - 09:30";
-      case 2:
-        return "09:30 - 11:00";
-      case 3:
-        return "13:30 - 15:00";
-      case 4:
-        return "15:00 - 16:30";
-      case 5:
-        return "20:00 - 21:30";
-      case 6:
-        return "21:30 - 23:00";
-      default:
-        return "21:30 - 23:00";
-    }
+  String getStringShiftFromShift(StudentSchedule schedule) {
+    return "${schedule.startTime} - ${schedule.endTime}";
   }
 }

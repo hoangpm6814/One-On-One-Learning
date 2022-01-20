@@ -1,33 +1,48 @@
 import 'package:flutter/foundation.dart';
+import 'package:lettutor/models/review.dart';
 
 class Tutor {
   final String id;
+  final String userId;
   final String name;
   final double rating;
   final String avatar;
-  final String description;
-  final String nation;
+  final String bio;
+  final String country;
   bool isFavourite;
-  List<String> languages;
+  String languages;
   final String education;
   final String experience;
-  final String interest;
+  final String interests;
   final String profession;
-  List<String> specialties;
+  String specialties;
+  String video;
+  String targetStudent;
+  bool isNative;
+  bool isOnline;
+  final int price;
+  List<Review> reviews;
 
   Tutor({
     @required this.id,
+    @required this.userId,
     @required this.name,
     @required this.rating,
     @required this.avatar,
-    @required this.description,
-    @required this.nation,
+    @required this.bio,
+    @required this.country,
     @required this.education,
     @required this.experience,
-    @required this.interest,
+    @required this.interests,
     @required this.profession,
     this.isFavourite = false,
     this.languages = null,
     this.specialties = null,
+    this.video = null,
+    this.targetStudent = null,
+    this.isNative = false,
+    this.isOnline = false,
+    @required this.price,
+    this.reviews = const [],
   });
 }
