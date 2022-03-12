@@ -13,6 +13,10 @@ Thầy: Phạm Hoàng Hải
 
 > Link Github: https://github.com/hoangpm6814/One-On-One-Learning
 
+> Google Play Store (Open Testing): https://play.google.com/store/apps/details?id=com.lettutor.oneonone 
+
+> App Store (TestFlight): https://testflight.apple.com/join/V6qZ0vFv 
+
 ## Tham khảo
 - Slide bài giảng thầy Phạm Hoàng Hải
 - https://github.com/hoangpm6814/
